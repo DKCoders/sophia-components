@@ -5,8 +5,10 @@
   "main": "build/index.js",
   "scripts": {
     "build": "babel lib -d build",
+    "build:watch": "babel lib -w -d build",
     "lint": "eslint lib/**; exit 0",
     "lint:watch": "esw -w lib/**",
+    "storybook": "start-storybook -p 9001 -c .storybook",
     "prepublish": "npm run build"
   },
   "repository": {
@@ -26,6 +28,7 @@
   },
   "homepage": "https://github.com/DKCoders/sophia-components#readme",
   "devDependencies": {
+    "@storybook/react": "^3.4.3",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
