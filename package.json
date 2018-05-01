@@ -1,0 +1,44 @@
+{
+  "name": "sophia-components",
+  "version": "0.0.1",
+  "description": "Sophia React Components based on bulma.io",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "babel lib -d build",
+    "lint": "eslint lib/**; exit 0",
+    "lint:watch": "esw -w lib/**",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DKCoders/sophia-components.git"
+  },
+  "keywords": [
+    "react",
+    "components",
+    "bulma",
+    "sophia"
+  ],
+  "author": "Alexys Gonzalez",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/DKCoders/sophia-components/issues"
+  },
+  "homepage": "https://github.com/DKCoders/sophia-components#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.3",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0",
+    "eslint-watch": "^3.1.4",
+    "prop-types": "^15.6.1",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
+  }
+}
