@@ -5,11 +5,11 @@
   "main": "build/index.js",
   "scripts": {
     "build": "babel lib -d build",
-    "build:watch": "babel lib -w -d build",
     "lint": "eslint lib/**; exit 0",
     "lint:watch": "esw -w lib/**",
-    "storybook": "start-storybook -p 9001 -c .storybook",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "repository": {
     "type": "git",
@@ -28,7 +28,6 @@
   },
   "homepage": "https://github.com/DKCoders/sophia-components#readme",
   "devDependencies": {
-    "@storybook/react": "^3.4.3",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
@@ -42,6 +41,14 @@
     "eslint-watch": "^3.1.4",
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
-    "react-dom": "^16.3.2"
+    "react-dom": "^16.3.2",
+    "@storybook/react": "^3.4.3",
+    "@storybook/addon-actions": "^3.4.3",
+    "@storybook/addon-links": "^3.4.3",
+    "@storybook/addons": "^3.4.3",
+    "babel-runtime": "^6.26.0"
+  },
+  "dependencies": {
+    "bulma": "^0.7.1"
   }
 }
