@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { shallow } from 'enzyme';
-import withAttrs, { defaultAttrs } from '../withAttrs';
+import withAttrs, { defaultAttrs } from '../../lib/base/withAttrs';
 
 const TestComponent = ({ another, ...props }) => <div {...props}>{another}</div>;
 TestComponent.propTypes = {

@@ -68,7 +68,7 @@
       "<rootDir>/config/setupTests.js"
     ],
     "testMatch": [
-      "<rootDir>/lib/**/__tests__/**/*.js?(x)"
+      "<rootDir>/__tests__/**/*.js?(x)"
     ],
     "testEnvironment": "node",
     "testURL": "http://localhost",
