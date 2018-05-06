@@ -9,17 +9,27 @@ const mappedAttrs = {
     PropTypes.arrayOf(PropTypes.string),
   ]),
   style: PropTypes.shape(),
+  disabled: PropTypes.bool,
 };
 
 const dummyConverter = val => val;
 
 const converterAttrs = {
   id: dummyConverter,
-  className: val => (typeof val === 'string') ? val : val.join(' '),
+  className: (val) => {
+    if (typeof val === 'string') {
+      return val;
+    }
+    if (Array.isArray(val) && val.length) {
+      return val.join(' ');
+    }
+    return null;
+  },
   style: dummyConverter,
+  disabled: dummyConverter,
 };
 
-const acceptedAttrs = ['id', 'className', 'style'];
+const acceptedAttrs = ['id', 'className', 'style', 'disabled'];
 export const defaultAttrs = ['id', 'className', 'style'];
 
 export default (attrs = defaultAttrs) => {
@@ -44,7 +54,11 @@ export default (attrs = defaultAttrs) => {
       render() {
         const propsToBePassed = Object.entries(this.props).reduce((acum, [key, value]) => {
           if (attrs.includes(key)) {
-            return { ...acum, [key]: converterAttrs[key](value) };
+            const converted = converterAttrs[key](value);
+            if (!converted) {
+              return acum;
+            }
+            return { ...acum, [key]: converted };
           }
           return { ...acum, [key]: value };
         }, {});

@@ -51,7 +51,7 @@ describe('HOC withAttrs', () => {
     expect(spy).toBeCalledWith('Invalid attribute at array index', 1);
     spy.mockRestore();
   });
-  test('should mount the Component and receive the props', () => {
+  test('should mount the Component and receive the props and the Inner Component too', () => {
     const Component = withAttrs()(TestComponent);
     const props = {
       id: 'test-id',
@@ -65,5 +65,21 @@ describe('HOC withAttrs', () => {
       className: props.className.join(' '),
     };
     expect(wrapper.props()).toEqual(expected);
+    const inner = wrapper.find(TestComponent).first();
+    expect(inner.props()).toEqual(expected);
+  });
+  test('should not receive null props the inner component', () => {
+    const Component = withAttrs()(TestComponent);
+    const props = {
+      id: 'test-id',
+      className: [],
+      style: null,
+      another: 'Hello',
+    };
+    const wrapper = shallow(<Component {...props} />);
+    expect(wrapper.instance().props).toEqual(props);
+    const inner = wrapper.find(TestComponent).first();
+    const { style, className, ...innerExpected } = props;
+    expect(inner.props()).toEqual(innerExpected);
   });
 });
