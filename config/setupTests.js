@@ -1,0 +1,35 @@
+/* eslint-disable no-undef,import/no-extraneous-dependencies */
+import Enzyme from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+Enzyme.configure({ adapter: new Adapter() });
+// Do this as the first thing so that any code reading it knows the right env.
+process.env.BABEL_ENV = 'test';
+process.env.NODE_ENV = 'test';
+process.env.PUBLIC_URL = '';
+
+// Makes the script crash on unhandled rejections instead of silently
+// ignoring them. In the future, promise rejections that are not handled will
+// terminate the Node.js process with a non-zero exit code.
+process.on('unhandledRejection', (err) => {
+  throw err;
+});
+
+let storage = {
+  access_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik9EWkVOa1ZFTWpJeE5UVkZRVUUwTURFek1qaERNekUwTmpreVFVTTNPVFEwT1VVM00wUkZOZyJ9.eyJpc3MiOiJodHRwczovL3F1YWRtaW5kcy5hdXRoMC5jb20vIiwic3ViIjoiZ29vZ2xlLW9hdXRoMnwxMTE1Nzk4MTczNjM1ODQxNzIyOTQiLCJhdWQiOlsiaHR0cHM6Ly9hcGkucXVhZG1pbmRzLmNvbSIsImh0dHBzOi8vcXVhZG1pbmRzLmF1dGgwLmNvbS91c2VyaW5mbyJdLCJhenAiOiJ2NzV3TmJHR3hkejVCMFNUR2J6clZ6MW5jS1pwWFM0NCIsImV4cCI6MTUwNDgwMzM4OCwiaWF0IjoxNTA0Nzk2MTg4LCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwiaHR0cDovL3F1YWRtaW5kcy9tZXRhZGF0YSI6eyJ1c2VyX2lkIjoiNTlhNmRhM2M4MmMzZmE5OGE0NWQxMzc1Iiwib3JnYW5pemF0aW9uX2lkIjoiNTlhNmRhNjczNGM4YzAwMDA3NTNkYWM3IiwicGVybWlzc2lvbnMiOlsiY2FuUmVtb3ZlT3duT3JnYW5pemF0aW9uIiwiY2FuVXBkYXRlT3duT3JnYW5pemF0aW9uIiwiY2FuVmlld093bk9yZ2FuaXphdGlvbiJdfX0.alSXhj3948QOPvfqi5hIRO9a36hm5U3gr0cFiBlCia54yRrmbKvu9B4asSWZ7txBT4qggUz9qzKqeoxzoWD7LQOE9AZsXZb-7g5YrlgM-7Rcsh5ozfst5UZpI3t1sWwfDkWZWGWln54G2NRM6XC3xka_SQgF3LmCO44W7yMAJTr14MhbTC0jKk6DbMULuC105IvKfjG5r9PrOa8GVEO-9hmXEuJSnoytuPMHERNC2v1_Nvua2tz1Qi9kzbFaEQpP2QhhdJf7e5ZxiSz04wGME4J_-HZCbD1EpOYvVTBIXCdX7CY1HhxjjA2Vzhw9dotCB9708LfL-ue1fktfe6cA5Q',
+  id_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik9EWkVOa1ZFTWpJeE5UVkZRVUUwTURFek1qaERNekUwTmpreVFVTTNPVFEwT1VVM00wUkZOZyJ9.eyJuYW1lIjoiQWxleHlzIExhbWVkYSIsImdpdmVuX25hbWUiOiJBbGV4eXMiLCJmYW1pbHlfbmFtZSI6IkxhbWVkYSIsIm5pY2tuYW1lIjoiYWxleHlzLmxhbWVkYSIsInBpY3R1cmUiOiJodHRwczovL2xoNS5nb29nbGV1c2VyY29udGVudC5jb20vLUw0NG5JejgxeFZNL0FBQUFBQUFBQUFJL0FBQUFBQUFBQUM0L0FLMUpqdGZPbk1zL3Bob3RvLmpwZyIsImxvY2FsZSI6ImVzIiwidXBkYXRlZF9hdCI6IjIwMTctMDktMDdUMTQ6NTY6MjguMTAyWiIsImVtYWlsIjoiYWxleHlzLmxhbWVkYUBxdWFkbWluZHMuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImlzcyI6Imh0dHBzOi8vcXVhZG1pbmRzLmF1dGgwLmNvbS8iLCJzdWIiOiJnb29nbGUtb2F1dGgyfDExMTU3OTgxNzM2MzU4NDE3MjI5NCIsImF1ZCI6InY3NXdOYkdHeGR6NUIwU1RHYnpyVnoxbmNLWnBYUzQ0IiwiZXhwIjoxNTA0ODMyMTg4LCJpYXQiOjE1MDQ3OTYxODgsIm5vbmNlIjoiZ2R5dWQ4bGt3RHkwM1JNRHpSU0tmcmdQSFRmMElEQ0oiLCJhdF9oYXNoIjoibVpvVG1sVkY1UXZseTFVQmVjT1dHdyIsImh0dHA6Ly9xdWFkbWluZHMvbWV0YWRhdGEiOnsidXNlcl9pZCI6IjU5YTZkYTNjODJjM2ZhOThhNDVkMTM3NSIsIm9yZ2FuaXphdGlvbiI6IjU5YTZkYTY3MzRjOGMwMDAwNzUzZGFjNyIsInBlcm1pc3Npb25zIjpbImNhblJlbW92ZU93bk9yZ2FuaXphdGlvbiIsImNhblVwZGF0ZU93bk9yZ2FuaXphdGlvbiIsImNhblZpZXdPd25Pcmdhbml6YXRpb24iXX19.X9byJsYbGJw8RYBy-SFy8S9z9YOPlhEa6D2WzVefuRkKseE8OO6yQwmVjsF6iZkgyhNr22u5OSGJqblN7IuB_ccS_-egfTPppAUz47WiVSfSG4bWxzkxC4pnnJoYN2Ovg6gKlpJFXmrW1DghOnnBc8CHtqSsbN53tyDjvO9MTOBKZnpYLTedn__iFNAba5KDpoW-knkyMSPTOBZaJ_uOto_h8xtz6l5z_zRUWhLyALazKAnWMYwKfcXRrPJ9RV0eF1k3j0DMVBPUFIM-6msLMsTVngZCLx8EYHZ0YqJ_PHlnjqdNr_h7WQTbVy_PhkoP__U1Hp9NHjx3wjEz8EaMIw',
+  expires_at: `${new Date().getTime() + 1000000}`,
+};
+const localStorageMock = {
+  getItem: jest.fn().mockImplementation(key => storage[key]),
+  setItem: jest.fn().mockImplementation((key, value) => {
+    storage[key] = value;
+  }),
+  clear: jest.fn().mockImplementation(() => {
+    storage = {};
+  }),
+};
+global.localStorage = localStorageMock;
+
+// Used to test index.jsx
+document.body.innerHTML = '<div id="root"></div>';
