@@ -8,7 +8,6 @@ export const colorsKeys = [
   'light',
   'dark',
   'black',
-  'text',
 ];
 
 export const colorsStateKeys = [

@@ -21,7 +21,6 @@ storiesOf('Button', module)
       <Button light>Light</Button>
       <Button dark>Dark</Button>
       <Button black>Black</Button>
-      <Button text>Text</Button>
       <Button primary>Primary</Button>
       <Button link>Link</Button>
       <Button info>Info</Button>
