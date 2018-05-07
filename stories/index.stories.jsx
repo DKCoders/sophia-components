@@ -5,6 +5,7 @@ import 'bulma/css/bulma.min.css';
 import './index.css';
 
 import Button from '../lib/elements/Button';
+import Buttons from '../lib/elements/Buttons';
 
 storiesOf('Button', module)
   .addDecorator(story => (
@@ -121,6 +122,39 @@ storiesOf('Button', module)
         <Button success disabled>Disabled</Button>
         <Button danger disabled>Disabled</Button>
       </div>
+    </React.Fragment>
+  ))
+  .add('groups', () => (
+    <Buttons>
+      <Button white>White</Button>
+      <Button light>Light</Button>
+      <Button dark>Dark</Button>
+      <Button black>Black</Button>
+      <Button primary>Primary</Button>
+      <Button link>Link</Button>
+      <Button info>Info</Button>
+      <Button success>Success</Button>
+      <Button warning>Warning</Button>
+      <Button danger>Danger</Button>
+    </Buttons>
+  ))
+  .add('addons groups and aligment', () => (
+    <React.Fragment>
+      <Buttons addons>
+        <Button success>Left</Button>
+        <Button>Center</Button>
+        <Button>Right</Button>
+      </Buttons>
+      <Buttons addons centered>
+        <Button>Left</Button>
+        <Button>Center</Button>
+        <Button danger>Right</Button>
+      </Buttons>
+      <Buttons addons right>
+        <Button>Left</Button>
+        <Button info>Center</Button>
+        <Button>Right</Button>
+      </Buttons>
     </React.Fragment>
   ));
 
