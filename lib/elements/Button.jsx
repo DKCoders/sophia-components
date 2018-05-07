@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withAttrs, { defaultAttrs, aAttrs, inputAttrs } from '../base/withAttrs';
-import withIsProcessor, { buttonKeys } from '../base/withIsProcessor';
+import withIsProcessor, { buttonIsKeys } from '../base/withIsHas';
 import { combineSets } from '../utils/helpers';
 
 const mappedTag = {
@@ -58,5 +58,5 @@ Button.defaultProps = {
   onClick: null,
 };
 
-export default withIsProcessor(buttonKeys)
+export default withIsProcessor(buttonIsKeys)
   (withAttrs(combineSets(defaultAttrs, aAttrs, inputAttrs))(Button));
