@@ -9,20 +9,77 @@ const mappedAttrs = {
     PropTypes.arrayOf(PropTypes.string),
   ]),
   style: PropTypes.shape(),
+  disabled: PropTypes.bool,
+  name: PropTypes.string,
+  title: PropTypes.string,
+  href: PropTypes.string,
+  role: PropTypes.string,
+  target: PropTypes.oneOf(['_blank', '_self', 'blank', 'self']),
+  value: PropTypes.any,
+  type: PropTypes.oneOf([
+    'button',
+    'checkbox',
+    'color',
+    'date',
+    'datetime-local',
+    'email',
+    'file',
+    'hidden',
+    'image',
+    'month',
+    'number',
+    'password',
+    'radio',
+    'range',
+    'reset',
+    'search',
+    'submit',
+    'tel',
+    'text',
+    'time',
+    'url',
+    'week',
+  ]),
 };
 
 const dummyConverter = val => val;
+const classNameConverter = (val) => {
+  if (typeof val === 'string') {
+    return val;
+  }
+  if (Array.isArray(val) && val.length) {
+    return val.join(' ');
+  }
+  return null;
+};
 
 const converterAttrs = {
   id: dummyConverter,
-  className: val => (typeof val === 'string') ? val : val.join(' '),
+  className: classNameConverter,
   style: dummyConverter,
+  disabled: dummyConverter,
+  name: dummyConverter,
+  title: dummyConverter,
+  href: dummyConverter,
+  role: dummyConverter,
+  target: dummyConverter,
+  type: dummyConverter,
+  value: dummyConverter,
 };
 
-const acceptedAttrs = ['id', 'className', 'style'];
+const acceptedAttrs = Object.keys(converterAttrs);
 export const defaultAttrs = ['id', 'className', 'style'];
+export const allAttrs = [...acceptedAttrs];
+export const aAttrs = ['href', 'target', 'title', 'name'];
+export const inputAttrs = ['name', 'type', 'value', 'disabled'];
+export const attrSets = {
+  defaultAttrs,
+  aAttrs,
+  inputAttrs,
+  allAttrs,
+};
 
-export default (attrs = defaultAttrs) => {
+const withAttrs = (attrs = defaultAttrs, skipNulls = true) => {
   // Validations and warnings
   if (!attrs.length) {
     console.warn('At least one attribute must be passed');
@@ -44,10 +101,14 @@ export default (attrs = defaultAttrs) => {
       render() {
         const propsToBePassed = Object.entries(this.props).reduce((acum, [key, value]) => {
           if (attrs.includes(key)) {
-            return { ...acum, [key]: converterAttrs[key](value) };
+            const converted = converterAttrs[key](value);
+            if (skipNulls && !converted) {
+              return acum;
+            }
+            return { ...acum, attrs: { ...acum.attrs, [key]: converted } };
           }
           return { ...acum, [key]: value };
-        }, {});
+        }, { attrs: {} });
         return <Component {...propsToBePassed} />;
       }
     }
@@ -61,6 +122,9 @@ export default (attrs = defaultAttrs) => {
       ...Component.defaultProps,
       ...attrDefaults,
     };
+    WithAttr.displayName = Component.displayName || Component.name;
     return WithAttr;
   };
 };
+
+export default withAttrs;
