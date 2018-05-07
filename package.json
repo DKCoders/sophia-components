@@ -7,7 +7,10 @@
     "build": "babel lib -d build",
     "lint": "eslint lib/**; exit 0",
     "lint:watch": "esw -w lib/**",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "test": "jest --watch --env=jsdom"
   },
   "repository": {
     "type": "git",
@@ -26,19 +29,66 @@
   },
   "homepage": "https://github.com/DKCoders/sophia-components#readme",
   "devDependencies": {
+    "@storybook/addon-actions": "^3.4.3",
+    "@storybook/addon-links": "^3.4.3",
+    "@storybook/addons": "^3.4.3",
+    "@storybook/react": "^3.4.3",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
+    "babel-jest": "^22.4.3",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "babel-preset-es2017": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "babel-runtime": "^6.26.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
     "eslint-watch": "^3.1.4",
+    "jest": "^22.4.3",
+    "jest-cli": "^22.4.3",
+    "jest-enzyme": "^6.0.0",
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2"
+  },
+  "dependencies": {
+    "bulma": "^0.7.1"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "lib/**/*.{js,jsx}"
+    ],
+    "setupFiles": [
+      "<rootDir>/config/setupTests.js"
+    ],
+    "testMatch": [
+      "<rootDir>/__tests__/**/*.js?(x)"
+    ],
+    "testEnvironment": "node",
+    "testURL": "http://localhost",
+    "transform": {
+      "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+    ],
+    "moduleNameMapper": {
+      "^react-native$": "react-native-web"
+    },
+    "moduleFileExtensions": [
+      "web.js",
+      "js",
+      "json",
+      "web.jsx",
+      "jsx"
+    ]
   }
 }
