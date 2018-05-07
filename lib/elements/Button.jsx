@@ -1,34 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import withAttrs, { defaultAttrs, aAttrs, inputAttrs } from '../base/withAttrs';
+import withIsProcessor, { buttonKeys } from '../base/withIsProcessor';
+import { combineSets } from '../utils/helpers';
 
 const mappedTag = {
   // eslint-disable-next-line react/prop-types
   button: ({ children, ...props }) => <button {...props}>{children}</button>,
   // eslint-disable-next-line react/prop-types
   a: ({ children, ...props }) => <a {...props}>{children}</a>,
+  // eslint-disable-next-line react/prop-types
+  span: ({ children, ...props }) => <span {...props}>{children}</span>,
   input: props => <input {...props} />,
 };
 
 const Button = ({
   children,
   as,
-  className,
   onClick,
-  ...props
+  attrs,
 }) => {
   const Component = mappedTag[as];
+  const { className, ...restAttrs } = attrs;
   const classNameProp = !className ? 'button' : `button ${className}`;
   return as === 'input' ? (
     <Component
       className={classNameProp}
-      {...props}
+      {...restAttrs}
       onClick={onClick}
       value={children}
     />
   ) : (
     <Component
       className={classNameProp}
-      {...props}
+      {...restAttrs}
       onClick={onClick}
     >
       {children}
@@ -37,25 +42,21 @@ const Button = ({
 };
 
 Button.propTypes = {
-  children: PropTypes.string,
-  as: PropTypes.oneOf(['button', 'a', 'input']),
-  href: PropTypes.string,
-  target: PropTypes.string,
-  name: PropTypes.string,
-  title: PropTypes.string,
-  className: PropTypes.string,
+  children: PropTypes.oneOfType(
+    PropTypes.string,
+    PropTypes.shape(),
+    PropTypes.arrayOf(PropTypes.shape()),
+  ),
+  as: PropTypes.oneOf(['button', 'a', 'input', 'span']),
   onClick: PropTypes.func,
+  attrs: PropTypes.shape().isRequired,
 };
 
 Button.defaultProps = {
   children: null,
   as: 'button',
-  href: null,
-  target: null,
-  name: null,
-  title: null,
-  className: null,
   onClick: null,
 };
 
-export default Button;
+export default withIsProcessor(buttonKeys)
+  (withAttrs(combineSets(defaultAttrs, aAttrs, inputAttrs))(Button));
