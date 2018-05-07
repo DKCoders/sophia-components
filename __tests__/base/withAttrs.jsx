@@ -60,15 +60,16 @@ describe('HOC withAttrs', () => {
       another: 'Hello',
     };
     const wrapper = shallow(<Component {...props} />);
+    expect(wrapper.instance().props).toEqual(props);
+    const inner = wrapper.find(TestComponent).first();
     const expected = {
       ...props,
       className: props.className.join(' '),
     };
-    expect(wrapper.props()).toEqual(expected);
-    const inner = wrapper.find(TestComponent).first();
-    expect(inner.props()).toEqual(expected);
+    const { another, ...rest } = expected;
+    expect(inner.props()).toEqual({ another, attrs: rest });
   });
-  test('should not receive null props the inner component', () => {
+  test('should not receive null props the inner component by default', () => {
     const Component = withAttrs()(TestComponent);
     const props = {
       id: 'test-id',
@@ -79,7 +80,21 @@ describe('HOC withAttrs', () => {
     const wrapper = shallow(<Component {...props} />);
     expect(wrapper.instance().props).toEqual(props);
     const inner = wrapper.find(TestComponent).first();
-    const { style, className, ...innerExpected } = props;
-    expect(inner.props()).toEqual(innerExpected);
+    const { style, className, another, ...innerExpected } = props;
+    expect(inner.props()).toEqual({ another, attrs: innerExpected });
+  });
+  test('should receive null props the inner component if skipNulls is set to false', () => {
+    const Component = withAttrs(undefined, false)(TestComponent);
+    const props = {
+      id: 'test-id',
+      className: [],
+      style: null,
+      another: 'Hello',
+    };
+    const wrapper = shallow(<Component {...props} />);
+    expect(wrapper.instance().props).toEqual(props);
+    const inner = wrapper.find(TestComponent).first();
+    const { another, ...innerExpected } = props;
+    expect(inner.props()).toEqual({ another, attrs: { ...innerExpected, className: null } });
   });
 });
