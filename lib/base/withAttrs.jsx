@@ -113,8 +113,13 @@ const withAttrs = (attrs = defaultAttrs, skipNulls = true) => {
       }
     }
     const attrPropTypes = attrs.reduce((acum, key) => ({ ...acum, [key]: mappedAttrs[key] }), {});
+    if (!Component.propTypes) {
+      // eslint-disable-next-line no-param-reassign
+      Component.propTypes = {};
+    }
+    const { attrs: removedPropType, ...restPropTypes } = Component.propTypes;
     WithAttr.propTypes = {
-      ...Component.propTypes,
+      ...restPropTypes,
       ...attrPropTypes,
     };
     const attrDefaults = attrs.reduce((acum, key) => ({ ...acum, [key]: null }), {});

@@ -16,7 +16,9 @@ class Buttons extends PureComponent {
 }
 
 Buttons.propTypes = {
-  children: PropTypes.arrayOf(Button).isRequired,
+  children: PropTypes.arrayOf(PropTypes.shape({
+    type: PropTypes.oneOf([Button]),
+  })).isRequired,
   attrs: PropTypes.shape().isRequired,
 };
 

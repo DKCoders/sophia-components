@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withAttrs, { defaultAttrs, aAttrs, inputAttrs } from '../base/withAttrs';
-import withIsProcessor, { buttonIsKeys } from '../base/withIsHas';
+import withIsProcessor, { buttonIsKeys, buttonHasKeys } from '../base/withIsHas';
 import { combineSets } from '../utils/helpers';
 
 const mappedTag = {
@@ -42,11 +42,11 @@ const Button = ({
 };
 
 Button.propTypes = {
-  children: PropTypes.oneOfType(
+  children: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.shape(),
     PropTypes.arrayOf(PropTypes.shape()),
-  ),
+  ]),
   as: PropTypes.oneOf(['button', 'a', 'input', 'span']),
   onClick: PropTypes.func,
   attrs: PropTypes.shape().isRequired,
@@ -57,6 +57,5 @@ Button.defaultProps = {
   as: 'button',
   onClick: null,
 };
-
-export default withIsProcessor(buttonIsKeys)
+export default withIsProcessor(buttonIsKeys, buttonHasKeys)
   (withAttrs(combineSets(defaultAttrs, aAttrs, inputAttrs))(Button));
