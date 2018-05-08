@@ -3,6 +3,63 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { processor } from '../utils/helpers';
 
+export const isAcceptStringVal = [
+  'flex',
+  'inline',
+  'inlineBlock',
+  'inlineFlex',
+  'hidden',
+  'size',
+];
+
+export const hasAcceptStringVal = [
+  // color text background
+  'text',
+  'background',
+  'textCentered',
+  'textJustified',
+  'textLeft',
+  'textRight',
+  'textWeight',
+];
+
+export const helpersIsKeys = [
+  'clearfix',
+  'pulledLeft',
+  'pulledRight',
+  'marginless',
+  'paddingless',
+  'overlay',
+  'clipped',
+  'radiusless',
+  'shadowless',
+  'unselectable',
+  'invisible',
+  'block',
+  'capitalized',
+  'lowercase',
+  'uppercase',
+  'italic',
+  'flex',
+  'inline',
+  'inlineBlock',
+  'inlineFlex',
+  'hidden',
+  'size',
+];
+
+// All accept strings
+export const helpersHasKeys = [
+  // color text background
+  'text',
+  'background',
+  'textCentered',
+  'textJustified',
+  'textLeft',
+  'textRight',
+  'textWeight',
+];
+
 export const colorsKeys = [
   'white',
   'light',
@@ -32,6 +89,7 @@ export const aligmentKeys = [
 ];
 
 export const buttonIsKeys = [
+  ...helpersIsKeys,
   ...colorsKeys,
   ...colorsStateKeys,
   ...sizeKeys,
@@ -46,28 +104,45 @@ export const buttonIsKeys = [
   'static',
 ];
 
+export const buttonHasKeys = [
+  ...helpersHasKeys,
+];
+
 export const buttonsIsKeys = [
+  ...helpersIsKeys,
   ...aligmentKeys,
 ];
 
 export const buttonsHasKeys = [
+  ...helpersHasKeys,
   'addons',
 ];
 
 export const defaultIsKeys = [...(new Set([...colorsKeys, ...colorsStateKeys, aligmentKeys]))];
 export const defaultHasKeys = [...(new Set([]))];
+
+const propTypesReduceFunc = (acceptString = []) => (acum, key) => ({
+  ...acum,
+  [key]: !acceptString.includes(key)
+    ? PropTypes.bool
+    : PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+});
+
 const withIsProcessor = (isKeys = defaultIsKeys, hasKeys = defaultHasKeys) => (Component) => {
   class WithProcessor extends PureComponent {
     render() {
       const { className, props } = processor(isKeys, hasKeys, this.props);
-      return <Component className={className} {...props} />;
+      if (className.length) {
+        return <Component className={className} {...props} />;
+      }
+      return <Component {...props} />;
     }
   }
 
   WithProcessor.propTypes = {
     ...Component.propTypes,
-    ...isKeys.reduce((acum, key) => ({ ...acum, [key]: PropTypes.bool }), {}),
-    ...hasKeys.reduce((acum, key) => ({ ...acum, [key]: PropTypes.bool }), {}),
+    ...isKeys.reduce(propTypesReduceFunc(isAcceptStringVal), {}),
+    ...hasKeys.reduce(propTypesReduceFunc(hasAcceptStringVal), {}),
     is: PropTypes.arrayOf(PropTypes.string),
     has: PropTypes.arrayOf(PropTypes.string),
     className: PropTypes.oneOfType([

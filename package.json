@@ -58,7 +58,8 @@
     "react-dom": "^16.3.2"
   },
   "dependencies": {
-    "bulma": "^0.7.1"
+    "bulma": "^0.7.1",
+    "decamelize": "^2.0.0"
   },
   "jest": {
     "collectCoverageFrom": [

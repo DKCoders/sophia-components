@@ -13,7 +13,7 @@ storiesOf('Button', module)
       {story()}
     </div>
   ))
-  .add('normal button', () => <Button onClick={action('click')}>I am a Button</Button>)
+  .add('normal button', () => <Button hidden={['mobile', 'desktop-only']} onClick={action('click')}>I am a Button</Button>)
   .add('a button like a link tag', () => <Button as="a" href="https://google.com" title="Google" target="blank">I am a link</Button>)
   .add('a button like a input tag', () => <Button onClick={action('click')} as="input" type="submit">I am an input</Button>)
   .add('colorsKeys buttons', () => (
