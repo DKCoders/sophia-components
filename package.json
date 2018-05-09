@@ -55,7 +55,8 @@
     "jest-enzyme": "^6.0.0",
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
-    "react-dom": "^16.3.2"
+    "react-dom": "^16.3.2",
+    "recompose": "^0.27.0"
   },
   "dependencies": {
     "bulma": "^0.7.1",

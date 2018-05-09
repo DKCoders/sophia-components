@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import compose from 'recompose/compose';
 import Button from './Button';
 import withAttrs from '../base/withAttrs';
 import withIsHas, { buttonsIsKeys, buttonsHasKeys } from '../base/withIsHas';
@@ -24,4 +25,7 @@ Buttons.propTypes = {
 
 Buttons.defaultProps = {};
 
-export default withIsHas(buttonsIsKeys, buttonsHasKeys)(withAttrs()(Buttons));
+export default compose(
+  withIsHas(buttonsIsKeys, buttonsHasKeys),
+  withAttrs(),
+)(Buttons);

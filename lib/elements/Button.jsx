@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import compose from 'recompose/compose';
 import withAttrs, { defaultAttrs, aAttrs, inputAttrs } from '../base/withAttrs';
 import withIsProcessor, { buttonIsKeys, buttonHasKeys } from '../base/withIsHas';
 import { combineSets } from '../utils/helpers';
@@ -57,5 +58,8 @@ Button.defaultProps = {
   as: 'button',
   onClick: null,
 };
-export default withIsProcessor(buttonIsKeys, buttonHasKeys)
-  (withAttrs(combineSets(defaultAttrs, aAttrs, inputAttrs))(Button));
+
+export default compose(
+  withIsProcessor(buttonIsKeys, buttonHasKeys),
+  withAttrs(combineSets(defaultAttrs, aAttrs, inputAttrs)),
+)(Button);
