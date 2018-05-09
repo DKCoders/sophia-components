@@ -8,6 +8,7 @@ import Button from '../lib/elements/Button';
 import Buttons from '../lib/elements/Buttons';
 import Box from '../lib/elements/Box';
 import Content from '../lib/elements/Content';
+import Delete from '../lib/elements/Delete';
 
 const boxDecorator = story => (
   <Box>
@@ -207,4 +208,16 @@ storiesOf('Content', module)
         <li>Vivamus maximus ultricies pulvinar.</li>
       </ol>
     </Content>
+  ));
+
+storiesOf('Delete', module)
+  .addDecorator(boxDecorator)
+  .add('normal delete', () => <Delete onClick={action('click!')} />)
+  .add('sizes delete', () => (
+    <React.Fragment>
+      <Delete small>Small</Delete>
+      <Delete>Normal</Delete>
+      <Delete medium>Medium</Delete>
+      <Delete large>Large</Delete>
+    </React.Fragment>
   ));

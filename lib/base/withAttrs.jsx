@@ -68,7 +68,7 @@ const converterAttrs = {
 };
 
 const acceptedAttrs = Object.keys(converterAttrs);
-export const defaultAttrs = ['id', 'className', 'style'];
+export const defaultAttrs = ['id', 'className', 'style', 'role'];
 export const allAttrs = [...acceptedAttrs];
 export const aAttrs = ['href', 'target', 'title', 'name'];
 export const inputAttrs = ['name', 'type', 'value', 'disabled'];

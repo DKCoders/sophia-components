@@ -1,0 +1,50 @@
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import compose from 'recompose/compose';
+import withAttrs, { defaultAttrs, aAttrs } from '../base/withAttrs';
+import withIsHas, { helpersIsKeys, helpersHasKeys, sizeKeys } from '../base/withIsHas';
+import { combineSets } from '../utils/helpers';
+
+class Delete extends PureComponent {
+  render() {
+    const {
+      children,
+      attrs: { className, ...restAttrs },
+      ...restProps
+    } = this.props;
+    return (
+      <a
+        className={`delete ${className || ''}`}
+        {...restAttrs}
+        {...restProps}
+      >
+        {children}
+      </a>);
+  }
+}
+
+Delete.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape(),
+    PropTypes.arrayOf(PropTypes.shape()),
+  ]),
+  attrs: PropTypes.shape().isRequired,
+  onClick: PropTypes.func,
+  onKeyDown: PropTypes.func,
+  onKeyPress: PropTypes.func,
+  onKeyUp: PropTypes.func,
+};
+
+Delete.defaultProps = {
+  children: null,
+  onClick: null,
+  onKeyDown: null,
+  onKeyPress: null,
+  onKeyUp: null,
+};
+
+export default compose(
+  withIsHas(combineSets(helpersIsKeys, sizeKeys), helpersHasKeys),
+  withAttrs(combineSets(defaultAttrs, aAttrs)),
+)(Delete);

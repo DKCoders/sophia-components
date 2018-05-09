@@ -6,8 +6,8 @@ import withIsHas, { helpersIsKeys, helpersHasKeys } from '../base/withIsHas';
 
 class Content extends PureComponent {
   render() {
-    const { children, attrs: { className, restAttr }, onClick } = this.props;
-    return (<div className={`content ${className || ''}`} onClick={onClick} {...restAttr}>{children}</div>);
+    const { children, attrs: { className, ...restAttrs } } = this.props;
+    return (<div className={`content ${className || ''}`} {...restAttrs}>{children}</div>);
   }
 }
 
@@ -18,12 +18,10 @@ Content.propTypes = {
     PropTypes.arrayOf(PropTypes.shape()),
   ]),
   attrs: PropTypes.shape().isRequired,
-  onClick: PropTypes.func,
 };
 
 Content.defaultProps = {
   children: null,
-  onClick: null,
 };
 
 export default compose(
