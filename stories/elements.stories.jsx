@@ -6,13 +6,16 @@ import './index.css';
 
 import Button from '../lib/elements/Button';
 import Buttons from '../lib/elements/Buttons';
+import Box from '../lib/elements/Box';
+
+const boxDecorator = story => (
+  <Box>
+    {story()}
+  </Box>
+);
 
 storiesOf('Button', module)
-  .addDecorator(story => (
-    <div className="box">
-      {story()}
-    </div>
-  ))
+  .addDecorator(boxDecorator)
   .add('normal button', () => <Button hidden={['mobile', 'desktop-only']} onClick={action('click')}>I am a Button</Button>)
   .add('a button like a link tag', () => <Button as="a" href="https://google.com" title="Google" target="blank">I am a link</Button>)
   .add('a button like a input tag', () => <Button onClick={action('click')} as="input" type="submit">I am an input</Button>)
@@ -158,3 +161,6 @@ storiesOf('Button', module)
     </React.Fragment>
   ));
 
+storiesOf('Box', module)
+  .addDecorator(boxDecorator)
+  .add('normal box', () => <h1>This is a box</h1>);
