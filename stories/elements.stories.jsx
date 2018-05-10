@@ -15,6 +15,7 @@ import Delete from '../lib/elements/Delete';
 import Icon from '../lib/elements/Icon';
 import Image from '../lib/elements/Image';
 import Notification from '../lib/elements/Notification';
+import ProgressBar from '../lib/elements/ProgressBar';
 
 const boxDecorator = story => (
   <Box>
@@ -281,5 +282,28 @@ storiesOf('Notification', module)
       <Notification warning onDeleteClick={action('click!')}>{lorem}</Notification>
       <Notification success onDeleteClick={action('click!')}>{lorem}</Notification>
       <Notification danger onDeleteClick={action('click!')}>{lorem}</Notification>
+    </React.Fragment>
+  ));
+
+storiesOf('ProgressBar', module)
+  .addDecorator(boxDecorator)
+  .add('normal progress bar', () => <ProgressBar value={30} />)
+  .add('color progress bar', () => (
+    <React.Fragment>
+      <ProgressBar value={30} />
+      <ProgressBar value={40} primary />
+      <ProgressBar value={50} link />
+      <ProgressBar value={60} info />
+      <ProgressBar value={70} warning />
+      <ProgressBar value={80} success />
+      <ProgressBar value={90} danger />
+    </React.Fragment>
+  ))
+  .add('size progress bar', () => (
+    <React.Fragment>
+      <ProgressBar value={30} small />
+      <ProgressBar value={40} />
+      <ProgressBar value={50} medium />
+      <ProgressBar value={60} large />
     </React.Fragment>
   ));
