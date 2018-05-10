@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/DKCoders/sophia-components#readme",
   "devDependencies": {
+    "@fortawesome/fontawesome-free-webfonts": "^1.0.9",
     "@storybook/addon-actions": "^3.4.3",
     "@storybook/addon-links": "^3.4.3",
     "@storybook/addons": "^3.4.3",

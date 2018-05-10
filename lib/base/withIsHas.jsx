@@ -118,9 +118,6 @@ export const buttonsHasKeys = [
   'addons',
 ];
 
-export const defaultIsKeys = [...(new Set([...colorsKeys, ...colorsStateKeys, aligmentKeys]))];
-export const defaultHasKeys = [...(new Set([]))];
-
 const propTypesReduceFunc = (acceptString = []) => (acum, key) => ({
   ...acum,
   [key]: !acceptString.includes(key)
@@ -128,7 +125,7 @@ const propTypesReduceFunc = (acceptString = []) => (acum, key) => ({
     : PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
 });
 
-const withIsProcessor = (isKeys = defaultIsKeys, hasKeys = defaultHasKeys) => (Component) => {
+const withIsProcessor = (isKeys = [], hasKeys = []) => (Component) => {
   class WithProcessor extends PureComponent {
     render() {
       const { className, props } = processor(isKeys, hasKeys, this.props);

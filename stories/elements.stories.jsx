@@ -2,6 +2,8 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import 'bulma/css/bulma.min.css';
+import '@fortawesome/fontawesome-free-webfonts/css/fontawesome.css';
+import '@fortawesome/fontawesome-free-webfonts/css/fa-solid.css';
 import './index.css';
 
 import Button from '../lib/elements/Button';
@@ -9,6 +11,7 @@ import Buttons from '../lib/elements/Buttons';
 import Box from '../lib/elements/Box';
 import Content from '../lib/elements/Content';
 import Delete from '../lib/elements/Delete';
+import Icon from '../lib/elements/Icon';
 
 const boxDecorator = story => (
   <Box>
@@ -215,9 +218,29 @@ storiesOf('Delete', module)
   .add('normal delete', () => <Delete onClick={action('click!')} />)
   .add('sizes delete', () => (
     <React.Fragment>
-      <Delete small>Small</Delete>
-      <Delete>Normal</Delete>
-      <Delete medium>Medium</Delete>
-      <Delete large>Large</Delete>
+      <Delete small />
+      <Delete />
+      <Delete medium />
+      <Delete large />
+    </React.Fragment>
+  ));
+
+storiesOf('Icon', module)
+  .addDecorator(boxDecorator)
+  .add('normal icon', () => <Icon icon="fas fa-home" />)
+  .add('sizes icon', () => (
+    <React.Fragment>
+      <Icon icon="fas fa-home fa-xs" small />
+      <Icon icon="fas fa-home" />
+      <Icon icon="fas fa-home fa-lg" medium />
+      <Icon icon="fas fa-home fa-3x" large />
+    </React.Fragment>
+  ))
+  .add('color icon', () => (
+    <React.Fragment>
+      <Icon icon="fas fa-home" text="success" />
+      <Icon icon="fas fa-home" />
+      <Icon icon="fas fa-home" />
+      <Icon icon="fas fa-home" />
     </React.Fragment>
   ));
