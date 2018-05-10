@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import faker from 'faker';
 import 'bulma/css/bulma.min.css';
 import '@fortawesome/fontawesome-free-webfonts/css/fontawesome.css';
 import '@fortawesome/fontawesome-free-webfonts/css/fa-solid.css';
@@ -13,6 +14,7 @@ import Content from '../lib/elements/Content';
 import Delete from '../lib/elements/Delete';
 import Icon from '../lib/elements/Icon';
 import Image from '../lib/elements/Image';
+import Notification from '../lib/elements/Notification';
 
 const boxDecorator = story => (
   <Box>
@@ -241,8 +243,6 @@ storiesOf('Icon', module)
     <React.Fragment>
       <Icon icon="fas fa-home" text="success" />
       <Icon icon="fas fa-home" />
-      <Icon icon="fas fa-home" />
-      <Icon icon="fas fa-home" />
     </React.Fragment>
   ));
 
@@ -266,4 +266,20 @@ storiesOf('Image', module)
       <Image src="https://bulma.io/images/placeholders/480x480.png" alt="Bulma img" ratio="5by4" /><br />
       <Image src="https://bulma.io/images/placeholders/480x480.png" alt="Bulma img" ratio="16by9" /><br />
     </div>
+  ));
+
+const lorem = faker.lorem.paragraphs();
+storiesOf('Notification', module)
+  .addDecorator(boxDecorator)
+  .add('normal notification', () => (<Notification onDeleteClick={action('click!')}>{lorem}</Notification>))
+  .add('color notification', () => (
+    <React.Fragment>
+      <Notification>{lorem}</Notification>
+      <Notification primary onDeleteClick={action('click!')}>{lorem}</Notification>
+      <Notification link onDeleteClick={action('click!')}>{lorem}</Notification>
+      <Notification info onDeleteClick={action('click!')}>{lorem}</Notification>
+      <Notification warning onDeleteClick={action('click!')}>{lorem}</Notification>
+      <Notification success onDeleteClick={action('click!')}>{lorem}</Notification>
+      <Notification danger onDeleteClick={action('click!')}>{lorem}</Notification>
+    </React.Fragment>
   ));
