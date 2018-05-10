@@ -307,3 +307,9 @@ storiesOf('ProgressBar', module)
       <ProgressBar value={60} large />
     </React.Fragment>
   ));
+
+storiesOf('Table', module)
+  .addDecorator(boxDecorator)
+  .add('normal table', () => (
+
+  ));

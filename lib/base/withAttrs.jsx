@@ -72,10 +72,12 @@ export const defaultAttrs = ['id', 'className', 'style', 'role'];
 export const allAttrs = [...acceptedAttrs];
 export const aAttrs = ['href', 'target', 'title', 'name'];
 export const inputAttrs = ['name', 'type', 'value', 'disabled'];
+export const tdAttrs = ['colspan', 'headers', 'rowspan', 'scope'];
 export const attrSets = {
   defaultAttrs,
   aAttrs,
   inputAttrs,
+  tdAttrs,
   allAttrs,
 };
 
