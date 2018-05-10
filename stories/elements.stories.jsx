@@ -12,6 +12,7 @@ import Box from '../lib/elements/Box';
 import Content from '../lib/elements/Content';
 import Delete from '../lib/elements/Delete';
 import Icon from '../lib/elements/Icon';
+import Image from '../lib/elements/Image';
 
 const boxDecorator = story => (
   <Box>
@@ -243,4 +244,26 @@ storiesOf('Icon', module)
       <Icon icon="fas fa-home" />
       <Icon icon="fas fa-home" />
     </React.Fragment>
+  ));
+
+storiesOf('Image', module)
+  .addDecorator(boxDecorator)
+  .add('normal image', () => <Image src="https://bulma.io/images/placeholders/128x128.png" alt="Bulma img" square="128" />)
+  .add('sizes image', () => (
+    <React.Fragment>
+      <Image src="https://bulma.io/images/placeholders/16x16.png" alt="Bulma img" square="16" /><br />
+      <Image src="https://bulma.io/images/placeholders/24x24.png" alt="Bulma img" square="24" /><br />
+      <Image src="https://bulma.io/images/placeholders/32x32.png" alt="Bulma img" square="32" /><br />
+      <Image src="https://bulma.io/images/placeholders/48x48.png" alt="Bulma img" square="48" /><br />
+      <Image src="https://bulma.io/images/placeholders/64x64.png" alt="Bulma img" square="64" /><br />
+      <Image src="https://bulma.io/images/placeholders/96x96.png" alt="Bulma img" square="96" /><br />
+      <Image src="https://bulma.io/images/placeholders/128x128.png" alt="Bulma img" square="128" />
+    </React.Fragment>
+  ))
+  .add('ratio image', () => (
+    <div style={{ width: 200 }}>
+      <Image src="https://bulma.io/images/placeholders/480x480.png" alt="Bulma img" ratio="square" /><br />
+      <Image src="https://bulma.io/images/placeholders/480x480.png" alt="Bulma img" ratio="5by4" /><br />
+      <Image src="https://bulma.io/images/placeholders/480x480.png" alt="Bulma img" ratio="16by9" /><br />
+    </div>
   ));
