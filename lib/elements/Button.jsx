@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import withAttrs, { defaultAttrs, aAttrs, inputAttrs } from '../base/withAttrs';
 import withIsProcessor, { buttonIsKeys, buttonHasKeys } from '../base/withIsHas';
-import { combineSets } from '../utils/helpers';
+import { classNameJoiner, combineSets } from '../utils/helpers';
 
 const mappedTag = {
   // eslint-disable-next-line react/prop-types
@@ -15,32 +15,35 @@ const mappedTag = {
   input: props => <input {...props} />,
 };
 
-const Button = ({
-  children,
-  as,
-  onClick,
-  attrs,
-}) => {
-  const Component = mappedTag[as];
-  const { className, ...restAttrs } = attrs;
-  const classNameProp = !className ? 'button' : `button ${className}`;
-  return as === 'input' ? (
-    <Component
-      className={classNameProp}
-      {...restAttrs}
-      onClick={onClick}
-      value={children}
-    />
-  ) : (
-    <Component
-      className={classNameProp}
-      {...restAttrs}
-      onClick={onClick}
-    >
-      {children}
-    </Component>
-  );
-};
+class Button extends PureComponent {
+  render() {
+    const {
+      children,
+      as,
+      onClick,
+      attrs,
+    } = this.props;
+    const Component = mappedTag[as];
+    const { className, ...restAttrs } = attrs;
+    const classNameProp = classNameJoiner('button', className);
+    return as === 'input' ? (
+      <Component
+        className={classNameProp}
+        {...restAttrs}
+        onClick={onClick}
+        value={children}
+      />
+    ) : (
+      <Component
+        className={classNameProp}
+        {...restAttrs}
+        onClick={onClick}
+      >
+        {children}
+      </Component>
+    );
+  }
+}
 
 Button.propTypes = {
   children: PropTypes.oneOfType([
