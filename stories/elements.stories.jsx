@@ -16,6 +16,7 @@ import Icon from '../lib/elements/Icon';
 import Image from '../lib/elements/Image';
 import Notification from '../lib/elements/Notification';
 import ProgressBar from '../lib/elements/ProgressBar';
+import Table, { Tbody, Tfoot, Thead, Th, Tr, Td } from '../lib/elements/Table';
 
 const boxDecorator = story => (
   <Box>
@@ -308,8 +309,82 @@ storiesOf('ProgressBar', module)
     </React.Fragment>
   ));
 
+const headers = ['Product', 'Color', 'Quantity', 'Price', 'Total'];
+const data = [...Array(6)].map(() => {
+  const qty = faker.random.arrayElement([1, 2, 3]);
+  const price = faker.commerce.price();
+  return [
+    faker.commerce.product(),
+    faker.commerce.color(),
+    qty,
+    price,
+    qty * price,
+  ];
+});
+const total = data.reduce((acum, item) => acum + item[4], 0);
+const footers = ['', '', '', '', total];
+
+const thead = (
+  <Thead>
+    <Tr>{headers.map(cell => <Th key={cell}>{cell}</Th>)}</Tr>
+  </Thead>
+);
+const tfoot = (
+  <Tfoot>
+    <Tr>{footers.map((cell, index) => <Th key={index}>{cell}</Th>)}</Tr>
+  </Tfoot>
+);
+const tbody = (
+  <Tbody>
+    {data.map((row, index) => (
+      <Tr key={row[0] + index} selected={index === 1}>
+        {row.map(cell => <Td key={cell + index}>{cell}</Td>)}
+      </Tr>
+    ))}
+  </Tbody>
+);
+
 storiesOf('Table', module)
   .addDecorator(boxDecorator)
   .add('normal table', () => (
-
+    <Table>
+      {thead}
+      {tfoot}
+      {tbody}
+    </Table>
+  ))
+  .add('bordered table', () => (
+    <Table bordered>
+      {thead}
+      {tfoot}
+      {tbody}
+    </Table>
+  ))
+  .add('striped table', () => (
+    <Table striped>
+      {thead}
+      {tfoot}
+      {tbody}
+    </Table>
+  ))
+  .add('narrow table', () => (
+    <Table narrow>
+      {thead}
+      {tfoot}
+      {tbody}
+    </Table>
+  ))
+  .add('hoverable table', () => (
+    <Table hoverable>
+      {thead}
+      {tfoot}
+      {tbody}
+    </Table>
+  ))
+  .add('fullwidth table', () => (
+    <Table fullwidth>
+      {thead}
+      {tfoot}
+      {tbody}
+    </Table>
   ));

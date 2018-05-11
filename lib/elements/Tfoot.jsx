@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
-import Th from './Th';
+import Tr from './Tr';
 import withAttrs from '../base/withAttrs';
 import withIsHas, { helpersIsKeys, helpersHasKeys } from '../base/withIsHas';
 
@@ -17,9 +17,14 @@ class Tfoot extends PureComponent {
 }
 
 Tfoot.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.shape({
-    type: PropTypes.oneOf([Th]),
-  })).isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.shape({
+      type: PropTypes.oneOf([Tr]),
+    })),
+    PropTypes.shape({
+      type: PropTypes.oneOf([Tr]),
+    }),
+  ]).isRequired,
   attrs: PropTypes.shape().isRequired,
 };
 

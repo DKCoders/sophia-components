@@ -40,6 +40,10 @@ const mappedAttrs = {
     'url',
     'week',
   ]),
+  colspan: PropTypes.string,
+  headers: PropTypes.string,
+  rowspan: PropTypes.string,
+  scope: PropTypes.string,
 };
 
 const dummyConverter = val => val;
@@ -65,6 +69,10 @@ const converterAttrs = {
   target: dummyConverter,
   type: dummyConverter,
   value: dummyConverter,
+  colspan: dummyConverter,
+  headers: dummyConverter,
+  rowspan: dummyConverter,
+  scope: dummyConverter,
 };
 
 const acceptedAttrs = Object.keys(converterAttrs);

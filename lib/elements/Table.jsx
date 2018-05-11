@@ -5,16 +5,12 @@ import withAttrs from '../base/withAttrs';
 import withIsHas, { helpersIsKeys, helpersHasKeys } from '../base/withIsHas';
 import { combineSets } from '../utils/helpers';
 
-class Th extends PureComponent {
-  render() {
-    const { children, attrs: { className, ...restAttrs } } = this.props;
-    return (
-      <th className={`${className || ''}`} {...restAttrs}>
-        {children}
-      </th>
-    );
-  }
-}
+import Tbody from './Tbody';
+import Thead from './Thead';
+import Tfoot from './Tfoot';
+import Th from './Th';
+import Tr from './Tr';
+import Td from './Td';
 
 class Table extends PureComponent {
   render() {
@@ -47,6 +43,15 @@ const tableModifiers = [
   'hoverable',
   'fullwidth',
 ];
+
+export {
+  Tbody,
+  Thead,
+  Tfoot,
+  Th,
+  Tr,
+  Td,
+};
 
 export default compose(
   withIsHas(combineSets(helpersIsKeys, tableModifiers), helpersHasKeys),

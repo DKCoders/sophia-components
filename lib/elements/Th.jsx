@@ -19,6 +19,7 @@ class Th extends PureComponent {
 Th.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.string,
+    PropTypes.number,
     PropTypes.shape(),
     PropTypes.arrayOf(PropTypes.shape()),
   ]),
@@ -27,7 +28,7 @@ Th.propTypes = {
 };
 
 Th.defaultProps = {
-  children: null,
+  children: '',
   onClick: null,
 };
 
