@@ -17,6 +17,8 @@ import Image from '../lib/elements/Image';
 import Notification from '../lib/elements/Notification';
 import ProgressBar from '../lib/elements/ProgressBar';
 import Table, { Tbody, Tfoot, Thead, Th, Tr, Td } from '../lib/elements/Table';
+import Tag from '../lib/elements/Tag';
+import Tags from '../lib/elements/Tags';
 
 const boxDecorator = story => (
   <Box>
@@ -387,4 +389,73 @@ storiesOf('Table', module)
       {tfoot}
       {tbody}
     </Table>
+  ));
+
+storiesOf('Tag', module)
+  .addDecorator(boxDecorator)
+  .add('normal tag', () => <Tag onClick={action('click!')}>Tag Label</Tag>)
+  .add('sizes tag', () => (
+    <React.Fragment>
+      <Tag>Normal</Tag>
+      <Tag medium primary>Medium</Tag>
+      <Tag large danger>Large</Tag>
+    </React.Fragment>
+  ))
+  .add('color tag', () => (
+    <React.Fragment>
+      <Tag>Normal</Tag>
+      <Tag black>Black</Tag>
+      <Tag dark>Dark</Tag>
+      <Tag light>Light</Tag>
+      <Tag white>White</Tag>
+      <Tag primary>Primary</Tag>
+      <Tag link>Link</Tag>
+      <Tag info>Info</Tag>
+      <Tag success>Success</Tag>
+      <Tag warning>Warning</Tag>
+      <Tag danger>Danger</Tag>
+    </React.Fragment>
+  ))
+  .add('modified tag', () => (
+    <React.Fragment>
+      <Tag delete as="a" />
+      <Tag rounded>Rounded</Tag>
+    </React.Fragment>
+  ))
+  .add('with Delete Component tag', () => (
+    <React.Fragment>
+      <Tag medium primary onDeleteClick={action('click!')}>
+        Hello
+      </Tag>
+      <Tag large danger onDeleteClick={action('click!')}>
+        World
+      </Tag>
+    </React.Fragment>
+  ))
+  .add('groups of tags', () => (
+    <Tags>
+      <Tag>Normal</Tag>
+      <Tag black>Black</Tag>
+      <Tag dark>Dark</Tag>
+      <Tag light>Light</Tag>
+      <Tag white>White</Tag>
+      <Tag primary>Primary</Tag>
+      <Tag link>Link</Tag>
+      <Tag info>Info</Tag>
+      <Tag success>Success</Tag>
+      <Tag warning>Warning</Tag>
+      <Tag danger>Danger</Tag>
+    </Tags>
+  ))
+  .add('Addons of tags', () => (
+    <React.Fragment>
+      <Tags addons>
+        <Tag>Normal</Tag>
+        <Tag black>Black</Tag>
+      </Tags>
+      <Tags addons>
+        <Tag link>Normal</Tag>
+        <Tag delete as="a" />
+      </Tags>
+    </React.Fragment>
   ));
