@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import withAttrs from '../base/withAttrs';
@@ -18,25 +18,28 @@ const mappedTag = {
 
 const sizes = ['one', 'two', 'three', 'four', 'five', 'six'];
 
-const Title = ({
-  children,
-  as,
-  attrs,
-  ...restProps,
-}) => {
-  const Component = mappedTag[as];
-  const { className, ...restAttrs } = attrs;
-  const sizeClassIndex = sizes.findIndex(size => restProps[size]);
-  const classNameProp = sizeClassIndex === -1 ? className || '' : `is-${sizeClassIndex + 1} ${className || ''}`;
-  return (
-    <Component
-      className={`title ${classNameProp}`}
-      {...restAttrs}
-    >
-      {children}
-    </Component>
-  );
-};
+class Title extends PureComponent {
+  render() {
+    const {
+      children,
+      as,
+      attrs,
+      ...restProps
+    } = this.props;
+    const Component = mappedTag[as];
+    const { className, ...restAttrs } = attrs;
+    const sizeClassIndex = sizes.findIndex(size => restProps[size]);
+    const classNameProp = sizeClassIndex === -1 ? className || '' : `is-${sizeClassIndex + 1} ${className || ''}`;
+    return (
+      <Component
+        className={`title ${classNameProp}`}
+        {...restAttrs}
+      >
+        {children}
+      </Component>
+    );
+  }
+}
 
 Title.propTypes = {
   children: PropTypes.oneOfType([
