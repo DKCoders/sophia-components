@@ -19,6 +19,8 @@ import ProgressBar from '../lib/elements/ProgressBar';
 import Table, { Tbody, Tfoot, Thead, Th, Tr, Td } from '../lib/elements/Table';
 import Tag from '../lib/elements/Tag';
 import Tags from '../lib/elements/Tags';
+import Title from '../lib/elements/Title';
+import Subtitle from '../lib/elements/Subtitle';
 
 const boxDecorator = story => (
   <Box>
@@ -457,5 +459,36 @@ storiesOf('Tag', module)
         <Tag link>Normal</Tag>
         <Tag delete as="a" />
       </Tags>
+    </React.Fragment>
+  ));
+
+storiesOf('Title and Subtitle', module)
+  .addDecorator(boxDecorator)
+  .add('normal title and subtitle', () => (
+    <React.Fragment>
+      <Title>Title</Title>
+      <Subtitle>Subtitle</Subtitle>
+    </React.Fragment>
+  ))
+  .add('sizes title and subtitle', () => (
+    <React.Fragment>
+      <Title one>Title</Title>
+      <Title two>Title</Title>
+      <Title three>Title</Title>
+      <Title four>Title</Title>
+      <Title five>Title</Title>
+      <Title six>Title</Title>
+      <Subtitle one>Subtitle</Subtitle>
+      <Subtitle two>Subtitle</Subtitle>
+      <Subtitle three>Subtitle</Subtitle>
+      <Subtitle four>Subtitle</Subtitle>
+      <Subtitle five>Subtitle</Subtitle>
+      <Subtitle six>Subtitle</Subtitle>
+    </React.Fragment>
+  ))
+  .add('spaced title and subtitle', () => (
+    <React.Fragment>
+      <Title spaced as="p">Title</Title>
+      <Subtitle as="p">Subtitle</Subtitle>
     </React.Fragment>
   ));
