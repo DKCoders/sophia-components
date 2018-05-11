@@ -1,32 +1,33 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
-import Button from './Button';
+import Td from './Td';
+import Th from './Th';
 import withAttrs from '../base/withAttrs';
-import withIsHas, { buttonsIsKeys, buttonsHasKeys } from '../base/withIsHas';
-import { classNameJoiner } from '../utils/helpers';
+import withIsHas, { helpersIsKeys, helpersHasKeys } from '../base/withIsHas';
+import { combineSets } from '../utils/helpers';
 
-class Buttons extends PureComponent {
+class Tr extends PureComponent {
   render() {
     const { children, attrs: { className, ...restAttrs } } = this.props;
     return (
-      <div className={classNameJoiner('buttons', className)} {...restAttrs}>
+      <tr className={`${className || ''}`} {...restAttrs}>
         {children}
-      </div>
+      </tr>
     );
   }
 }
 
-Buttons.propTypes = {
+Tr.propTypes = {
   children: PropTypes.arrayOf(PropTypes.shape({
-    type: PropTypes.oneOf([Button]),
+    type: PropTypes.oneOf([Td, Th]),
   })).isRequired,
   attrs: PropTypes.shape().isRequired,
 };
 
-Buttons.defaultProps = {};
+Tr.defaultProps = {};
 
 export default compose(
-  withIsHas(buttonsIsKeys, buttonsHasKeys),
+  withIsHas(combineSets(helpersIsKeys, ['selected']), helpersHasKeys),
   withAttrs(),
-)(Buttons);
+)(Tr);
