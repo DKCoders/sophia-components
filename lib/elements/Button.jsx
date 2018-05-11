@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import withAttrs, { defaultAttrs, aAttrs, inputAttrs } from '../base/withAttrs';
 import withIsProcessor, { buttonIsKeys, buttonHasKeys } from '../base/withIsHas';
-import { combineSets } from '../utils/helpers';
+import { classNameJoiner, combineSets } from '../utils/helpers';
 
 const mappedTag = {
   // eslint-disable-next-line react/prop-types
@@ -25,7 +25,7 @@ class Button extends PureComponent {
     } = this.props;
     const Component = mappedTag[as];
     const { className, ...restAttrs } = attrs;
-    const classNameProp = !className ? 'button' : `button ${className}`;
+    const classNameProp = classNameJoiner('button', className);
     return as === 'input' ? (
       <Component
         className={classNameProp}

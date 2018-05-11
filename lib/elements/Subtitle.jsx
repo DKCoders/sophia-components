@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import withAttrs from '../base/withAttrs';
 import withIsProcessor, { helpersIsKeys, helpersHasKeys } from '../base/withIsHas';
-import { combineSets } from '../utils/helpers';
+import { classNameJoiner, combineSets } from '../utils/helpers';
 
 const mappedTag = {
   p: ({ children, ...props }) => <p {...props}>{children}</p>,
@@ -29,10 +29,12 @@ class Subtitle extends PureComponent {
     const Component = mappedTag[as];
     const { className, ...restAttrs } = attrs;
     const sizeClassIndex = sizes.findIndex(size => restProps[size]);
-    const classNameProp = sizeClassIndex === -1 ? className : `is-${sizeClassIndex + 1} ${className}`;
+    const sizeClassNameProp = sizeClassIndex !== -1
+      ? `is-${sizeClassIndex + 1}`
+      : null;
     return (
       <Component
-        className={`subtitle ${classNameProp}`}
+        className={classNameJoiner('subtitle', sizeClassNameProp, className)}
         {...restAttrs}
       >
         {children}

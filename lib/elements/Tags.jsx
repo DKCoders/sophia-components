@@ -4,12 +4,13 @@ import compose from 'recompose/compose';
 import Tag from './Tag';
 import withAttrs from '../base/withAttrs';
 import withIsHas, { buttonsIsKeys, buttonsHasKeys } from '../base/withIsHas';
+import { classNameJoiner } from '../utils/helpers';
 
 class Tags extends PureComponent {
   render() {
     const { children, attrs: { className, ...restAttrs } } = this.props;
     return (
-      <div className={`tags ${className || ''}`} {...restAttrs}>
+      <div className={classNameJoiner('tags', className)} {...restAttrs}>
         {children}
       </div>
     );

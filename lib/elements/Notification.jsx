@@ -4,14 +4,14 @@ import compose from 'recompose/compose';
 import Delete from './Delete';
 import withAttrs from '../base/withAttrs';
 import withIsHas, { helpersIsKeys, helpersHasKeys, colorsStateKeys } from '../base/withIsHas';
-import { combineSets } from '../utils/helpers';
+import { classNameJoiner, combineSets } from '../utils/helpers';
 
 class Notification extends PureComponent {
   render() {
     const { children, attrs: { className, ...restAttrs }, onDeleteClick } = this.props;
     const deleteButton = !onDeleteClick ? null : <Delete onClick={onDeleteClick} />;
     return (
-      <div className={`notification ${className || ''}`} {...restAttrs}>
+      <div className={classNameJoiner('notification', className)} {...restAttrs}>
         {deleteButton}
         {children}
       </div>

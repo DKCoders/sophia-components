@@ -5,7 +5,7 @@ import compose from 'recompose/compose';
 import Delete from './Delete';
 import withAttrs, { defaultAttrs, aAttrs } from '../base/withAttrs';
 import withIsProcessor, { colorsKeys, colorsStateKeys, helpersHasKeys, helpersIsKeys, sizeKeys } from '../base/withIsHas';
-import { combineSets } from '../utils/helpers';
+import { classNameJoiner, combineSets } from '../utils/helpers';
 
 const mappedTag = {
   a: ({ children, ...props }) => <a {...props}>{children}</a>,
@@ -24,7 +24,7 @@ const Tag = ({
   const deleteButton = !onDeleteClick ? null : <Delete onClick={onDeleteClick} />;
   return (
     <Component
-      className={`tag ${className || ''}`}
+      className={classNameJoiner('tag', className)}
       {...restAttrs}
       onClick={onClick}
     >

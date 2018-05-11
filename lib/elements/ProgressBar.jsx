@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import withAttrs from '../base/withAttrs';
 import withIsHas, { helpersIsKeys, helpersHasKeys, colorsStateKeys, sizeKeys } from '../base/withIsHas';
-import { combineSets } from '../utils/helpers';
+import { classNameJoiner, combineSets } from '../utils/helpers';
 
 class ProgressBar extends PureComponent {
   render() {
     const { value, max, attrs: { className, ...restAttrs } } = this.props;
     return (
-      <progress className={`progress ${className || ''}`} {...restAttrs} value={value} max={max}>
+      <progress className={classNameJoiner('progress', className)} {...restAttrs} value={value} max={max}>
         {value}%
       </progress>
     );

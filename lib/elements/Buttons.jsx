@@ -4,12 +4,13 @@ import compose from 'recompose/compose';
 import Button from './Button';
 import withAttrs from '../base/withAttrs';
 import withIsHas, { buttonsIsKeys, buttonsHasKeys } from '../base/withIsHas';
+import { classNameJoiner } from '../utils/helpers';
 
 class Buttons extends PureComponent {
   render() {
     const { children, attrs: { className, ...restAttrs } } = this.props;
     return (
-      <div className={`buttons ${className || ''}`} {...restAttrs}>
+      <div className={classNameJoiner('buttons', className)} {...restAttrs}>
         {children}
       </div>
     );
