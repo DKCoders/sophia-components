@@ -9,8 +9,11 @@ import './index.css';
 
 import Box from '../lib/elements/Box';
 import Notification from '../lib/elements/Notification';
+import Subtitle from '../lib/elements/Subtitle';
+import Button from '../lib/elements/Button';
 
 import Container from '../lib/layout/Container';
+import Level, { LevelLeft, LevelRight, LevelItem } from '../lib/layout/Level';
 
 const boxDecorator = story => (
   <Box>
@@ -49,4 +52,28 @@ storiesOf('Container', module)
         the <code>$fullhd</code> breakpoint.
       </Notification>
     </Container>
+  ));
+
+storiesOf('Level', module)
+  .addDecorator(boxDecorator)
+  .add('normal level', () => (
+    <Level>
+      <LevelLeft>
+        <LevelItem>
+          <Subtitle>
+            <strong>123</strong> posts
+          </Subtitle>
+        </LevelItem>
+        <LevelItem>
+          <Button>Search</Button>
+        </LevelItem>
+      </LevelLeft>
+      <LevelRight>
+        <LevelItem><strong>All</strong></LevelItem>
+        <LevelItem>Published</LevelItem>
+        <LevelItem>Drafts</LevelItem>
+        <LevelItem>Deleted</LevelItem>
+        <LevelItem><Button success>New</Button></LevelItem>
+      </LevelRight>
+    </Level>
   ));
