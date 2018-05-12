@@ -7,15 +7,17 @@ import './index.css';
 
 import Box from '../lib/elements/Box';
 import Notification from '../lib/elements/Notification';
+import Title from '../lib/elements/Title';
 import Subtitle from '../lib/elements/Subtitle';
 import Button from '../lib/elements/Button';
+import Image from '../lib/elements/Image';
+import Content from '../lib/elements/Content';
+import Delete from '../lib/elements/Delete';
 
 import Container from '../lib/layout/Container';
 import Level, { LevelLeft, LevelRight, LevelItem } from '../lib/layout/Level';
 import Media, { MediaLeft, MediaRight, MediaContent } from '../lib/layout/Media';
-import Image from "../lib/elements/Image";
-import Content from "../lib/elements/Content";
-import Delete from "../lib/elements/Delete";
+import Hero, { HeroBody, HeroFoot, HeroHead } from '../lib/layout/Hero';
 
 const boxDecorator = story => (
   <Box>
@@ -142,4 +144,98 @@ storiesOf('Media', module)
         <Delete />
       </MediaRight>
     </Media>
+  ));
+
+const commonInnerHero = (
+  <HeroBody>
+    <Container>
+      <Title>Hero title</Title>
+      <Subtitle>Hero subtitle</Subtitle>
+    </Container>
+  </HeroBody>
+);
+
+storiesOf('Hero', module)
+  .addDecorator(boxDecorator)
+  .add('normal hero', () => (
+    <Hero>
+      {commonInnerHero}
+    </Hero>
+  ))
+  .add('colors hero', () => (
+    <React.Fragment>
+      <Hero primary>
+        {commonInnerHero}
+      </Hero>
+      <Hero info>
+        {commonInnerHero}
+      </Hero>
+      <Hero success>
+        {commonInnerHero}
+      </Hero>
+      <Hero warning>
+        {commonInnerHero}
+      </Hero>
+      <Hero danger>
+        {commonInnerHero}
+      </Hero>
+      <Hero light>
+        {commonInnerHero}
+      </Hero>
+      <Hero dark>
+        {commonInnerHero}
+      </Hero>
+    </React.Fragment>
+  ))
+  .add('bold hero', () => (
+    <React.Fragment>
+      <Hero bold primary>
+        {commonInnerHero}
+      </Hero>
+      <Hero bold info>
+        {commonInnerHero}
+      </Hero>
+      <Hero bold success>
+        {commonInnerHero}
+      </Hero>
+      <Hero bold warning>
+        {commonInnerHero}
+      </Hero>
+      <Hero bold danger>
+        {commonInnerHero}
+      </Hero>
+      <Hero bold light>
+        {commonInnerHero}
+      </Hero>
+      <Hero bold dark>
+        {commonInnerHero}
+      </Hero>
+    </React.Fragment>
+  ))
+  .add('size hero', () => (
+    <React.Fragment>
+      <Hero primary>
+        {commonInnerHero}
+      </Hero>
+      <Hero medium info>
+        {commonInnerHero}
+      </Hero>
+      <Hero large success>
+        {commonInnerHero}
+      </Hero>
+      <Hero fullheight danger>
+        {commonInnerHero}
+      </Hero>
+    </React.Fragment>
+  ))
+  .add('fullheight complete hero', () => (
+    <Hero large success>
+      <HeroHead>
+        <p>This is the head. Always on top</p>
+      </HeroHead>
+      {commonInnerHero}
+      <HeroFoot>
+        <p>This is the foot. Always on bottom</p>
+      </HeroFoot>
+    </Hero>
   ));
