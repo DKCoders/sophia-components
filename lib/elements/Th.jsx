@@ -17,12 +17,7 @@ class Th extends PureComponent {
 }
 
 Th.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.shape(),
-    PropTypes.arrayOf(PropTypes.shape()),
-  ]),
+  children: PropTypes.node,
   attrs: PropTypes.shape().isRequired,
   onClick: PropTypes.func,
 };

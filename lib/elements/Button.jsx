@@ -46,11 +46,7 @@ class Button extends PureComponent {
 }
 
 Button.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.shape(),
-    PropTypes.arrayOf(PropTypes.shape()),
-  ]),
+  children: PropTypes.node,
   as: PropTypes.oneOf(['button', 'a', 'input', 'span']),
   onClick: PropTypes.func,
   attrs: PropTypes.shape().isRequired,

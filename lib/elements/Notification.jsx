@@ -20,11 +20,7 @@ class Notification extends PureComponent {
 }
 
 Notification.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.shape(),
-    PropTypes.arrayOf(PropTypes.shape()),
-  ]),
+  children: PropTypes.node,
   attrs: PropTypes.shape().isRequired,
   onDeleteClick: PropTypes.func,
 };

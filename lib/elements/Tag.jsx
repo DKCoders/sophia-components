@@ -35,11 +35,7 @@ const Tag = ({
 };
 
 Tag.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.shape(),
-    PropTypes.arrayOf(PropTypes.shape()),
-  ]),
+  children: PropTypes.node,
   as: PropTypes.oneOf(['a', 'span']),
   onClick: PropTypes.func,
   onDeleteClick: PropTypes.func,

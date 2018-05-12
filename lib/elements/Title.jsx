@@ -44,11 +44,7 @@ class Title extends PureComponent {
 }
 
 Title.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.shape(),
-    PropTypes.arrayOf(PropTypes.shape()),
-  ]),
+  children: PropTypes.node,
   as: PropTypes.oneOf([
     'p',
     'h1',

@@ -24,11 +24,7 @@ class Table extends PureComponent {
 }
 
 Table.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.shape(),
-    PropTypes.arrayOf(PropTypes.shape()),
-  ]),
+  children: PropTypes.node,
   attrs: PropTypes.shape().isRequired,
 };
 
