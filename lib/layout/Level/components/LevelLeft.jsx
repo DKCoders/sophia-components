@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
-import LevelItem from './LevelItem';
 import withAttrs from '../../../base/withAttrs';
 import withIsHas, { helpersIsKeys, helpersHasKeys } from '../../../base/withIsHas';
 import { classNameJoiner } from '../../../utils/helpers';
@@ -14,14 +13,7 @@ class LevelLeft extends PureComponent {
 }
 
 LevelLeft.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.shape({
-      type: LevelItem,
-    })),
-    PropTypes.shape({
-      type: LevelItem,
-    }),
-  ]),
+  children: PropTypes.node,
   attrs: PropTypes.shape().isRequired,
 };
 

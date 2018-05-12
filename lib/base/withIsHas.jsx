@@ -128,7 +128,6 @@ const propTypesReduceFunc = (acceptString = []) => (acum, key) => ({
 const withIsProcessor = (isKeys = [], hasKeys = []) => (Component) => {
   class WithProcessor extends PureComponent {
     render() {
-      console.log(Component.propTypes);
       const { className, props } = processor(isKeys, hasKeys, this.props);
       if (className.length) {
         return <Component className={className} {...props} />;
