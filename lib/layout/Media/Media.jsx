@@ -20,6 +20,7 @@ Media.propTypes = {
       return new Error(`Invalid prop \`${propFullName}\` supplied to` +
         ` \`${componentName}\`. Validation failed.`);
     }
+    return true;
   }),
   attrs: PropTypes.shape().isRequired,
 };
