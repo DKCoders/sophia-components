@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import faker from 'faker';
 import 'bulma/css/bulma.min.css';
 import '@fortawesome/fontawesome-free-webfonts/css/fontawesome.css';
 import '@fortawesome/fontawesome-free-webfonts/css/fa-solid.css';
@@ -20,6 +21,7 @@ import Media, { MediaLeft, MediaRight, MediaContent } from '../lib/layout/Media'
 import Hero, { HeroBody, HeroFoot, HeroHead } from '../lib/layout/Hero';
 import Section from '../lib/layout/Section';
 import Footer from '../lib/layout/Footer';
+import Tile from '../lib/layout/Tile';
 
 const boxDecorator = story => (
   <Box>
@@ -302,4 +304,40 @@ storiesOf('Footer', module)
         </Content>
       </Container>
     </Footer>
+  ));
+
+storiesOf('Tile', module)
+  .addDecorator(boxDecorator)
+  .add('normal tiles', () => (
+    <Tile ancestor>
+      <Tile vertical eight>
+        <Tile>
+          <Tile parent vertical>
+            <Tile child>
+              <Notification primary style={{ height: '100%' }}>
+                <Title>Vertical</Title>
+                <Subtitle>Top tile</Subtitle>
+              </Notification>
+            </Tile>
+            <Tile child>
+              <Notification warning style={{ height: '100%' }}>
+                <Title>...tiles</Title>
+                <Subtitle>Bottom tile</Subtitle>
+              </Notification>
+            </Tile>
+          </Tile>
+        </Tile>
+      </Tile>
+      <Tile parent>
+        <Tile child>
+          <Notification success>
+            <Title>Tall tile</Title>
+            <Subtitle>With even more content</Subtitle>
+            <Content>
+              <p>{faker.lorem.paragraphs()}</p>
+            </Content>
+          </Notification>
+        </Tile>
+      </Tile>
+    </Tile>
   ));
