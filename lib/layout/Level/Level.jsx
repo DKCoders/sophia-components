@@ -13,13 +13,12 @@ class Level extends PureComponent {
 }
 
 Level.propTypes = {
-  children: PropTypes.node,
-  // children: PropTypes.arrayOf((propValue, key, componentName, location, propFullName) => {
-  //   if (propValue[key].type.displayName === 'LevelLeft' && propValue[key].type.displayName === 'LevelRight') {
-  //     return new Error(`Invalid prop \`${propFullName}\` supplied to` +
-  //     ` \`${componentName}\`. Validation failed.`);
-  //   }
-  // }),
+  children: PropTypes.arrayOf((propValue, key, componentName, location, propFullName) => {
+    if (propValue[key].type.displayName === 'LevelLeft' && propValue[key].type.displayName === 'LevelRight') {
+      return new Error(`Invalid prop \`${propFullName}\` supplied to` +
+      ` \`${componentName}\`. Validation failed.`);
+    }
+  }),
   attrs: PropTypes.shape().isRequired,
 };
 
