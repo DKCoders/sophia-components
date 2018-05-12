@@ -18,6 +18,7 @@ import Container from '../lib/layout/Container';
 import Level, { LevelLeft, LevelRight, LevelItem } from '../lib/layout/Level';
 import Media, { MediaLeft, MediaRight, MediaContent } from '../lib/layout/Media';
 import Hero, { HeroBody, HeroFoot, HeroHead } from '../lib/layout/Hero';
+import Section from '../lib/layout/Section';
 
 const boxDecorator = story => (
   <Box>
@@ -238,4 +239,49 @@ storiesOf('Hero', module)
         <p>This is the foot. Always on bottom</p>
       </HeroFoot>
     </Hero>
+  ));
+
+storiesOf('Section', module)
+  .addDecorator(boxDecorator)
+  .add('normal section', () => (
+    <Section>
+      <Container>
+        <Title>Section</Title>
+        <Subtitle>
+          A simple container to divide your page into <strong>sections</strong>.
+          Use sections as direct children of <code>body</code>
+        </Subtitle>
+      </Container>
+    </Section>
+  ))
+  .add('sizes section', () => (
+    <React.Fragment>
+      <Section background="primary">
+        <Container>
+          <Title>Section</Title>
+          <Subtitle>
+            A simple container to divide your page into <strong>sections</strong>.
+            Use sections as direct children of <code>body</code>
+          </Subtitle>
+        </Container>
+      </Section>
+      <Section medium background="info">
+        <Container>
+          <Title>Section</Title>
+          <Subtitle>
+            A simple container to divide your page into <strong>sections</strong>.
+            Use sections as direct children of <code>body</code>
+          </Subtitle>
+        </Container>
+      </Section>
+      <Section large background="success">
+        <Container>
+          <Title>Section</Title>
+          <Subtitle>
+            A simple container to divide your page into <strong>sections</strong>.
+            Use sections as direct children of <code>body</code>
+          </Subtitle>
+        </Container>
+      </Section>
+    </React.Fragment>
   ));
