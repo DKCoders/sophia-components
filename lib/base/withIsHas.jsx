@@ -1,7 +1,22 @@
 /* eslint-disable no-param-reassign */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { processor } from '../utils/helpers';
+import { capitalizeFirstLetter, processor } from '../utils/helpers';
+
+export const columnSizesIsKeys = [
+  'half',
+  'oneFifths',
+  'twoFifths',
+  'threeFifths',
+  'fourFifths',
+  'oneThird',
+  'twoThirds',
+  'oneQuarter',
+  'threeQuarters',
+];
+
+export const columnOffsetIsKeys = columnSizesIsKeys
+  .map(size => `offset${capitalizeFirstLetter(size)}`);
 
 export const isAcceptStringVal = [
   'flex',
@@ -10,6 +25,10 @@ export const isAcceptStringVal = [
   'inlineFlex',
   'hidden',
   'size',
+  'half',
+  'narrow',
+  ...columnSizesIsKeys,
+  ...columnOffsetIsKeys,
 ];
 
 export const hasAcceptStringVal = [
