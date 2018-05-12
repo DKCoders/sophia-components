@@ -14,6 +14,10 @@ import Button from '../lib/elements/Button';
 
 import Container from '../lib/layout/Container';
 import Level, { LevelLeft, LevelRight, LevelItem } from '../lib/layout/Level';
+import Media, { MediaLeft, MediaRight, MediaContent } from '../lib/layout/Media';
+import Image from "../lib/elements/Image";
+import Content from "../lib/elements/Content";
+import Delete from "../lib/elements/Delete";
 
 const boxDecorator = story => (
   <Box>
@@ -76,4 +80,68 @@ storiesOf('Level', module)
         <LevelItem><Button success>New</Button></LevelItem>
       </LevelRight>
     </Level>
+  ));
+
+storiesOf('Media', module)
+  .addDecorator(boxDecorator)
+  .add('normal media', () => (
+    <Media>
+      <MediaLeft>
+        <Image src="https://bulma.io/images/placeholders/128x128.png" alt="Bulma img" square="64" />
+      </MediaLeft>
+      <MediaContent>
+        <Content>
+          <p>
+            <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
+            <br />
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros,
+            eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis
+            feugiat facilisis.
+          </p>
+        </Content>
+      </MediaContent>
+      <MediaRight>
+        <Delete />
+      </MediaRight>
+    </Media>
+  ))
+  .add('nested media', () => (
+    <Media>
+      <MediaLeft>
+        <Image src="https://bulma.io/images/placeholders/128x128.png" alt="Bulma img" square="64" />
+      </MediaLeft>
+      <MediaContent>
+        <Content>
+          <p>
+            <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
+            <br />
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros,
+            eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis
+            feugiat facilisis.
+          </p>
+        </Content>
+        <Media>
+          <MediaLeft>
+            <Image src="https://bulma.io/images/placeholders/128x128.png" alt="Bulma img" square="64" />
+          </MediaLeft>
+          <MediaContent>
+            <Content>
+              <p>
+                <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
+                <br />
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros,
+                eu pellentesque tortor vestibulum ut. Maecenas non massa sem.
+                Etiam finibus odio quis feugiat facilisis.
+              </p>
+            </Content>
+          </MediaContent>
+          <MediaRight>
+            <Delete />
+          </MediaRight>
+        </Media>
+      </MediaContent>
+      <MediaRight>
+        <Delete />
+      </MediaRight>
+    </Media>
   ));
