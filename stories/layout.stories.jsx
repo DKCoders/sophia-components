@@ -19,6 +19,7 @@ import Level, { LevelLeft, LevelRight, LevelItem } from '../lib/layout/Level';
 import Media, { MediaLeft, MediaRight, MediaContent } from '../lib/layout/Media';
 import Hero, { HeroBody, HeroFoot, HeroHead } from '../lib/layout/Hero';
 import Section from '../lib/layout/Section';
+import Footer from '../lib/layout/Footer';
 
 const boxDecorator = story => (
   <Box>
@@ -284,4 +285,21 @@ storiesOf('Section', module)
         </Container>
       </Section>
     </React.Fragment>
+  ));
+
+storiesOf('Footer', module)
+  .addDecorator(boxDecorator)
+  .add('normal footer', () => (
+    <Footer>
+      <Container>
+        <Content textCentered>
+          <p>
+            <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>.
+            The source code is licensed
+            <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+            is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+          </p>
+        </Content>
+      </Container>
+    </Footer>
   ));
