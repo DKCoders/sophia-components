@@ -7,6 +7,8 @@ import '@fortawesome/fontawesome-free-webfonts/css/fontawesome.css';
 import '@fortawesome/fontawesome-free-webfonts/css/fa-solid.css';
 import './index.css';
 
+import Container from '../lib/layout/Container';
+
 import Button from '../lib/elements/Button';
 import Buttons from '../lib/elements/Buttons';
 import Box from '../lib/elements/Box';
@@ -23,9 +25,11 @@ import Title from '../lib/elements/Title';
 import Subtitle from '../lib/elements/Subtitle';
 
 const boxDecorator = story => (
-  <Box>
-    {story()}
-  </Box>
+  <Container style={{ marginTop: 10 }}>
+    <Box>
+      {story()}
+    </Box>
+  </Container>
 );
 
 storiesOf('Button', module)

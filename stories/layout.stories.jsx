@@ -24,9 +24,11 @@ import Footer from '../lib/layout/Footer';
 import Tile from '../lib/layout/Tile';
 
 const boxDecorator = story => (
-  <Box>
-    {story()}
-  </Box>
+  <Container style={{ marginTop: 10 }}>
+    <Box>
+      {story()}
+    </Box>
+  </Container>
 );
 
 storiesOf('Container', module)
