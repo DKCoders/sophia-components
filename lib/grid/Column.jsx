@@ -20,7 +20,6 @@ const mapSizeToClasses = prefix => ({ size, value }) =>
 class Column extends PureComponent {
   render() {
     const { children, attrs: { className, ...restAttrs }, ...restProps } = this.props;
-    // TODO: handler multiple sizes
     const sizeClassIndex = sizes.reduce(reduceSizesToArray(restProps), []);
     const sizeClassNameProp = !sizeClassIndex.length
       ? null
