@@ -13,7 +13,7 @@ import Columns from '../lib/grid/Columns';
 import Column from '../lib/grid/Column';
 
 const boxDecorator = story => (
-  <Container>
+  <Container style={{ marginTop: 10 }}>
     <Box>
       {story()}
     </Box>
@@ -53,7 +53,52 @@ storiesOf('Columns', module)
         <Column half offsetOneQuarter>{contentPrimary}</Column>
       </Columns>
       <Columns>
-        <Column four offsetFour>{contentPrimary}</Column>
+        <Column four offsetThree>{contentPrimary}</Column>
+      </Columns>
+    </React.Fragment>
+  ))
+  .add('responsiveness', () => (
+    <React.Fragment>
+      <Columns>
+        <Column half="mobile" nine>{contentPrimary}</Column>
+        <Column>{content}</Column>
+      </Columns>
+      <Columns>
+        <Column half="mobile" eight offsetOne="desktop" offsetTwo="tablet">{contentPrimary}</Column>
+        <Column>{content}</Column>
+      </Columns>
+    </React.Fragment>
+  ))
+  .add('gap', () => (
+    <Columns gapless>
+      <Column>{contentPrimary}</Column>
+      <Column>{contentPrimary}</Column>
+      <Column>{contentPrimary}</Column>
+      <Column>{contentPrimary}</Column>
+    </Columns>
+  ))
+  .add('options', () => (
+    <React.Fragment>
+      <Columns multiline>
+        <Column oneQuarter>{contentPrimary}</Column>
+        <Column oneQuarter>{contentPrimary}</Column>
+        <Column oneQuarter>{contentPrimary}</Column>
+        <Column oneQuarter>{contentPrimary}</Column>
+        <Column half>{contentPrimary}</Column>
+        <Column oneQuarter>{contentPrimary}</Column>
+        <Column oneQuarter>{contentPrimary}</Column>
+        <Column oneQuarter>{contentPrimary}</Column>
+        <Column>{contentPrimary}</Column>
+      </Columns>
+      <Columns mobile centered>
+        <Column half narrow>{contentPrimary}</Column>
+      </Columns>
+      <Columns mobile centered multiline>
+        <Column narrow>{contentPrimary}</Column>
+        <Column narrow>{contentPrimary}</Column>
+        <Column narrow>{contentPrimary}</Column>
+        <Column narrow>{contentPrimary}</Column>
+        <Column narrow>{contentPrimary}</Column>
       </Columns>
     </React.Fragment>
   ));

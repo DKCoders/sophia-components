@@ -7,24 +7,32 @@ import withIsHas, {
   helpersHasKeys,
   columnSizesIsKeys, columnOffsetIsKeys,
 } from '../base/withIsHas';
-import { classNameJoiner, combineSets } from '../utils/helpers';
+import { classNameJoiner, combineSets, capitalizeFirstLetter } from '../utils/helpers';
 
 const sizes = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven'];
-const offsetSizes = [...sizes];
+const offsetSizes = [...sizes.map(size => `offset${capitalizeFirstLetter(size)}`)];
+
+const reduceSizesToArray = props =>
+  (acum, size, index) => (!props[size] ? acum : [...acum, { size: index + 1, value: props[size] }]);
+const mapSizeToClasses = prefix => ({ size, value }) =>
+  `${prefix}-${size}${typeof value === 'string' ? `-${value}` : ''}`;
 
 class Column extends PureComponent {
   render() {
     const { children, attrs: { className, ...restAttrs }, ...restProps } = this.props;
-    //TODO handler multiple string sizes values
-    const sizeClassIndex = sizes.findIndex(size => restProps[size]);
-    const sizeClassNameProp = sizeClassIndex !== -1
-      ? `is-${sizeClassIndex + 1}${typeof restProps[sizeClassIndex] === 'string' ? `-${restProps[sizeClassIndex]}` : ''}`
-      : null;
-    //TODO handler multiple string sizes values
-    const offsetSizeClassIndex = sizes.findIndex(size => restProps[size]);
-    const offsetSizeClassNameProp = offsetSizeClassIndex !== -1
-      ? `is-offset-${sizeClassIndex + 1}${typeof restProps[offsetSizeClassIndex] === 'string' ? `-${restProps[offsetSizeClassIndex]}` : ''}`
-      : null;
+    // TODO: handler multiple sizes
+    const sizeClassIndex = sizes.reduce(reduceSizesToArray(restProps), []);
+    const sizeClassNameProp = !sizeClassIndex.length
+      ? null
+      : sizeClassIndex
+        .map(mapSizeToClasses('is'))
+        .join(' ');
+    const offsetSizeClassIndex = offsetSizes.reduce(reduceSizesToArray(restProps), []);
+    const offsetSizeClassNameProp = !offsetSizeClassIndex.length
+      ? null
+      : offsetSizeClassIndex
+        .map(mapSizeToClasses('is-offset'))
+        .join(' ');
     return (<div className={classNameJoiner('column', offsetSizeClassNameProp, sizeClassNameProp, className)} {...restAttrs}>{children}</div>);
   }
 }
@@ -37,7 +45,6 @@ Column.propTypes = {
     [size]: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.string,
-      PropTypes.arrayOf(PropTypes.string),
     ]),
   }), {}),
   ...offsetSizes.reduce((acum, size) => ({
@@ -45,7 +52,6 @@ Column.propTypes = {
     [size]: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.string,
-      PropTypes.arrayOf(PropTypes.string),
     ]),
   }), {}),
 };

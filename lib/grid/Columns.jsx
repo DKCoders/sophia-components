@@ -9,7 +9,7 @@ const sizes = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
 
 class Columns extends PureComponent {
   render() {
-    const { children, attrs: { className, ...restAttrs }, ... restProps } = this.props;
+    const { children, attrs: { className, ...restAttrs }, ...restProps } = this.props;
     const sizeClassIndex = sizes.findIndex(size => restProps[size]);
     const sizeClassNameProp = sizeClassIndex !== -1
       ? `is-${sizeClassIndex + 1}`
