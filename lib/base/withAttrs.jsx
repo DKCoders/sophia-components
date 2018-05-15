@@ -10,6 +10,7 @@ const mappedAttrs = {
   ]),
   style: PropTypes.shape(),
   disabled: PropTypes.bool,
+  readOnly: PropTypes.bool,
   name: PropTypes.string,
   title: PropTypes.string,
   href: PropTypes.string,
@@ -40,6 +41,7 @@ const mappedAttrs = {
     'url',
     'week',
   ]),
+  placeholder: PropTypes.string,
   colspan: PropTypes.string,
   headers: PropTypes.string,
   rowspan: PropTypes.string,
@@ -62,12 +64,14 @@ const converterAttrs = {
   className: classNameConverter,
   style: dummyConverter,
   disabled: dummyConverter,
+  readOnly: dummyConverter,
   name: dummyConverter,
   title: dummyConverter,
   href: dummyConverter,
   role: dummyConverter,
   target: dummyConverter,
   type: dummyConverter,
+  placeholder: dummyConverter,
   value: dummyConverter,
   colspan: dummyConverter,
   headers: dummyConverter,
@@ -79,7 +83,7 @@ const acceptedAttrs = Object.keys(converterAttrs);
 export const defaultAttrs = ['id', 'className', 'style', 'role'];
 export const allAttrs = [...acceptedAttrs];
 export const aAttrs = ['href', 'target', 'title', 'name'];
-export const inputAttrs = ['name', 'type', 'value', 'disabled'];
+export const inputAttrs = ['name', 'type', 'value', 'disabled', 'placeholder', 'readOnly'];
 export const tdAttrs = ['colspan', 'headers', 'rowspan', 'scope'];
 export const attrSets = {
   defaultAttrs,
