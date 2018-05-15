@@ -10,6 +10,7 @@ import Box from '../lib/elements/Box';
 import Container from '../lib/layout/Container';
 
 import Input from '../lib/form/Input';
+import Textarea from '../lib/form/Textarea';
 
 const boxDecorator = story => (
   <Container style={{ marginTop: 10 }}>
@@ -51,5 +52,42 @@ storiesOf('Input', module)
       <Input placeholder="With states" disabled />
       <Input placeholder="With states" value="Text" readOnly />
       <Input placeholder="With states" value="Text" readOnly static />
+    </React.Fragment>
+  ));
+
+storiesOf('Textarea', module)
+  .addDecorator(boxDecorator)
+  .add('normal', () => (
+    <Textarea name="test" placeholder="write" onClick={action('Clicked!')} onChange={action('Changed!')} />
+  ))
+  .add('rows', () => (
+    <Textarea name="test" rows="10" placeholder="write" onClick={action('Clicked!')} onChange={action('Changed!')} />
+  ))
+  .add('colors', () => (
+    <React.Fragment>
+      <Textarea placeholder="With color" primary />
+      <Textarea placeholder="With color" info />
+      <Textarea placeholder="With color" success />
+      <Textarea placeholder="With color" warning />
+      <Textarea placeholder="With color" danger />
+    </React.Fragment>
+  ))
+  .add('sizes', () => (
+    <React.Fragment>
+      <Textarea placeholder="With sizes" small />
+      <Textarea placeholder="With sizes" />
+      <Textarea placeholder="With sizes" medium />
+      <Textarea placeholder="With sizes" large />
+    </React.Fragment>
+  ))
+  .add('styles and stattes', () => (
+    <React.Fragment>
+      <Textarea placeholder="With style" rounded />
+      <Textarea placeholder="With states" />
+      <Textarea placeholder="With states" hovered />
+      <Textarea placeholder="With states" focused />
+      <Textarea placeholder="With states" loading />
+      <Textarea placeholder="With states" disabled />
+      <Textarea placeholder="With states" value="Text" readOnly />
     </React.Fragment>
   ));

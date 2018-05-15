@@ -42,6 +42,7 @@ const mappedAttrs = {
     'week',
   ]),
   placeholder: PropTypes.string,
+  rows: PropTypes.string,
   colspan: PropTypes.string,
   headers: PropTypes.string,
   rowspan: PropTypes.string,
@@ -72,6 +73,7 @@ const converterAttrs = {
   target: dummyConverter,
   type: dummyConverter,
   placeholder: dummyConverter,
+  rows: dummyConverter,
   value: dummyConverter,
   colspan: dummyConverter,
   headers: dummyConverter,
@@ -84,6 +86,7 @@ export const defaultAttrs = ['id', 'className', 'style', 'role'];
 export const allAttrs = [...acceptedAttrs];
 export const aAttrs = ['href', 'target', 'title', 'name'];
 export const inputAttrs = ['name', 'type', 'value', 'disabled', 'placeholder', 'readOnly'];
+export const textAreaAttrs = ['name', 'value', 'disabled', 'placeholder', 'readOnly', 'rows'];
 export const tdAttrs = ['colspan', 'headers', 'rowspan', 'scope'];
 export const attrSets = {
   defaultAttrs,
