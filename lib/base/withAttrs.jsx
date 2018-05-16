@@ -43,6 +43,7 @@ const mappedAttrs = {
   ]),
   placeholder: PropTypes.string,
   rows: PropTypes.string,
+  size: PropTypes.string,
   colspan: PropTypes.string,
   headers: PropTypes.string,
   rowspan: PropTypes.string,
@@ -74,6 +75,7 @@ const converterAttrs = {
   type: dummyConverter,
   placeholder: dummyConverter,
   rows: dummyConverter,
+  size: dummyConverter,
   value: dummyConverter,
   colspan: dummyConverter,
   headers: dummyConverter,
@@ -87,6 +89,7 @@ export const allAttrs = [...acceptedAttrs];
 export const aAttrs = ['href', 'target', 'title', 'name'];
 export const inputAttrs = ['name', 'type', 'value', 'disabled', 'placeholder', 'readOnly'];
 export const textAreaAttrs = ['name', 'value', 'disabled', 'placeholder', 'readOnly', 'rows'];
+export const selectAttrs = ['name', 'value', 'disabled', 'placeholder', 'readOnly', 'size'];
 export const tdAttrs = ['colspan', 'headers', 'rowspan', 'scope'];
 export const attrSets = {
   defaultAttrs,

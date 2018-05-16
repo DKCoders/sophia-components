@@ -11,6 +11,7 @@ import Container from '../lib/layout/Container';
 
 import Input from '../lib/form/Input';
 import Textarea from '../lib/form/Textarea';
+import Select from '../lib/form/Select';
 
 const boxDecorator = story => (
   <Container style={{ marginTop: 10 }}>
@@ -90,4 +91,13 @@ storiesOf('Textarea', module)
       <Textarea placeholder="With states" disabled />
       <Textarea placeholder="With states" value="Text" readOnly />
     </React.Fragment>
+  ));
+
+storiesOf('Select', module)
+  .addDecorator(boxDecorator)
+  .add('normal', () => (
+    <Select onChange={action('changed')} onClick={action('clicked')}>
+      <option>Select an thing</option>
+      <option value="1">One</option>
+    </Select>
   ));
