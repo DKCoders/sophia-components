@@ -15,6 +15,10 @@ import Select from '../lib/form/Select';
 import Checkbox from '../lib/form/Checkbox';
 import Radio from '../lib/form/Radio';
 import FileInput from '../lib/form/FileInput';
+import Help from "../lib/form/Help";
+import Control from "../lib/form/Control";
+import Label from "../lib/form/Label";
+import Field from "../lib/form/Field";
 
 const boxDecorator = story => (
   <Container style={{ marginTop: 10 }}>
@@ -211,3 +215,25 @@ storiesOf('FileInput', module)
       <FileInput right name="test-file" icon="fas fa-upload" label="Choose a file..." />
     </React.Fragment>
   ));
+
+storiesOf('Field', module)
+  .addDecorator(boxDecorator)
+  .add('normal', () => (
+    <React.Fragment>
+      <Field>
+        <Label>Name</Label>
+        <Control>
+          <Input name="test-name" placeholder="Name" />
+        </Control>
+        <Help primary>A help</Help>
+      </Field>
+      <Field addons>
+        <Control iconLeft="fas fa-upload">
+          <Input name="test-name" placeholder="Name" />
+        </Control>
+        <Control expanded iconRight="fas fa-upload">
+          <Input name="test-name" placeholder="La st Name" />
+        </Control>
+      </Field>
+    </React.Fragment>
+  ))

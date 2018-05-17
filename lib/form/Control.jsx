@@ -21,7 +21,7 @@ class Control extends PureComponent {
 
     const iconLeftProps = !iconLeftSize ? {} : { [iconLeftSize]: true };
     const iconLeftElement = !iconLeft ? null : (
-      <Icon icon={iconLeft} {...iconLeftProps} />
+      <Icon icon={iconLeft} left {...iconLeftProps} />
     );
     const iconLeftClassName = !iconLeftElement || (typeof className === 'string' && className.includes('has-icons-left'))
       ? null
@@ -29,7 +29,7 @@ class Control extends PureComponent {
 
     const iconRightProps = !iconRightSize ? {} : { [iconRightSize]: true };
     const iconRightElement = !iconRight ? null : (
-      <Icon icon={iconRight} {...iconRightProps} />
+      <Icon icon={iconRight} right {...iconRightProps} />
     );
     const iconRightClassName = !iconRightElement || (typeof className === 'string' && className.includes('has-icons-right'))
       ? null
@@ -64,6 +64,6 @@ Control.defaultProps = {
 
 export default compose(
   withEvents(),
-  withIsHas(helpersIsKeys, combineSets(helpersHasKeys, ['iconsRight', 'iconsLeft'])),
+  withIsHas(combineSets(helpersIsKeys, ['expanded']), combineSets(helpersHasKeys, ['iconsRight', 'iconsLeft'])),
   withAttrs(combineSets(defaultAttrs, inputAttrs)),
 )(Control);
