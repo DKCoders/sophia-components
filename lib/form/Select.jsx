@@ -4,7 +4,7 @@ import compose from 'recompose/compose';
 import withAttrs, { defaultAttrs, selectAttrs } from '../base/withAttrs';
 import withIsHas, { helpersIsKeys, helpersHasKeys, colorsStateKeys, sizeKeys } from '../base/withIsHas';
 import withEvents, { inputSet } from '../base/withEvents';
-import { classNameJoiner, combineSets } from '../utils/helpers';
+import { classNameJoiner, combineSets, propsSegregator } from '../utils/helpers';
 
 const processOptions = (options) => {
   if (!options) {
@@ -16,34 +16,33 @@ const processOptions = (options) => {
         return <option key={option} value={option}>{option}</option>;
       }
       if (Array.isArray(option)) {
-        return <option key={option[0]} value={option[0]}>{option[1]}</option>;
+        return <option key={option[0] || option[1]} value={option[0]}>{option[1]}</option>;
       }
-      return <option key={option.value} value={option.value}>{option.label}</option>;
+      return (
+        <option key={option.value || option.label} value={option.value}>{option.label}</option>
+      );
     });
   }
   return Object.entries(options).map(([value, label]) => (
-    <option key={value} value={value}>{label}</option>
+    <option key={value || label} value={value}>{label}</option>
   ));
 };
 
 class Select extends PureComponent {
   render() {
     const {
-      attrs: { className, ...restAttrs }, events, multiple, children, options, noSelectedLabel
+      attrs: { className, ...restAttrs },
+      events,
+      multiple,
+      children,
+      options,
+      noSelectedLabel,
     } = this.props;
     const classNameProp = !multiple
       ? classNameJoiner('select', className)
       : classNameJoiner('select', 'is-multiple', className);
-    const { defaultAttrs: defaultProps, selectAttrs: selectProps } = Object.entries(restAttrs)
-      .reduce((acum, [key, value]) => {
-        if (defaultAttrs.includes(key)) {
-          return { ...acum, defaultAttrs: { ...acum.defaultAttrs, [key]: value } };
-        }
-        if (selectAttrs.includes(key)) {
-          return { ...acum, selectAttrs: { ...acum.selectAttrs, [key]: value } };
-        }
-        return acum;
-      }, { defaultAttrs: {}, selectAttrs: {} });
+    const { defaultAttrs: defaultProps, selectAttrs: selectProps } =
+      propsSegregator(restAttrs, { defaultAttrs, selectAttrs });
     const optionItems = children || processOptions(options);
     const noSelectedOption = !noSelectedLabel ? null : (
       <option>{noSelectedLabel}</option>
@@ -68,7 +67,7 @@ Select.propTypes = {
     PropTypes.arrayOf(PropTypes.string),
     PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
     PropTypes.arrayOf(PropTypes.shape({
-      value: PropTypes.string,
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       label: PropTypes.string,
     })),
     PropTypes.shape(),
