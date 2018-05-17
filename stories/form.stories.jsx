@@ -12,6 +12,7 @@ import Container from '../lib/layout/Container';
 import Input from '../lib/form/Input';
 import Textarea from '../lib/form/Textarea';
 import Select from '../lib/form/Select';
+import Checkbox from '../lib/form/Checkbox';
 
 const boxDecorator = story => (
   <Container style={{ marginTop: 10 }}>
@@ -152,5 +153,15 @@ storiesOf('Select', module)
       <Select options={optionsArrayShape} onChange={action('changed')} onClick={action('clicked')} />
       <Select medium options={optionsArrayShape} onChange={action('changed')} onClick={action('clicked')} />
       <Select large options={optionsArrayShape} onChange={action('changed')} onClick={action('clicked')} />
+    </React.Fragment>
+  ));
+
+storiesOf('Checkbox', module)
+  .addDecorator(boxDecorator)
+  .add('normal', () => (
+    <React.Fragment>
+      <Checkbox checked label="Test" onChange={action('Changed')} />
+      <br />
+      <Checkbox checked label="Test" onChange={action('Changed')} disabled />
     </React.Fragment>
   ));

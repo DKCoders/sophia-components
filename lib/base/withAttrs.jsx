@@ -11,6 +11,7 @@ const mappedAttrs = {
   style: PropTypes.shape(),
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
+  checked: PropTypes.bool,
   name: PropTypes.string,
   title: PropTypes.string,
   href: PropTypes.string,
@@ -43,6 +44,7 @@ const mappedAttrs = {
   ]),
   placeholder: PropTypes.string,
   rows: PropTypes.string,
+  for: PropTypes.string,
   size: PropTypes.string,
   colspan: PropTypes.string,
   headers: PropTypes.string,
@@ -65,7 +67,9 @@ const converterAttrs = {
   id: dummyConverter,
   className: classNameConverter,
   style: dummyConverter,
+  for: dummyConverter,
   disabled: dummyConverter,
+  checked: dummyConverter,
   readOnly: dummyConverter,
   name: dummyConverter,
   title: dummyConverter,
@@ -85,9 +89,11 @@ const converterAttrs = {
 
 const acceptedAttrs = Object.keys(converterAttrs);
 export const defaultAttrs = ['id', 'className', 'style', 'role'];
+export const labelAttrs = [...defaultAttrs, 'for'];
 export const allAttrs = [...acceptedAttrs];
 export const aAttrs = ['href', 'target', 'title', 'name'];
 export const inputAttrs = ['name', 'type', 'value', 'disabled', 'placeholder', 'readOnly'];
+export const checkboxAttrs = ['name', 'checked', 'disabled', 'placeholder', 'readOnly'];
 export const textAreaAttrs = ['name', 'value', 'disabled', 'placeholder', 'readOnly', 'rows'];
 export const selectAttrs = ['name', 'value', 'disabled', 'placeholder', 'readOnly', 'size'];
 export const tdAttrs = ['colspan', 'headers', 'rowspan', 'scope'];
