@@ -13,6 +13,7 @@ import Input from '../lib/form/Input';
 import Textarea from '../lib/form/Textarea';
 import Select from '../lib/form/Select';
 import Checkbox from '../lib/form/Checkbox';
+import Radio from '../lib/form/Radio';
 
 const boxDecorator = story => (
   <Container style={{ marginTop: 10 }}>
@@ -163,5 +164,14 @@ storiesOf('Checkbox', module)
       <Checkbox checked label="Test" onChange={action('Changed')} />
       <br />
       <Checkbox checked label="Test" onChange={action('Changed')} disabled />
+    </React.Fragment>
+  ));
+
+storiesOf('Radio', module)
+  .addDecorator(boxDecorator)
+  .add('normal', () => (
+    <React.Fragment>
+      <Radio name="test" label="Test 1" onChange={action('Changed')} />
+      <Radio name="test" label="Test 2" onChange={action('Changed')} />
     </React.Fragment>
   ));
