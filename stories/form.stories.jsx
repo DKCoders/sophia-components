@@ -14,6 +14,7 @@ import Textarea from '../lib/form/Textarea';
 import Select from '../lib/form/Select';
 import Checkbox from '../lib/form/Checkbox';
 import Radio from '../lib/form/Radio';
+import FileInput from '../lib/form/FileInput';
 
 const boxDecorator = story => (
   <Container style={{ marginTop: 10 }}>
@@ -173,5 +174,40 @@ storiesOf('Radio', module)
     <React.Fragment>
       <Radio name="test" label="Test 1" onChange={action('Changed')} />
       <Radio name="test" label="Test 2" onChange={action('Changed')} />
+    </React.Fragment>
+  ));
+
+storiesOf('FileInput', module)
+  .addDecorator(boxDecorator)
+  .add('normal', () => (
+    <React.Fragment>
+      <FileInput name="test-file" icon="fas fa-upload" label="Choose a file..." onChange={action('Changed!')} />
+      <FileInput name="test-file" icon="fas fa-upload" label="Choose a file..." fileName="File name.docx" />
+      <FileInput name="test-file" icon="fas fa-upload" label="Choose a file..." fileName="File name.docx" right />
+      <FileInput name="test-file" icon="fas fa-upload" label="Choose a file..." fileName="File name.docx" fullwidth />
+      <FileInput name="test-file" icon="fas fa-upload" label="Choose a file..." boxed />
+      <FileInput name="test-file" icon="fas fa-upload" label="Choose a file..." fileName="File name.docx" boxed />
+    </React.Fragment>
+  ))
+  .add('color', () => (
+    <React.Fragment>
+      <FileInput primary name="test-file" icon="fas fa-upload" label="Choose a file..." />
+      <FileInput info name="test-file" icon="fas fa-upload" label="Choose a file..." boxed />
+      <FileInput danger name="test-file" icon="fas fa-upload" label="Choose a file..." fileName="Testing.xls" boxed />
+    </React.Fragment>
+  ))
+  .add('sizes', () => (
+    <React.Fragment>
+      <FileInput small name="test-file" icon="fas fa-upload" label="Choose a file..." />
+      <FileInput name="test-file" icon="fas fa-upload" label="Choose a file..." />
+      <FileInput medium name="test-file" icon="fas fa-upload" label="Choose a file..." />
+      <FileInput large name="test-file" icon="fas fa-upload" label="Choose a file..." />
+    </React.Fragment>
+  ))
+  .add('aligment', () => (
+    <React.Fragment>
+      <FileInput name="test-file" icon="fas fa-upload" label="Choose a file..." />
+      <FileInput centered name="test-file" icon="fas fa-upload" label="Choose a file..." />
+      <FileInput right name="test-file" icon="fas fa-upload" label="Choose a file..." />
     </React.Fragment>
   ));

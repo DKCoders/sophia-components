@@ -95,6 +95,7 @@ export const aAttrs = ['href', 'target', 'title', 'name'];
 export const inputAttrs = ['name', 'type', 'value', 'disabled', 'placeholder', 'readOnly'];
 export const checkboxAttrs = ['name', 'checked', 'disabled', 'placeholder', 'readOnly'];
 export const radioAttrs = ['name', 'value', 'checked', 'disabled', 'placeholder', 'readOnly'];
+export const fileAttrs = ['name', 'value', 'disabled', 'readOnly'];
 export const textAreaAttrs = ['name', 'value', 'disabled', 'placeholder', 'readOnly', 'rows'];
 export const selectAttrs = ['name', 'value', 'disabled', 'placeholder', 'readOnly', 'size'];
 export const tdAttrs = ['colspan', 'headers', 'rowspan', 'scope'];
