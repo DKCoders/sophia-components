@@ -6,10 +6,30 @@ import withIsHas, { helpersIsKeys, helpersHasKeys, colorsStateKeys, sizeKeys } f
 import withEvents, { inputSet } from '../base/withEvents';
 import { classNameJoiner, combineSets } from '../utils/helpers';
 
+const processOptions = (options) => {
+  if (!options) {
+    return options;
+  }
+  if (Array.isArray(options)) {
+    return options.map((option) => {
+      if (typeof option === 'string') {
+        return <option key={option} value={option}>{option}</option>;
+      }
+      if (Array.isArray(option)) {
+        return <option key={option[0]} value={option[0]}>{option[1]}</option>;
+      }
+      return <option key={option.value} value={option.value}>{option.label}</option>;
+    });
+  }
+  return Object.entries(options).map(([value, label]) => (
+    <option key={value} value={value}>{label}</option>
+  ));
+};
+
 class Select extends PureComponent {
   render() {
     const {
-      attrs: { className, ...restAttrs }, events, multiple, children,
+      attrs: { className, ...restAttrs }, events, multiple, children, options, noSelectedLabel
     } = this.props;
     const classNameProp = !multiple
       ? classNameJoiner('select', className)
@@ -24,10 +44,15 @@ class Select extends PureComponent {
         }
         return acum;
       }, { defaultAttrs: {}, selectAttrs: {} });
+    const optionItems = children || processOptions(options);
+    const noSelectedOption = !noSelectedLabel ? null : (
+      <option>{noSelectedLabel}</option>
+    );
     return (
       <div className={classNameProp} {...defaultProps}>
         <select multiple={multiple} {...events} {...selectProps}>
-          {children}
+          {noSelectedOption}
+          {optionItems}
         </select>
       </div>
     );
@@ -42,18 +67,28 @@ Select.propTypes = {
   options: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.string),
     PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
-    PropTypes.arrayOf(PropTypes.shape()),
+    PropTypes.arrayOf(PropTypes.shape({
+      value: PropTypes.string,
+      label: PropTypes.string,
+    })),
     PropTypes.shape(),
   ]),
+  noSelectedLabel: PropTypes.string,
 };
 
 Select.defaultProps = {
   children: null,
   options: null,
   multiple: false,
+  noSelectedLabel: null,
 };
 
-const isKeys = combineSets(helpersIsKeys, colorsStateKeys, sizeKeys, ['rounded', 'hovered', 'focused', 'loading']);
+const isKeys = combineSets(
+  helpersIsKeys.filter(key => key !== 'size'),
+  colorsStateKeys,
+  sizeKeys,
+  ['rounded', 'hovered', 'focused', 'loading'],
+);
 
 export default compose(
   withEvents(inputSet),

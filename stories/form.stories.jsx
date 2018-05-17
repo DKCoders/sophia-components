@@ -93,11 +93,64 @@ storiesOf('Textarea', module)
     </React.Fragment>
   ));
 
+const unselectedLabel = 'Select a number';
+const optionsArray = ['One', 'Two', 'Three', 'Four'];
+const optionsArrayArray = [[undefined, unselectedLabel], [1, 'One'], [2, 'Two'], [3, 'Three'], [4, 'Four']];
+const optionsArrayShape = [
+  { label: unselectedLabel },
+  { label: 'One', value: 1 },
+  { label: 'Two', value: 2 },
+  { label: 'Three', value: 3 },
+];
+const optionsShape = {
+  1: 'One',
+  2: 'Two',
+  3: 'Three',
+  4: 'Four',
+};
+
 storiesOf('Select', module)
   .addDecorator(boxDecorator)
   .add('normal', () => (
-    <Select onChange={action('changed')} onClick={action('clicked')}>
-      <option>Select an thing</option>
-      <option value="1">One</option>
-    </Select>
+    <React.Fragment>
+      <Select onChange={action('changed')} onClick={action('clicked')}>
+        <option>Select a number</option>
+        <option value="1">One</option>
+      </Select>
+      <Select options={optionsArray} noSelectedLabel={unselectedLabel} onChange={action('changed')} onClick={action('clicked')} />
+      <Select options={optionsArrayArray} onChange={action('changed')} onClick={action('clicked')} />
+      <Select options={optionsArrayShape} onChange={action('changed')} onClick={action('clicked')} />
+      <Select options={optionsShape} noSelectedLabel={unselectedLabel} onChange={action('changed')} onClick={action('clicked')} />
+    </React.Fragment>
+  ))
+  .add('multiple', () => (
+    <React.Fragment>
+      <Select multiple size="8" options={optionsArrayShape} onChange={action('changed')} onClick={action('clicked')} />
+    </React.Fragment>
+  ))
+  .add('color', () => (
+    <React.Fragment>
+      <Select primary options={optionsArrayShape} onChange={action('changed')} onClick={action('clicked')} />
+      <Select info options={optionsArrayShape} onChange={action('changed')} onClick={action('clicked')} />
+      <Select success options={optionsArrayShape} onChange={action('changed')} onClick={action('clicked')} />
+      <Select warning options={optionsArrayShape} onChange={action('changed')} onClick={action('clicked')} />
+      <Select danger options={optionsArrayShape} onChange={action('changed')} onClick={action('clicked')} />
+    </React.Fragment>
+  ))
+  .add('styles and states', () => (
+    <React.Fragment>
+      <Select options={optionsArrayShape} onChange={action('changed')} onClick={action('clicked')} />
+      <Select rounded options={optionsArrayShape} onChange={action('changed')} onClick={action('clicked')} />
+      <Select hovered options={optionsArrayShape} onChange={action('changed')} onClick={action('clicked')} />
+      <Select focused options={optionsArrayShape} onChange={action('changed')} onClick={action('clicked')} />
+      <Select loading options={optionsArrayShape} onChange={action('changed')} onClick={action('clicked')} />
+    </React.Fragment>
+  ))
+  .add('sizes', () => (
+    <React.Fragment>
+      <Select small options={optionsArrayShape} onChange={action('changed')} onClick={action('clicked')} />
+      <Select options={optionsArrayShape} onChange={action('changed')} onClick={action('clicked')} />
+      <Select medium options={optionsArrayShape} onChange={action('changed')} onClick={action('clicked')} />
+      <Select large options={optionsArrayShape} onChange={action('changed')} onClick={action('clicked')} />
+    </React.Fragment>
   ));
