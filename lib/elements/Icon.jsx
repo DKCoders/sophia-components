@@ -24,6 +24,6 @@ Icon.propTypes = {
 Icon.defaultProps = {};
 
 export default compose(
-  withIsHas(combineSets(helpersIsKeys, sizeKeys), helpersHasKeys),
+  withIsHas(combineSets(helpersIsKeys, sizeKeys, ['left', 'right']), helpersHasKeys),
   withAttrs(),
 )(Icon);
