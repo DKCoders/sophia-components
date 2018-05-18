@@ -2,36 +2,35 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import withAttrs from '../base/withAttrs';
-import withIsHas, { helpersIsKeys, helpersHasKeys, colorsStateKeys, sizeKeys, colorsKeys } from '../base/withIsHas';
+import withIsHas, { helpersIsKeys, helpersHasKeys, sizeKeys } from '../base/withIsHas';
 import withEvents from '../base/withEvents';
 import { classNameJoiner, combineSets } from '../utils/helpers';
 
-class Help extends PureComponent {
+class FieldLabel extends PureComponent {
   render() {
     const { attrs: { className, ...restAttrs }, events, children } = this.props;
-
     return (
-      <p className={classNameJoiner('help', className)} {...restAttrs} {...events}>
+      <div className={classNameJoiner('field-label', className)} {...restAttrs} {...events}>
         {children}
-      </p>
+      </div>
     );
   }
 }
 
-Help.propTypes = {
+FieldLabel.propTypes = {
   children: PropTypes.node,
   attrs: PropTypes.shape().isRequired,
   events: PropTypes.shape().isRequired,
 };
 
-Help.defaultProps = {
+FieldLabel.defaultProps = {
   children: null,
 };
 
-const isKeys = combineSets(helpersIsKeys, colorsStateKeys, colorsKeys, sizeKeys);
+const isKeys = combineSets(helpersIsKeys, sizeKeys, ['normal']);
 
 export default compose(
   withEvents(),
   withIsHas(isKeys, helpersHasKeys),
   withAttrs(),
-)(Help);
+)(FieldLabel);

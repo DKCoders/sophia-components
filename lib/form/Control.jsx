@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import Icon from '../elements/Icon';
-import withAttrs, { defaultAttrs, inputAttrs } from '../base/withAttrs';
+import withAttrs from '../base/withAttrs';
 import withIsHas, { helpersIsKeys, helpersHasKeys } from '../base/withIsHas';
 import withEvents from '../base/withEvents';
 import { classNameJoiner, combineSets } from '../utils/helpers';
@@ -65,5 +65,5 @@ Control.defaultProps = {
 export default compose(
   withEvents(),
   withIsHas(combineSets(helpersIsKeys, ['expanded']), combineSets(helpersHasKeys, ['iconsRight', 'iconsLeft'])),
-  withAttrs(combineSets(defaultAttrs, inputAttrs)),
+  withAttrs(),
 )(Control);

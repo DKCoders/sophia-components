@@ -15,10 +15,12 @@ import Select from '../lib/form/Select';
 import Checkbox from '../lib/form/Checkbox';
 import Radio from '../lib/form/Radio';
 import FileInput from '../lib/form/FileInput';
-import Help from "../lib/form/Help";
-import Control from "../lib/form/Control";
-import Label from "../lib/form/Label";
-import Field from "../lib/form/Field";
+import Help from '../lib/form/Help';
+import Control from '../lib/form/Control';
+import Label from '../lib/form/Label';
+import Field from '../lib/form/Field';
+import FieldLabel from '../lib/form/FieldLabel';
+import FieldBody from '../lib/form/FieldBody';
 
 const boxDecorator = story => (
   <Container style={{ marginTop: 10 }}>
@@ -232,8 +234,51 @@ storiesOf('Field', module)
           <Input name="test-name" placeholder="Name" />
         </Control>
         <Control expanded iconRight="fas fa-upload">
-          <Input name="test-name" placeholder="La st Name" />
+          <Input name="test-name" placeholder="Last Name" />
         </Control>
       </Field>
     </React.Fragment>
   ))
+  .add('horizontal', () => (
+    <React.Fragment>
+      <Field horizontal>
+        <FieldLabel normal>
+          <Label>Name</Label>
+        </FieldLabel>
+        <FieldBody>
+          <Field>
+            <Control>
+              <Input name="test-name" placeholder="Name" />
+            </Control>
+            <Help primary>A help</Help>
+          </Field>
+        </FieldBody>
+      </Field>
+      <Field horizontal>
+        <FieldLabel large>
+          <Label>Name</Label>
+        </FieldLabel>
+        <FieldBody>
+          <Field>
+            <Control>
+              <Input large name="test-name" placeholder="Name" />
+            </Control>
+            <Help large primary>A help</Help>
+          </Field>
+        </FieldBody>
+      </Field>
+      <Field addons>
+        <FieldLabel />
+        <FieldBody>
+          <Field addons>
+            <Control iconLeft="fas fa-upload">
+              <Input name="test-name" placeholder="Name" />
+            </Control>
+            <Control expanded iconRight="fas fa-upload">
+              <Input name="test-name" placeholder="Last Name" />
+            </Control>
+          </Field>
+        </FieldBody>
+      </Field>
+    </React.Fragment>
+  ));

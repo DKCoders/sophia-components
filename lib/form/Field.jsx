@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
-import withAttrs, { defaultAttrs, labelAttrs } from '../base/withAttrs';
+import withAttrs from '../base/withAttrs';
 import withIsHas, { helpersIsKeys, helpersHasKeys } from '../base/withIsHas';
 import withEvents from '../base/withEvents';
 import { classNameJoiner, combineSets } from '../utils/helpers';
@@ -28,10 +28,10 @@ Field.defaultProps = {
   children: null,
 };
 
-const isKeys = combineSets(helpersIsKeys, ['grouped', 'grouped-centered', 'grouped-right', 'grouped-multiline']);
+const isKeys = combineSets(helpersIsKeys, ['grouped', 'grouped-centered', 'grouped-right', 'grouped-multiline', 'horizontal']);
 
 export default compose(
   withEvents(),
   withIsHas(isKeys, combineSets(helpersHasKeys, ['addons', 'addonsCentered', 'addonsRight'])),
-  withAttrs(combineSets(defaultAttrs, labelAttrs)),
+  withAttrs(),
 )(Field);
