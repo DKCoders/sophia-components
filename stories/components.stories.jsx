@@ -10,6 +10,24 @@ import Box from '../lib/elements/Box';
 import Container from '../lib/layout/Container';
 
 import Breadcrumb from '../lib/components/Breadcrumb';
+import Card from '../lib/components/Card';
+import CardContent from '../lib/components/Card/components/CardContent';
+import CardFooter from '../lib/components/Card/components/CardFooter';
+import CardFooterItem from '../lib/components/Card/components/CardFooterItem';
+import CardHeader from '../lib/components/Card/components/CardHeader';
+import CardHeaderIcon from '../lib/components/Card/components/CardHeaderIcon';
+import CardHeaderTitle from '../lib/components/Card/components/CardHeaderTitle';
+import CardImage from '../lib/components/Card/components/CardImage';
+import Image from '../lib/elements/Image';
+import Media from '../lib/layout/Media/Media';
+import MediaLeft from '../lib/layout/Media/components/MediaLeft';
+import Title from '../lib/elements/Title';
+import MediaContent from '../lib/layout/Media/components/MediaContent';
+import Subtitle from '../lib/elements/Subtitle';
+import Content from '../lib/elements/Content';
+import Columns from '../lib/grid/Columns';
+import Column from '../lib/grid/Column';
+import Icon from '../lib/elements/Icon';
 
 const boxDecorator = story => (
   <Container style={{ marginTop: 10 }}>
@@ -55,5 +73,86 @@ storiesOf('Breadcrumb', module)
       <Breadcrumb items={itemsWithIcon} />
       <Breadcrumb medium items={itemsWithIcon} />
       <Breadcrumb large items={itemsWithIcon} />
+    </React.Fragment>
+  ));
+
+storiesOf('Card', module)
+  .addDecorator(boxDecorator)
+  .add('normal', () => (
+    <React.Fragment>
+      <Columns>
+        <Column oneQuarter>
+          <Card>
+            <CardImage>
+              <Image ratio="4by3" src="https://bulma.io/images/placeholders/1280x960.png" alt="image" />
+            </CardImage>
+            <CardContent>
+              <Media>
+                <MediaLeft>
+                  <Image square="48" src="https://bulma.io/images/placeholders/96x96.png" alt="image" />
+                </MediaLeft>
+                <MediaContent>
+                  <Title four>John Smith</Title>
+                  <Subtitle six>@johnsmith</Subtitle>
+                </MediaContent>
+              </Media>
+              <Content>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Phasellus nec iaculis mauris. <a>@bulmaio</a>.
+                <a href="#">#css</a> <a href="#">#responsive</a>
+                <br />
+                <time dateTime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+              </Content>
+            </CardContent>
+          </Card>
+        </Column>
+        <Column oneQuarter>
+          <Card>
+            <CardHeader>
+              <CardHeaderTitle>Component</CardHeaderTitle>
+              <CardHeaderIcon>
+                <Icon icon="fas fa-angle-down" />
+              </CardHeaderIcon>
+            </CardHeader>
+            <CardContent>
+              <Content>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Phasellus nec iaculis mauris.
+                <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
+                <br />
+                <time dateTime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+              </Content>
+            </CardContent>
+            <CardFooter>
+              <CardFooterItem>Save</CardFooterItem>
+              <CardFooterItem>Edit</CardFooterItem>
+              <CardFooterItem>Delete</CardFooterItem>
+            </CardFooter>
+          </Card>
+        </Column>
+        <Column oneQuarter>
+          <Card>
+            <CardContent>
+              <Title>
+                “There are two hard things in computer science:
+                cache invalidation, naming things, and off-by-one errors.”
+              </Title>
+              <Subtitle>Jeff Atwood</Subtitle>
+            </CardContent>
+            <CardFooter>
+              <CardFooterItem as="p">
+                <span>
+                  View on <a href="https://twitter.com/codinghorror/status/506010907021828096">Twitter</a>
+                </span>
+              </CardFooterItem>
+              <CardFooterItem as="p">
+                <span>
+                  Share on <a href="#">Facebook</a>
+                </span>
+              </CardFooterItem>
+            </CardFooter>
+          </Card>
+        </Column>
+      </Columns>
     </React.Fragment>
   ));
