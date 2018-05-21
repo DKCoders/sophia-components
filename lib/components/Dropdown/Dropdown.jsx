@@ -119,7 +119,10 @@ Dropdown.propTypes = {
   events: PropTypes.shape().isRequired,
   items: PropTypes.arrayOf(PropTypes.shape({
     onClick: PropTypes.func,
-    content: PropTypes.string,
+    content: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.node,
+    ]),
     href: PropTypes.string,
     type: PropTypes.oneOf(['a', 'div', 'divider']),
     active: PropTypes.bool,
