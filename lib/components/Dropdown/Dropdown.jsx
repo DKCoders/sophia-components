@@ -50,7 +50,6 @@ class Dropdown extends Component {
    * Alert if clicked on outside of element
    */
   handleClickOutside(event) {
-    console.log(event.target, this.wrapperRef);
     if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
       this.setState({ active: false });
     }
