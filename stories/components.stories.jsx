@@ -28,7 +28,7 @@ import Content from '../lib/elements/Content';
 import Columns from '../lib/grid/Columns';
 import Column from '../lib/grid/Column';
 import Icon from '../lib/elements/Icon';
-import Dropdown from "../lib/components/Dropdown/Dropdown";
+import Dropdown from '../lib/components/Dropdown/Dropdown';
 
 const boxDecorator = story => (
   <Container style={{ marginTop: 10 }}>
@@ -167,6 +167,14 @@ const normalItems = [
   { content: 'With divider Dropdown Item' },
 ];
 
+const contentItems = [
+  { type: 'div', content: (<p>You can insert <strong>any type of content</strong> within the dropdown menu.</p>), active: true },
+  { type: 'divider' },
+  { type: 'div', content: (<p>You simply need to use a <code>&lt;div&gt;</code> instead.</p>) },
+  { type: 'divider' },
+  { content: 'This is a link' },
+];
+
 storiesOf('Dropdown', module)
   .addDecorator(boxDecorator)
   .add('normal', () => (
@@ -174,5 +182,26 @@ storiesOf('Dropdown', module)
       <Dropdown items={normalItems} trigger="A clickeable Dropodown" />
       <Dropdown hoverable items={normalItems} trigger="A Hoverable Dropodown" />
       <Dropdown active items={normalItems} trigger="A Dropodown" />
+    </React.Fragment>
+  ))
+  .add('content', () => (
+    <React.Fragment>
+      <Dropdown items={contentItems} trigger={{ label: 'A clickeable Dropodown', icon: <Icon icon="fas fa-camera-retro" /> }} />
+      <Dropdown hoverable items={contentItems} trigger="A Hoverable Dropodown" />
+    </React.Fragment>
+  ))
+  .add('right aligment', () => (
+    <React.Fragment>
+      <Dropdown hoverable items={contentItems} trigger="Left" />
+      <Dropdown right hoverable items={contentItems} trigger="Right" />
+    </React.Fragment>
+  ))
+  .add('up', () => (
+    <React.Fragment>
+      <br />
+      <br />
+      <br />
+      <br />
+      <Dropdown up hoverable items={contentItems} trigger="Dropup button" />
     </React.Fragment>
   ));

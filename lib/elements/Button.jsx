@@ -43,7 +43,7 @@ class Button extends PureComponent {
 
     if (icon) {
       const iconProps = !iconSize ? {} : { [iconSize]: true };
-      const iconElement = <Icon icon={icon} {...iconProps} />;
+      const iconElement = typeof icon !== 'string' ? icon : <Icon icon={icon} {...iconProps} />;
       return (
         <Component
           className={classNameProp}
