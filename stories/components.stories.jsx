@@ -28,6 +28,7 @@ import Content from '../lib/elements/Content';
 import Columns from '../lib/grid/Columns';
 import Column from '../lib/grid/Column';
 import Icon from '../lib/elements/Icon';
+import Dropdown from "../lib/components/Dropdown/Dropdown";
 
 const boxDecorator = story => (
   <Container style={{ marginTop: 10 }}>
@@ -154,5 +155,24 @@ storiesOf('Card', module)
           </Card>
         </Column>
       </Columns>
+    </React.Fragment>
+  ));
+
+const normalItems = [
+  { content: 'Dropdown Item' },
+  { content: 'Another Dropdown Item' },
+  { content: 'Active Dropdown Item', active: true },
+  { content: 'Just another Dropdown Item' },
+  { type: 'divider' },
+  { content: 'With divider Dropdown Item' },
+];
+
+storiesOf('Dropdown', module)
+  .addDecorator(boxDecorator)
+  .add('normal', () => (
+    <React.Fragment>
+      <Dropdown items={normalItems} trigger="A clickeable Dropodown" />
+      <Dropdown hoverable items={normalItems} trigger="A Hoverable Dropodown" />
+      <Dropdown active items={normalItems} trigger="A Dropodown" />
     </React.Fragment>
   ));

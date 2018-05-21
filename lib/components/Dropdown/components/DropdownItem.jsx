@@ -2,49 +2,48 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import withEvents from '../../../base/withEvents';
-import withAttrs from '../../../base/withAttrs';
+import withAttrs, { defaultAttrs, aAttrs } from '../../../base/withAttrs';
 import withIsHas, { helpersIsKeys, helpersHasKeys } from '../../../base/withIsHas';
-import { classNameJoiner } from '../../../utils/helpers';
+import { classNameJoiner, combineSets } from '../../../utils/helpers';
 
 const mappedTag = {
   // eslint-disable-next-line react/prop-types
   a: ({ children, ...props }) => <a {...props}>{children}</a>,
   // eslint-disable-next-line react/prop-types
-  p: ({ children, ...props }) => <p {...props}>{children}</p>,
+  div: ({ children, ...props }) => <div {...props}>{children}</div>,
 };
 
-
-class CardFooterItem extends PureComponent {
+class DropdownItem extends PureComponent {
   render() {
     const {
-      as,
       children,
       attrs: { className, ...restAttrs },
       events,
+      as,
     } = this.props;
     const Component = mappedTag[as];
     return (
-      <Component className={classNameJoiner('card-footer-item', className)} {...restAttrs} {...events}>
+      <Component className={classNameJoiner('dropdown-item', className)} {...restAttrs} {...events}>
         {children}
       </Component>
     );
   }
 }
 
-CardFooterItem.propTypes = {
+DropdownItem.propTypes = {
   children: PropTypes.node,
-  as: PropTypes.oneOf(['a', 'p']),
   attrs: PropTypes.shape().isRequired,
   events: PropTypes.shape().isRequired,
+  as: PropTypes.oneOf(['div', 'a']),
 };
 
-CardFooterItem.defaultProps = {
-  as: 'a',
+DropdownItem.defaultProps = {
   children: null,
+  as: 'a',
 };
 
 export default compose(
   withEvents(),
-  withIsHas(helpersIsKeys, helpersHasKeys),
-  withAttrs(),
-)(CardFooterItem);
+  withIsHas(combineSets(helpersIsKeys, ['active']), helpersHasKeys),
+  withAttrs(combineSets(defaultAttrs, aAttrs)),
+)(DropdownItem);

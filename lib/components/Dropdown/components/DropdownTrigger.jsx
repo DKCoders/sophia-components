@@ -5,46 +5,47 @@ import withEvents from '../../../base/withEvents';
 import withAttrs from '../../../base/withAttrs';
 import withIsHas, { helpersIsKeys, helpersHasKeys } from '../../../base/withIsHas';
 import { classNameJoiner } from '../../../utils/helpers';
+import Button from '../../../elements/Button';
 
-const mappedTag = {
-  // eslint-disable-next-line react/prop-types
-  a: ({ children, ...props }) => <a {...props}>{children}</a>,
-  // eslint-disable-next-line react/prop-types
-  p: ({ children, ...props }) => <p {...props}>{children}</p>,
-};
-
-
-class CardFooterItem extends PureComponent {
+class DropdownTrigger extends PureComponent {
   render() {
     const {
-      as,
       children,
       attrs: { className, ...restAttrs },
       events,
+      icon,
+      label,
     } = this.props;
-    const Component = mappedTag[as];
+    const trigger = children || (
+      <Button icon={icon} iconPosition="right">{label}</Button>
+    );
     return (
-      <Component className={classNameJoiner('card-footer-item', className)} {...restAttrs} {...events}>
-        {children}
-      </Component>
+      <div className={classNameJoiner('dropdown-trigger', className)} {...restAttrs} {...events}>
+        {trigger}
+      </div>
     );
   }
 }
 
-CardFooterItem.propTypes = {
+DropdownTrigger.propTypes = {
   children: PropTypes.node,
-  as: PropTypes.oneOf(['a', 'p']),
   attrs: PropTypes.shape().isRequired,
   events: PropTypes.shape().isRequired,
+  label: PropTypes.string,
+  icon: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node,
+  ]),
 };
 
-CardFooterItem.defaultProps = {
-  as: 'a',
+DropdownTrigger.defaultProps = {
   children: null,
+  label: null,
+  icon: null,
 };
 
 export default compose(
   withEvents(),
   withIsHas(helpersIsKeys, helpersHasKeys),
   withAttrs(),
-)(CardFooterItem);
+)(DropdownTrigger);

@@ -51,6 +51,19 @@ storiesOf('Button', module)
       <Button danger>Danger</Button>
     </React.Fragment>
   ))
+  .add('icon sizes', () => (
+    <React.Fragment>
+      <Button large primary icon="fas fa-home" iconSize="small" />
+      <Button large primary icon="fas fa-home" />
+      <Button large primary icon="fas fa-home fa-lg" iconSize="medium" />
+      <Button large primary icon="fas fa-home fa-2x" iconSize="large" />
+      <Button success icon="fas fa-home" iconSize="small">Warning</Button>
+      <Button info icon="fas fa-home" iconSize="medium">Warning</Button>
+      <Button warning icon="fas fa-home" iconSize="large">Warning</Button>
+      <Button danger icon="fas fa-home">Danger</Button>
+      <Button danger icon="fas fa-home" iconPosition="right">Danger</Button>
+    </React.Fragment>
+  ))
   .add('sizes buttons', () => (
     <React.Fragment>
       <Button small>Small</Button>
