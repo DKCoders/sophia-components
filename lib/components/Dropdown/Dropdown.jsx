@@ -15,8 +15,8 @@ class Dropdown extends Component {
   constructor(props) {
     super();
     this.props = props;
-    if (this.props.active !== null) {
-      this.state = { active: false };
+    if (this.props.active === null && this.props.hoverable === null) {
+      this.state = { active: false, wrapperRef: null };
     }
     this.setWrapperRef = this.setWrapperRef.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
@@ -24,13 +24,13 @@ class Dropdown extends Component {
   }
 
   componentDidMount() {
-    if (this.props.active !== null) {
+    if (this.props.active === null && this.props.hoverable === null) {
       document.addEventListener('mousedown', this.handleClickOutside);
     }
   }
 
   componentWillUnmount() {
-    if (this.props.active !== null) {
+    if (this.props.active === null && this.props.hoverable === null) {
       document.removeEventListener('mousedown', this.handleClickOutside);
     }
   }
@@ -39,7 +39,9 @@ class Dropdown extends Component {
    * Set the wrapper ref
    */
   setWrapperRef(node) {
-    this.wrapperRef = node;
+    if (this.state) {
+      this.setState({ wrapperRef: node });
+    }
   }
 
   setActive() {
@@ -50,7 +52,7 @@ class Dropdown extends Component {
    * Alert if clicked on outside of element
    */
   handleClickOutside(event) {
-    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+    if (this.state.wrapperRef && !this.state.wrapperRef.contains(event.target)) {
       this.setState({ active: false });
     }
   }
@@ -61,6 +63,7 @@ class Dropdown extends Component {
       attrs: { className, ...restAttrs },
       events,
       active,
+      hoverable,
       onTriggerClick,
     } = this.props;
     if (!children) {
@@ -90,8 +93,9 @@ class Dropdown extends Component {
         });
       const activeState = !this.state ? active : this.state.active;
       const activeClass = activeState ? 'is-active' : false;
+      const hoverableClass = hoverable ? 'is-hoverable' : false;
       return (
-        <div ref={this.setWrapperRef} className={classNameJoiner('dropdown', className, activeClass)} {...restAttrs} {...events}>
+        <div ref={this.setWrapperRef} className={classNameJoiner('dropdown', className, activeClass, hoverableClass)} {...restAttrs} {...events}>
           {triggerElement}
           <DropdownMenu>
             {itemElements}
@@ -109,6 +113,7 @@ class Dropdown extends Component {
 
 Dropdown.propTypes = {
   active: PropTypes.bool,
+  hoverable: PropTypes.bool,
   children: PropTypes.node,
   attrs: PropTypes.shape().isRequired,
   events: PropTypes.shape().isRequired,
@@ -134,6 +139,7 @@ Dropdown.propTypes = {
 
 Dropdown.defaultProps = {
   active: null,
+  hoverable: null,
   children: null,
   items: null,
   trigger: null,
@@ -142,6 +148,6 @@ Dropdown.defaultProps = {
 
 export default compose(
   withEvents(),
-  withIsHas(combineSets(helpersIsKeys, ['hoverable', 'right', 'up']), helpersHasKeys),
+  withIsHas(combineSets(helpersIsKeys, ['right', 'up']), helpersHasKeys),
   withAttrs(),
 )(Dropdown);
