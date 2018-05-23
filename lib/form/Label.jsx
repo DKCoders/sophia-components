@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import withAttrs, { defaultAttrs, labelAttrs } from '../base/withAttrs';
@@ -6,17 +6,11 @@ import withIsHas, { helpersIsKeys, helpersHasKeys, colorsStateKeys, sizeKeys } f
 import withEvents from '../base/withEvents';
 import { classNameJoiner, combineSets } from '../utils/helpers';
 
-class Label extends PureComponent {
-  render() {
-    const { attrs: { className, ...restAttrs }, events, children } = this.props;
-
-    return (
-      <label className={classNameJoiner('label', className)} {...restAttrs} {...events}>
-        {children}
-      </label>
-    );
-  }
-}
+const Label = ({ attrs: { className, ...restAttrs }, events, children }) => (
+  <label className={classNameJoiner('label', className)} {...restAttrs} {...events}>
+    {children}
+  </label>
+);
 
 Label.propTypes = {
   children: PropTypes.node,

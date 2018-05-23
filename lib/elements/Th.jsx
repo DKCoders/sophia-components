@@ -1,20 +1,15 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import withAttrs, { defaultAttrs, tdAttrs } from '../base/withAttrs';
 import withIsHas, { helpersIsKeys, helpersHasKeys } from '../base/withIsHas';
 import { combineSets } from '../utils/helpers';
 
-class Th extends PureComponent {
-  render() {
-    const { children, attrs: { className, ...restAttrs }, onClick } = this.props;
-    return (
-      <th className={`${className || ''}`} {...restAttrs} onClick={onClick}>
-        {children}
-      </th>
-    );
-  }
-}
+const Th = ({ children, attrs: { className, ...restAttrs }, onClick }) => (
+  <th className={`${className || ''}`} {...restAttrs} onClick={onClick}>
+    {children}
+  </th>
+);
 
 Th.propTypes = {
   children: PropTypes.node,

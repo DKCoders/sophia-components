@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import withEvents from '../../../base/withEvents';
@@ -14,22 +14,19 @@ const mappedTag = {
 };
 
 
-class CardFooterItem extends PureComponent {
-  render() {
-    const {
-      as,
-      children,
-      attrs: { className, ...restAttrs },
-      events,
-    } = this.props;
-    const Component = mappedTag[as];
-    return (
-      <Component className={classNameJoiner('card-footer-item', className)} {...restAttrs} {...events}>
-        {children}
-      </Component>
-    );
-  }
-}
+const CardFooterItem = ({
+  as,
+  children,
+  attrs: { className, ...restAttrs },
+  events,
+}) => {
+  const MappedComponent = mappedTag[as];
+  return (
+    <MappedComponent className={classNameJoiner('card-footer-item', className)} {...restAttrs} {...events}>
+      {children}
+    </MappedComponent>
+  );
+};
 
 CardFooterItem.propTypes = {
   children: PropTypes.node,

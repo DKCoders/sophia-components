@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { capitalizeFirstLetter, processor } from '../utils/helpers';
 
@@ -144,19 +144,19 @@ const propTypesReduceFunc = (acceptString = []) => (acum, key) => ({
     : PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
 });
 
-const withIsProcessor = (isKeys = [], hasKeys = []) => (Component) => {
-  class WithProcessor extends PureComponent {
+const withIsProcessor = (isKeys = [], hasKeys = []) => (InnerComponent) => {
+  class WithProcessor extends Component {
     render() {
       const { className, props } = processor(isKeys, hasKeys, this.props);
       if (className.length) {
-        return <Component className={className} {...props} />;
+        return <InnerComponent className={className} {...props} />;
       }
-      return <Component {...props} />;
+      return <InnerComponent {...props} />;
     }
   }
 
   WithProcessor.propTypes = {
-    ...Component.propTypes,
+    ...InnerComponent.propTypes,
     ...isKeys.reduce(propTypesReduceFunc(isAcceptStringVal), {}),
     ...hasKeys.reduce(propTypesReduceFunc(hasAcceptStringVal), {}),
     is: PropTypes.arrayOf(PropTypes.string),
@@ -167,14 +167,14 @@ const withIsProcessor = (isKeys = [], hasKeys = []) => (Component) => {
     ]),
   };
   WithProcessor.defaultProps = {
-    ...Component.defaultProps,
+    ...InnerComponent.defaultProps,
     ...isKeys.reduce((acum, key) => ({ ...acum, [key]: null }), {}),
     ...hasKeys.reduce((acum, key) => ({ ...acum, [key]: null }), {}),
     is: null,
     has: null,
     className: [],
   };
-  WithProcessor.displayName = Component.displayName || Component.name;
+  WithProcessor.displayName = InnerComponent.displayName || InnerComponent.name;
   return WithProcessor;
 };
 

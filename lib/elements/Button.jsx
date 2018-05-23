@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import withAttrs, { defaultAttrs, aAttrs, inputAttrs } from '../base/withAttrs';
@@ -16,58 +16,55 @@ const mappedTag = {
   input: props => <input {...props} />,
 };
 
-class Button extends PureComponent {
-  render() {
-    const {
-      children,
-      as,
-      onClick,
-      attrs,
-      icon,
-      iconSize,
-      iconPosition,
-    } = this.props;
-    const Component = mappedTag[as];
-    const { className, ...restAttrs } = attrs;
-    const classNameProp = classNameJoiner('button', className);
-    if (as === 'input') {
-      return (
-        <Component
-          className={classNameProp}
-          {...restAttrs}
-          onClick={onClick}
-          value={children}
-        />
-      );
-    }
-
-    if (icon) {
-      const iconProps = !iconSize ? {} : { [iconSize]: true };
-      const iconElement = typeof icon !== 'string' ? icon : <Icon icon={icon} {...iconProps} />;
-      return (
-        <Component
-          className={classNameProp}
-          {...restAttrs}
-          onClick={onClick}
-        >
-          {iconPosition === 'left' && iconElement}
-          {!children ? null : (<span>{children}</span>)}
-          {iconPosition === 'right' && iconElement}
-        </Component>
-      );
-    }
-
+const Button = ({
+  children,
+  as,
+  onClick,
+  attrs,
+  icon,
+  iconSize,
+  iconPosition,
+}) => {
+  const MappedComponent = mappedTag[as];
+  const { className, ...restAttrs } = attrs;
+  const classNameProp = classNameJoiner('button', className);
+  if (as === 'input') {
     return (
-      <Component
+      <MappedComponent
+        className={classNameProp}
+        {...restAttrs}
+        onClick={onClick}
+        value={children}
+      />
+    );
+  }
+
+  if (icon) {
+    const iconProps = !iconSize ? {} : { [iconSize]: true };
+    const iconElement = typeof icon !== 'string' ? icon : <Icon icon={icon} {...iconProps} />;
+    return (
+      <MappedComponent
         className={classNameProp}
         {...restAttrs}
         onClick={onClick}
       >
-        {children}
-      </Component>
+        {iconPosition === 'left' && iconElement}
+        {!children ? null : (<span>{children}</span>)}
+        {iconPosition === 'right' && iconElement}
+      </MappedComponent>
     );
   }
-}
+
+  return (
+    <MappedComponent
+      className={classNameProp}
+      {...restAttrs}
+      onClick={onClick}
+    >
+      {children}
+    </MappedComponent>
+  );
+};
 
 Button.propTypes = {
   children: PropTypes.node,

@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import withIsHas, { aligmentKeys, helpersHasKeys, helpersIsKeys, sizeKeys } from '../../base/withIsHas';
@@ -8,7 +8,7 @@ import { combineSets, classNameJoiner } from '../../utils/helpers';
 import BreadcrumbItem from './components/BreadcrumbItem';
 import Icon from '../../elements/Icon';
 
-class Breadcrumb extends PureComponent {
+class Breadcrumb extends Component {
   constructor() {
     super();
     this.onClick = this.onClick.bind(this);

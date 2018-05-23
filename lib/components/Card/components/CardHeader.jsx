@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import withEvents from '../../../base/withEvents';
@@ -6,16 +6,11 @@ import withAttrs from '../../../base/withAttrs';
 import withIsHas, { helpersIsKeys, helpersHasKeys } from '../../../base/withIsHas';
 import { classNameJoiner } from '../../../utils/helpers';
 
-class CardHeader extends PureComponent {
-  render() {
-    const { children, attrs: { className, ...restAttrs }, events } = this.props;
-    return (
-      <header className={classNameJoiner('card-header', className)} {...restAttrs} {...events}>
-        {children}
-      </header>
-    );
-  }
-}
+const CardHeader = ({ children, attrs: { className, ...restAttrs }, events }) => (
+  <header className={classNameJoiner('card-header', className)} {...restAttrs} {...events}>
+    {children}
+  </header>
+);
 
 CardHeader.propTypes = {
   children: PropTypes.node,

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import withAttrs from '../base/withAttrs';
@@ -18,30 +18,27 @@ const mappedTag = {
 
 const sizes = ['one', 'two', 'three', 'four', 'five', 'six'];
 
-class Title extends PureComponent {
-  render() {
-    const {
-      children,
-      as,
-      attrs,
-      ...restProps
-    } = this.props;
-    const Component = mappedTag[as];
-    const { className, ...restAttrs } = attrs;
-    const sizeClassIndex = sizes.findIndex(size => restProps[size]);
-    const sizeClassNameProp = sizeClassIndex !== -1
-      ? `is-${sizeClassIndex + 1}`
-      : null;
-    return (
-      <Component
-        className={classNameJoiner('title', sizeClassNameProp, className)}
-        {...restAttrs}
-      >
-        {children}
-      </Component>
-    );
-  }
-}
+const Title = ({
+  children,
+  as,
+  attrs,
+  ...restProps
+}) => {
+  const MappedComponent = mappedTag[as];
+  const { className, ...restAttrs } = attrs;
+  const sizeClassIndex = sizes.findIndex(size => restProps[size]);
+  const sizeClassNameProp = sizeClassIndex !== -1
+    ? `is-${sizeClassIndex + 1}`
+    : null;
+  return (
+    <MappedComponent
+      className={classNameJoiner('title', sizeClassNameProp, className)}
+      {...restAttrs}
+    >
+      {children}
+    </MappedComponent>
+  );
+};
 
 Title.propTypes = {
   children: PropTypes.node,

@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import withEvents from '../../../base/withEvents';
@@ -6,7 +6,7 @@ import withIsHas, { helpersHasKeys, helpersIsKeys } from '../../../base/withIsHa
 import withAttrs, { aAttrs, defaultAttrs } from '../../../base/withAttrs';
 import { combineSets, propsSegregator } from '../../../utils/helpers';
 
-class BreadcrumbItem extends PureComponent {
+class BreadcrumbItem extends Component {
   constructor() {
     super();
     this.onItemClick = this.onItemClick.bind(this);

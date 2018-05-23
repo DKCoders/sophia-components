@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import withEvents from '../../../base/withEvents';
@@ -13,22 +13,19 @@ const mappedTag = {
   div: ({ children, ...props }) => <div {...props}>{children}</div>,
 };
 
-class DropdownItem extends PureComponent {
-  render() {
-    const {
-      children,
-      attrs: { className, ...restAttrs },
-      events,
-      as,
-    } = this.props;
-    const Component = mappedTag[as];
-    return (
-      <Component className={classNameJoiner('dropdown-item', className)} {...restAttrs} {...events}>
-        {children}
-      </Component>
-    );
-  }
-}
+const DropdownItem = ({
+  children,
+  attrs: { className, ...restAttrs },
+  events,
+  as,
+}) => {
+  const MappedComponent = mappedTag[as];
+  return (
+    <MappedComponent className={classNameJoiner('dropdown-item', className)} {...restAttrs} {...events}>
+      {children}
+    </MappedComponent>
+  );
+};
 
 DropdownItem.propTypes = {
   children: PropTypes.node,

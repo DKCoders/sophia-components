@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { combineSets } from '../utils/helpers';
 
@@ -47,8 +47,8 @@ export const all = combineSets(
   other,
 );
 
-const withEvents = (events = mouseBasic, skipNulls = true) => (Component) => {
-  class WithEvents extends PureComponent {
+const withEvents = (events = mouseBasic, skipNulls = true) => (InnerComponent) => {
+  class WithEvents extends Component {
     render() {
       const propsToBePassed = Object.entries(this.props).reduce((acum, [key, value]) => {
         if (events.includes(key)) {
@@ -59,22 +59,22 @@ const withEvents = (events = mouseBasic, skipNulls = true) => (Component) => {
         }
         return { ...acum, [key]: value };
       }, { events: {} });
-      return <Component {...propsToBePassed} />;
+      return <InnerComponent {...propsToBePassed} />;
     }
   }
 
-  const { events: removedPropType, ...restPropTypes } = Component.propTypes;
+  const { events: removedPropType, ...restPropTypes } = InnerComponent.propTypes;
   WithEvents.propTypes = {
     ...restPropTypes,
     ...events.reduce((acum, event) => ({ ...acum, [event]: PropTypes.func }), {}),
   };
 
   WithEvents.defaultProps = {
-    ...Component.defaultProps,
+    ...InnerComponent.defaultProps,
     ...events.reduce((acum, event) => ({ ...acum, [event]: null }), {}),
   };
 
-  WithEvents.displayName = Component.displayName || Component.name;
+  WithEvents.displayName = InnerComponent.displayName || InnerComponent.name;
 
   return WithEvents;
 };

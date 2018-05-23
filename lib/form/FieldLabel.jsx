@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import withAttrs from '../base/withAttrs';
@@ -6,16 +6,11 @@ import withIsHas, { helpersIsKeys, helpersHasKeys, sizeKeys } from '../base/with
 import withEvents from '../base/withEvents';
 import { classNameJoiner, combineSets } from '../utils/helpers';
 
-class FieldLabel extends PureComponent {
-  render() {
-    const { attrs: { className, ...restAttrs }, events, children } = this.props;
-    return (
-      <div className={classNameJoiner('field-label', className)} {...restAttrs} {...events}>
-        {children}
-      </div>
-    );
-  }
-}
+const FieldLabel = ({ attrs: { className, ...restAttrs }, events, children }) => (
+  <div className={classNameJoiner('field-label', className)} {...restAttrs} {...events}>
+    {children}
+  </div>
+);
 
 FieldLabel.propTypes = {
   children: PropTypes.node,

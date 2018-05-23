@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import withAttrs from '../base/withAttrs';
@@ -6,17 +6,11 @@ import withIsHas, { helpersIsKeys, helpersHasKeys, colorsStateKeys, sizeKeys, co
 import withEvents from '../base/withEvents';
 import { classNameJoiner, combineSets } from '../utils/helpers';
 
-class Help extends PureComponent {
-  render() {
-    const { attrs: { className, ...restAttrs }, events, children } = this.props;
-
-    return (
-      <p className={classNameJoiner('help', className)} {...restAttrs} {...events}>
-        {children}
-      </p>
-    );
-  }
-}
+const Help = ({ attrs: { className, ...restAttrs }, events, children }) => (
+  <p className={classNameJoiner('help', className)} {...restAttrs} {...events}>
+    {children}
+  </p>
+);
 
 Help.propTypes = {
   children: PropTypes.node,
