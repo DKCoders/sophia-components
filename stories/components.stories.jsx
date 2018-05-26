@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
@@ -29,6 +30,10 @@ import Columns from '../lib/grid/Columns';
 import Column from '../lib/grid/Column';
 import Icon from '../lib/elements/Icon';
 import Dropdown from '../lib/components/Dropdown/Dropdown';
+import Menu from '../lib/components/Menu/Menu';
+import MenuLabel from '../lib/components/Menu/components/MenuLabel';
+import MenuList from '../lib/components/Menu/components/MenuList';
+import MenuListItem from '../lib/components/Menu/components/MenuListItem';
 
 const boxDecorator = story => (
   <Container style={{ marginTop: 10 }}>
@@ -203,5 +208,30 @@ storiesOf('Dropdown', module)
       <br />
       <br />
       <Dropdown up hoverable items={contentItems} trigger="Dropup button" />
+    </React.Fragment>
+  ));
+
+const subMenu = [
+  <MenuListItem key={1}>Members</MenuListItem>,
+  <MenuListItem key={2}>Plugins</MenuListItem>,
+  <MenuListItem key={3}>Add a member</MenuListItem>,
+];
+storiesOf('Menu', module)
+  .addDecorator(boxDecorator)
+  .add('normal', () => (
+    <React.Fragment>
+      <Menu>
+        <MenuLabel>General</MenuLabel>
+        <MenuList>
+          <MenuListItem>Dashboard</MenuListItem>
+          <MenuListItem>Customers</MenuListItem>
+        </MenuList>
+        <MenuLabel>Administration</MenuLabel>
+        <MenuList>
+          <MenuListItem>Team Settings</MenuListItem>
+          <MenuListItem active subList={subMenu}>Manage Your Team</MenuListItem>
+          <MenuListItem>Invitations</MenuListItem>
+        </MenuList>
+      </Menu>
     </React.Fragment>
   ));
