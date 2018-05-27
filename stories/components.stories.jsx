@@ -2,6 +2,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import faker from 'faker';
 import 'bulma/css/bulma.min.css';
 import '@fortawesome/fontawesome-free-webfonts/css/fontawesome.css';
 import '@fortawesome/fontawesome-free-webfonts/css/fa-solid.css';
@@ -34,6 +35,7 @@ import Menu from '../lib/components/Menu/Menu';
 import MenuLabel from '../lib/components/Menu/components/MenuLabel';
 import MenuList from '../lib/components/Menu/components/MenuList';
 import MenuListItem from '../lib/components/Menu/components/MenuListItem';
+import Message from '../lib/components/Message/Message';
 
 const boxDecorator = story => (
   <Container style={{ marginTop: 10 }}>
@@ -233,5 +235,45 @@ storiesOf('Menu', module)
           <MenuListItem>Invitations</MenuListItem>
         </MenuList>
       </Menu>
+    </React.Fragment>
+  ));
+
+const body = faker.lorem.paragraphs();
+storiesOf('Message', module)
+  .addDecorator(boxDecorator)
+  .add('normal', () => (
+    <React.Fragment>
+      <Message header="Hello World" body={body} onDeleteClick={action('clicked')} />
+    </React.Fragment>
+  ))
+  .add('color', () => (
+    <React.Fragment>
+      <Message dark header="dark" body={body} onDeleteClick={action('clicked')} />
+      <Message primary header="primary" body={body} onDeleteClick={action('clicked')} />
+      <Message link header="link" body={body} onDeleteClick={action('clicked')} />
+      <Message info header="info" body={body} onDeleteClick={action('clicked')} />
+      <Message success header="success" body={body} onDeleteClick={action('clicked')} />
+      <Message warning header="warning" body={body} onDeleteClick={action('clicked')} />
+      <Message danger header="danger" body={body} onDeleteClick={action('clicked')} />
+    </React.Fragment>
+  ))
+  .add('body only', () => (
+    <React.Fragment>
+      <Message body={body} />
+      <Message dark body={body} />
+      <Message primary body={body} />
+      <Message link body={body} />
+      <Message info body={body} />
+      <Message success body={body} />
+      <Message warning body={body} />
+      <Message danger body={body} />
+    </React.Fragment>
+  ))
+  .add('sizes', () => (
+    <React.Fragment>
+      <Message small header="small" body={body} onDeleteClick={action('clicked')} />
+      <Message header="normal" body={body} onDeleteClick={action('clicked')} />
+      <Message medium header="medium" body={body} onDeleteClick={action('clicked')} />
+      <Message large header="large" body={body} onDeleteClick={action('clicked')} />
     </React.Fragment>
   ));
