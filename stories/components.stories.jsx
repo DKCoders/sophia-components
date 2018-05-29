@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import faker from 'faker';
@@ -23,19 +23,21 @@ import CardImage from '../lib/components/Card/components/CardImage';
 import Image from '../lib/elements/Image';
 import Media from '../lib/layout/Media/Media';
 import MediaLeft from '../lib/layout/Media/components/MediaLeft';
-import Title from '../lib/elements/Title';
 import MediaContent from '../lib/layout/Media/components/MediaContent';
+import Title from '../lib/elements/Title';
 import Subtitle from '../lib/elements/Subtitle';
 import Content from '../lib/elements/Content';
 import Columns from '../lib/grid/Columns';
 import Column from '../lib/grid/Column';
 import Icon from '../lib/elements/Icon';
 import Dropdown from '../lib/components/Dropdown/Dropdown';
-import Menu from '../lib/components/Menu/Menu';
+import Menu from '../lib/components/Menu';
 import MenuLabel from '../lib/components/Menu/components/MenuLabel';
 import MenuList from '../lib/components/Menu/components/MenuList';
 import MenuListItem from '../lib/components/Menu/components/MenuListItem';
-import Message from '../lib/components/Message/Message';
+import Message from '../lib/components/Message';
+import Modal from '../lib/components/Modal';
+import Button from '../lib/elements/Button';
 
 const boxDecorator = story => (
   <Container style={{ marginTop: 10 }}>
@@ -277,3 +279,126 @@ storiesOf('Message', module)
       <Message large header="large" body={body} onDeleteClick={action('clicked')} />
     </React.Fragment>
   ));
+
+const makeModal = ModalComp => class extends Component {
+  constructor(props) {
+    super(props);
+    this.props = props;
+    this.state = { active: false };
+    this.setActive = this.setActive.bind(this);
+  }
+  setActive(active) {
+    this.setState({ active });
+  }
+  render() {
+    return (
+      <React.Fragment>
+        <Button large primary onClick={() => this.setActive(true)}>Open Modal</Button>
+        <ModalComp
+          {...this.props}
+          setActive={val => this.setActive(val)}
+          activeState={this.state.active}
+        />
+      </React.Fragment>
+    );
+  }
+};
+
+const ModalNormal = makeModal(({ setActive, activeState }) => {
+  const content = (
+    <Box>
+      <Media>
+        <MediaLeft>
+          <Image src="https://bulma.io/images/placeholders/128x128.png" square="128" />
+        </MediaLeft>
+        <MediaContent>
+          <Content>
+            <p>
+              <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
+              <br />
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Aenean efficitur sit amet massa fringilla egestas.
+              Nullam condimentum luctus turpis.
+            </p>
+          </Content>
+        </MediaContent>
+      </Media>
+    </Box>
+  );
+  return (
+    <Modal
+      active={activeState}
+      onOverlayClick={() => setActive(false)}
+      onCloseClick={() => setActive(false)}
+      content={content}
+    />
+  );
+});
+
+const ModalImage = makeModal(({ setActive, activeState }) => {
+  const content = (
+    <Image src="https://bulma.io/images/placeholders/1280x960.png" alt="alt" ratio="4by3" />
+  );
+  return (
+    <Modal
+      active={activeState}
+      onOverlayClick={() => setActive(false)}
+      onCloseClick={() => setActive(false)}
+      content={content}
+    />
+  );
+});
+
+const ModalCard = makeModal(({ setActive, activeState }) => {
+  const bodyElement = (
+    <Content>
+      <h1>Hello World</h1>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Nulla accumsan, metus ultrices eleifend gravida,
+        nulla nunc varius lectus, nec rutrum justo nibh eu lectus.
+        Ut vulputate semper dui. Fusce erat odio,
+        sollicitudin vel erat vel, interdum mattis neque.
+      </p>
+      <h2>Second level</h2>
+      <p>
+        Curabitur accumsan turpis pharetra <strong>augue tincidunt</strong> blandit.
+        Quisque condimentum maximus mi,
+        sit amet commodo arcu rutrum id. Proin pretium urna vel cursus venenatis.
+        Suspendisse potenti. Etiam mattis
+        sem rhoncus lacus dapibus facilisis. Donec at dignissim dui. Ut et neque nisl.
+      </p>
+      <ul>
+        <li>In fermentum leo eu lectus mollis, quis dictum mi aliquet.</li>
+        <li>Morbi eu nulla lobortis, lobortis est in, fringilla felis.</li>
+        <li>Aliquam nec felis in sapien venenatis viverra fermentum nec lectus.</li>
+        <li>Ut non enim metus.</li>
+      </ul>
+    </Content>
+  );
+  const footer = (
+    <React.Fragment>
+      <Button success onClick={() => setActive(false)}>Save changes</Button>
+      <Button onClick={() => setActive(false)}>Cancel</Button>
+    </React.Fragment>
+  );
+  const card = {
+    head: 'Modal title',
+    body: bodyElement,
+    foot: footer,
+  };
+  return (
+    <Modal
+      active={activeState}
+      onOverlayClick={() => setActive(false)}
+      onCloseClick={() => setActive(false)}
+      card={card}
+    />
+  );
+});
+
+storiesOf('Modal', module)
+  .addDecorator(boxDecorator)
+  .add('normal', () => <ModalNormal />)
+  .add('image modal', () => <ModalImage />)
+  .add('modal card', () => <ModalCard />);
