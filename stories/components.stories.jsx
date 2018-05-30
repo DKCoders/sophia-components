@@ -38,6 +38,16 @@ import MenuListItem from '../lib/components/Menu/components/MenuListItem';
 import Message from '../lib/components/Message';
 import Modal from '../lib/components/Modal';
 import Button from '../lib/elements/Button';
+import Navbar from '../lib/components/Navbar/Navbar';
+import NavbarBrand from '../lib/components/Navbar/components/NavbarBrand';
+import NavbarItem from '../lib/components/Navbar/components/NavbarItem';
+import NavbarBurger from '../lib/components/Navbar/components/NavbarBurger';
+import NavbarMenu from '../lib/components/Navbar/components/NavbarMenu';
+import NavbarStart from '../lib/components/Navbar/components/NavbarStart';
+import NavbarDivider from '../lib/components/Navbar/components/NavbarDivider';
+import NavbarEnd from '../lib/components/Navbar/components/NavbarEnd';
+import Field from '../lib/form/Field';
+import Control from '../lib/form/Control';
 
 const boxDecorator = story => (
   <Container style={{ marginTop: 10 }}>
@@ -402,3 +412,156 @@ storiesOf('Modal', module)
   .add('normal', () => <ModalNormal />)
   .add('image modal', () => <ModalImage />)
   .add('modal card', () => <ModalCard />);
+
+const commonBrand = (
+  <NavbarBrand onBurgerClick={action('click')}>
+    <NavbarItem href="https://bulma.io">
+      <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28" />
+    </NavbarItem>
+  </NavbarBrand>
+);
+const commonMenu = (
+  <NavbarMenu>
+    <NavbarStart>
+      <NavbarItem href="https://bulma.io/">Home</NavbarItem>
+      <NavbarItem
+        dropdown
+        link="Docs"
+        href="https://bulma.io/documentation/overview/start/"
+        hoverable
+      >
+        <NavbarItem href="https://bulma.io/documentation/overview/start/" target="_blank">
+          Overview
+        </NavbarItem>
+        <NavbarItem href="https://bulma.io/documentation/modifiers/syntax/">
+          Modifiers
+        </NavbarItem>
+        <NavbarItem href="https://bulma.io/documentation/columns/basics/">
+          Columns
+        </NavbarItem>
+        <NavbarItem href="https://bulma.io/documentation/layout/container/">
+          Layout
+        </NavbarItem>
+        <NavbarItem href="https://bulma.io/documentation/form/general/">
+          Form
+        </NavbarItem>
+        <NavbarDivider />
+        <NavbarItem href="https://bulma.io/documentation/elements/box/">
+          Elements
+        </NavbarItem>
+        <NavbarItem active href="https://bulma.io/documentation/components/breadcrumb/">
+          Components
+        </NavbarItem>
+      </NavbarItem>
+    </NavbarStart>
+    <NavbarEnd>
+      <NavbarItem as="div">
+        <Field grouped>
+          <Control>
+            <Button success as="a" icon="fas fa-download">Github</Button>
+          </Control>
+          <Control>
+            <Button primary as="a" icon="fas fa-download" href="https://github.com/jgthms/bulma/releases/download/0.7.1/bulma-0.7.1.zip">Download</Button>
+          </Control>
+        </Field>
+      </NavbarItem>
+    </NavbarEnd>
+  </NavbarMenu>
+);
+storiesOf('Navbar', module)
+  .addDecorator(boxDecorator)
+  .add('normal', () => (
+    <Navbar>
+      <NavbarBrand>
+        <NavbarItem href="https://bulma.io">
+          <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28" />
+        </NavbarItem>
+        <NavbarBurger />
+      </NavbarBrand>
+    </Navbar>
+  ))
+  .add('menus and dropdown', () => (
+    <Navbar>
+      {commonBrand}
+      {commonMenu}
+    </Navbar>
+  ))
+  .add('transparent', () => (
+    <Navbar transparent>
+      {commonBrand}
+      <NavbarMenu>
+        <NavbarStart>
+          <NavbarItem href="https://bulma.io/">Home</NavbarItem>
+          <NavbarItem
+            dropdown
+            link="Docs"
+            href="https://bulma.io/documentation/overview/start/"
+            hoverable
+            boxed
+          >
+            <NavbarItem href="https://bulma.io/documentation/overview/start/" target="_blank">
+              Overview
+            </NavbarItem>
+            <NavbarItem href="https://bulma.io/documentation/modifiers/syntax/">
+              Modifiers
+            </NavbarItem>
+            <NavbarItem href="https://bulma.io/documentation/columns/basics/">
+              Columns
+            </NavbarItem>
+            <NavbarItem href="https://bulma.io/documentation/layout/container/">
+              Layout
+            </NavbarItem>
+            <NavbarItem href="https://bulma.io/documentation/form/general/">
+              Form
+            </NavbarItem>
+            <NavbarDivider />
+            <NavbarItem href="https://bulma.io/documentation/elements/box/">
+              Elements
+            </NavbarItem>
+            <NavbarItem active href="https://bulma.io/documentation/components/breadcrumb/">
+              Components
+            </NavbarItem>
+          </NavbarItem>
+        </NavbarStart>
+        <NavbarEnd>
+          <NavbarItem as="div">
+            <Field grouped>
+              <Control>
+                <Button success as="a" icon="fas fa-download">Github</Button>
+              </Control>
+              <Control>
+                <Button primary as="a" icon="fas fa-download" href="https://github.com/jgthms/bulma/releases/download/0.7.1/bulma-0.7.1.zip">Download</Button>
+              </Control>
+            </Field>
+          </NavbarItem>
+        </NavbarEnd>
+      </NavbarMenu>
+    </Navbar>
+  ))
+  .add('fixed top', () => (
+    <Navbar fixedTop>
+      {commonBrand}
+      {commonMenu}
+    </Navbar>
+  ))
+  .add('fixed bottom', () => (
+    <Navbar fixedBottom>
+      {commonBrand}
+      {commonMenu}
+    </Navbar>
+  ))
+  .add('colors', () => (
+    <React.Fragment>
+      <Navbar>{commonBrand}{commonMenu}</Navbar>
+      <Navbar primary>{commonBrand}{commonMenu}</Navbar>
+      <Navbar link>{commonBrand}{commonMenu}</Navbar>
+      <Navbar info>{commonBrand}{commonMenu}</Navbar>
+      <Navbar success>{commonBrand}{commonMenu}</Navbar>
+      <Navbar warning>{commonBrand}{commonMenu}</Navbar>
+      <Navbar danger>{commonBrand}{commonMenu}</Navbar>
+      <Navbar black>{commonBrand}{commonMenu}</Navbar>
+      <Navbar dark>{commonBrand}{commonMenu}</Navbar>
+      <Navbar light>{commonBrand}{commonMenu}</Navbar>
+      <Navbar white>{commonBrand}{commonMenu}</Navbar>
+    </React.Fragment>
+  ));
