@@ -56,6 +56,7 @@ import Input from '../lib/form/Input';
 import PanelTabs from '../lib/components/Panel/components/PanelTabs';
 import PanelBlockLink from '../lib/components/Panel/components/PanelBlockLink';
 import PanelBlockCheckbox from '../lib/components/Panel/components/PanelBlockCheckbox';
+import Tabs from '../lib/components/Tabs/Tabs';
 
 const boxDecorator = story => (
   <Container style={{ marginTop: 10 }}>
@@ -645,4 +646,45 @@ storiesOf('Panel', module)
         <Button link outlined fullwidth>reset all filters</Button>
       </PanelBlock>
     </Panel>
+  ));
+
+const normalTabs = ['Pictures', 'Music', 'Videos', 'Documents'];
+const iconsTabs = [
+  { tab: 'Pictures', icon: 'fas fa-image', iconSize: 'small' },
+  { tab: 'Music', icon: 'fas fa-music', iconSize: 'small' },
+  { tab: 'Videos', icon: 'fas fa-film', iconSize: 'small' },
+  { tab: 'Documents', icon: 'fas fa-file-alt', iconSize: 'small' },
+];
+const alternIconsTabs = iconsTabs.map(tab => ({ ...tab, iconPosition: 'right' }));
+storiesOf('Tabs', module)
+  .addDecorator(boxDecorator)
+  .add('normal', () => (
+    <React.Fragment>
+      <Tabs tabs={normalTabs} activeTabIndex={0} onTabClick={action('clicked')} />
+      <Tabs tabs={iconsTabs} activeTabIndex={0} onTabClick={action('clicked')} />
+      <Tabs tabs={alternIconsTabs} activeTabIndex={0} onTabClick={action('clicked')} />
+    </React.Fragment>
+  ))
+  .add('aligment', () => (
+    <React.Fragment>
+      <Tabs tabs={normalTabs} activeTabIndex={0} onTabClick={action('clicked')} />
+      <Tabs centered tabs={normalTabs} activeTabIndex={0} onTabClick={action('clicked')} />
+      <Tabs right tabs={normalTabs} activeTabIndex={0} onTabClick={action('clicked')} />
+    </React.Fragment>
+  ))
+  .add('sizes', () => (
+    <React.Fragment>
+      <Tabs small tabs={normalTabs} activeTabIndex={0} onTabClick={action('clicked')} />
+      <Tabs tabs={normalTabs} activeTabIndex={0} onTabClick={action('clicked')} />
+      <Tabs medium tabs={normalTabs} activeTabIndex={0} onTabClick={action('clicked')} />
+      <Tabs large tabs={normalTabs} activeTabIndex={0} onTabClick={action('clicked')} />
+    </React.Fragment>
+  ))
+  .add('styles', () => (
+    <React.Fragment>
+      <Tabs boxed tabs={normalTabs} activeTabIndex={0} onTabClick={action('clicked')} />
+      <Tabs toggle tabs={normalTabs} activeTabIndex={0} onTabClick={action('clicked')} />
+      <Tabs toggle toggleRounded tabs={normalTabs} activeTabIndex={0} onTabClick={action('clicked')} />
+      <Tabs fullwidth tabs={normalTabs} activeTabIndex={0} onTabClick={action('clicked')} />
+    </React.Fragment>
   ));
