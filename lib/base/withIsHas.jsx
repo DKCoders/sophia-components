@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { capitalizeFirstLetter, processor } from '../utils/helpers';
 
@@ -112,6 +112,7 @@ export const buttonIsKeys = [
   ...colorsKeys,
   ...colorsStateKeys,
   ...sizeKeys,
+  'fullwidth',
   'outlined',
   'inverted',
   'rounded',
@@ -144,19 +145,17 @@ const propTypesReduceFunc = (acceptString = []) => (acum, key) => ({
     : PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
 });
 
-const withIsProcessor = (isKeys = [], hasKeys = []) => (Component) => {
-  class WithProcessor extends PureComponent {
-    render() {
-      const { className, props } = processor(isKeys, hasKeys, this.props);
-      if (className.length) {
-        return <Component className={className} {...props} />;
-      }
-      return <Component {...props} />;
+const withIsProcessor = (isKeys = [], hasKeys = []) => (InnerComponent) => {
+  const WithProcessor = (_props) => {
+    const { className, props } = processor(isKeys, hasKeys, _props);
+    if (className.length) {
+      return <InnerComponent className={className} {...props} />;
     }
-  }
+    return <InnerComponent {...props} />;
+  };
 
   WithProcessor.propTypes = {
-    ...Component.propTypes,
+    ...InnerComponent.propTypes,
     ...isKeys.reduce(propTypesReduceFunc(isAcceptStringVal), {}),
     ...hasKeys.reduce(propTypesReduceFunc(hasAcceptStringVal), {}),
     is: PropTypes.arrayOf(PropTypes.string),
@@ -167,14 +166,14 @@ const withIsProcessor = (isKeys = [], hasKeys = []) => (Component) => {
     ]),
   };
   WithProcessor.defaultProps = {
-    ...Component.defaultProps,
+    ...InnerComponent.defaultProps,
     ...isKeys.reduce((acum, key) => ({ ...acum, [key]: null }), {}),
     ...hasKeys.reduce((acum, key) => ({ ...acum, [key]: null }), {}),
     is: null,
     has: null,
     className: [],
   };
-  WithProcessor.displayName = Component.displayName || Component.name;
+  WithProcessor.displayName = InnerComponent.displayName || InnerComponent.name;
   return WithProcessor;
 };
 

@@ -19,18 +19,18 @@ const Tag = ({
   onDeleteClick,
   attrs,
 }) => {
-  const Component = mappedTag[as];
+  const MappedComponent = mappedTag[as];
   const { className, ...restAttrs } = attrs;
   const deleteButton = !onDeleteClick ? null : <Delete onClick={onDeleteClick} />;
   return (
-    <Component
+    <MappedComponent
       className={classNameJoiner('tag', className)}
       {...restAttrs}
       onClick={onClick}
     >
       {children}
       {deleteButton}
-    </Component>
+    </MappedComponent>
   );
 };
 

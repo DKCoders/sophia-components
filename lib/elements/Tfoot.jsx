@@ -1,20 +1,15 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import Tr from './Tr';
 import withAttrs from '../base/withAttrs';
 import withIsHas, { helpersIsKeys, helpersHasKeys } from '../base/withIsHas';
 
-class Tfoot extends PureComponent {
-  render() {
-    const { children, attrs: { className, ...restAttrs } } = this.props;
-    return (
-      <tfoot className={`${className || ''}`} {...restAttrs}>
-        {children}
-      </tfoot>
-    );
-  }
-}
+const Tfoot = ({ children, attrs: { className, ...restAttrs } }) => (
+  <tfoot className={`${className || ''}`} {...restAttrs}>
+    {children}
+  </tfoot>
+);
 
 Tfoot.propTypes = {
   children: PropTypes.oneOfType([

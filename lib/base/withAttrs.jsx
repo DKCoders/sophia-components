@@ -1,5 +1,5 @@
 /* eslint-disable no-confusing-arrow */
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 const mappedAttrs = {
@@ -124,8 +124,8 @@ const withAttrs = (attrs = defaultAttrs, skipNulls = true) => {
   if (invalidAttrs.length) {
     console.warn('Invalid attributes: ', invalidAttrs.join(', '));
   }
-  return (Component) => {
-    class WithAttr extends PureComponent {
+  return (InnerComponent) => {
+    class WithAttr extends Component {
       render() {
         const propsToBePassed = Object.entries(this.props).reduce((acum, [key, value]) => {
           if (attrs.includes(key)) {
@@ -137,25 +137,25 @@ const withAttrs = (attrs = defaultAttrs, skipNulls = true) => {
           }
           return { ...acum, [key]: value };
         }, { attrs: {} });
-        return <Component {...propsToBePassed} />;
+        return <InnerComponent {...propsToBePassed} />;
       }
     }
     const attrPropTypes = attrs.reduce((acum, key) => ({ ...acum, [key]: mappedAttrs[key] }), {});
-    if (!Component.propTypes) {
+    if (!InnerComponent.propTypes) {
       // eslint-disable-next-line no-param-reassign
-      Component.propTypes = {};
+      InnerComponent.propTypes = {};
     }
-    const { attrs: removedPropType, ...restPropTypes } = Component.propTypes;
+    const { attrs: removedPropType, ...restPropTypes } = InnerComponent.propTypes;
     WithAttr.propTypes = {
       ...restPropTypes,
       ...attrPropTypes,
     };
     const attrDefaults = attrs.reduce((acum, key) => ({ ...acum, [key]: null }), {});
     WithAttr.defaultProps = {
-      ...Component.defaultProps,
+      ...InnerComponent.defaultProps,
       ...attrDefaults,
     };
-    WithAttr.displayName = Component.displayName || Component.name;
+    WithAttr.displayName = InnerComponent.displayName || InnerComponent.name;
     return WithAttr;
   };
 };

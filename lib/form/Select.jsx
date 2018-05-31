@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import withAttrs, { defaultAttrs, selectAttrs } from '../base/withAttrs';
@@ -28,35 +28,33 @@ const processOptions = (options) => {
   ));
 };
 
-class Select extends PureComponent {
-  render() {
-    const {
-      attrs: { className, ...restAttrs },
-      events,
-      multiple,
-      children,
-      options,
-      noSelectedLabel,
-    } = this.props;
-    const classNameProp = !multiple
-      ? classNameJoiner('select', className)
-      : classNameJoiner('select', 'is-multiple', className);
-    const { defaultAttrs: defaultProps, selectAttrs: selectProps } =
+const Select = ({
+  attrs: { className, ...restAttrs },
+  events,
+  multiple,
+  children,
+  options,
+  noSelectedLabel,
+}) => {
+  const classNameProp = !multiple
+    ? classNameJoiner('select', className)
+    : classNameJoiner('select', 'is-multiple', className);
+  const { defaultAttrs: defaultProps, selectAttrs: selectProps } =
       propsSegregator(restAttrs, { defaultAttrs, selectAttrs });
-    const optionItems = children || processOptions(options);
-    const noSelectedOption = !noSelectedLabel ? null : (
-      <option>{noSelectedLabel}</option>
-    );
-    return (
-      <div className={classNameProp} {...defaultProps}>
-        <select multiple={multiple} {...events} {...selectProps}>
-          {noSelectedOption}
-          {optionItems}
-        </select>
-      </div>
-    );
-  }
-}
+  const optionItems = children || processOptions(options);
+  const noSelectedOption = !noSelectedLabel ? null : (
+    <option>{noSelectedLabel}</option>
+
+  );
+  return (
+    <div className={classNameProp} {...defaultProps}>
+      <select multiple={multiple} {...events} {...selectProps}>
+        {noSelectedOption}
+        {optionItems}
+      </select>
+    </div>
+  );
+};
 
 Select.propTypes = {
   children: PropTypes.node,

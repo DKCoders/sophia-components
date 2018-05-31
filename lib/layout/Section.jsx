@@ -1,16 +1,12 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import withAttrs from '../base/withAttrs';
 import withIsHas, { helpersIsKeys, helpersHasKeys } from '../base/withIsHas';
 import { classNameJoiner, combineSets } from '../utils/helpers';
 
-class Section extends PureComponent {
-  render() {
-    const { children, attrs: { className, ...restAttrs } } = this.props;
-    return (<section className={classNameJoiner('section', className)} {...restAttrs}>{children}</section>);
-  }
-}
+const Section = ({ children, attrs: { className, ...restAttrs } }) =>
+  (<section className={classNameJoiner('section', className)} {...restAttrs}>{children}</section>);
 
 Section.propTypes = {
   children: PropTypes.node,

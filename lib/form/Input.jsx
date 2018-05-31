@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import withAttrs, { defaultAttrs, inputAttrs } from '../base/withAttrs';
@@ -6,20 +6,14 @@ import withIsHas, { helpersIsKeys, helpersHasKeys, colorsStateKeys, sizeKeys } f
 import withEvents, { inputSet } from '../base/withEvents';
 import { classNameJoiner, combineSets } from '../utils/helpers';
 
-class Input extends PureComponent {
-  render() {
-    const { attrs: { className, type, ...restAttrs }, events } = this.props;
-
-    return (
-      <input
-        className={classNameJoiner('input', className)}
-        type={type || 'text'}
-        {...events}
-        {...restAttrs}
-      />
-    );
-  }
-}
+const Input = ({ attrs: { className, type, ...restAttrs }, events }) => (
+  <input
+    className={classNameJoiner('input', className)}
+    type={type || 'text'}
+    {...events}
+    {...restAttrs}
+  />
+);
 
 Input.propTypes = {
   attrs: PropTypes.shape().isRequired,

@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import withAttrs from '../base/withAttrs';
@@ -12,16 +12,11 @@ import Th from './Th';
 import Tr from './Tr';
 import Td from './Td';
 
-class Table extends PureComponent {
-  render() {
-    const { children, attrs: { className, ...restAttrs } } = this.props;
-    return (
-      <table className={classNameJoiner('table', className)} {...restAttrs}>
-        {children}
-      </table>
-    );
-  }
-}
+const Table = ({ children, attrs: { className, ...restAttrs } }) => (
+  <table className={classNameJoiner('table', className)} {...restAttrs}>
+    {children}
+  </table>
+);
 
 Table.propTypes = {
   children: PropTypes.node,

@@ -1,27 +1,22 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import withAttrs, { defaultAttrs, aAttrs } from '../base/withAttrs';
 import withIsHas, { helpersIsKeys, helpersHasKeys, sizeKeys } from '../base/withIsHas';
 import { classNameJoiner, combineSets } from '../utils/helpers';
 
-class Delete extends PureComponent {
-  render() {
-    const {
-      children,
-      attrs: { className, ...restAttrs },
-      ...restProps
-    } = this.props;
-    return (
-      <a
-        className={classNameJoiner('delete', className)}
-        {...restAttrs}
-        {...restProps}
-      >
-        {children}
-      </a>);
-  }
-}
+const Delete = ({
+  children,
+  attrs: { className, ...restAttrs },
+  ...restProps
+}) => (
+  <a
+    className={classNameJoiner('delete', className)}
+    {...restAttrs}
+    {...restProps}
+  >
+    {children}
+  </a>);
 
 Delete.propTypes = {
   children: PropTypes.node,

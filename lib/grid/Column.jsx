@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import withAttrs from '../base/withAttrs';
@@ -17,24 +17,21 @@ const reduceSizesToArray = props =>
 const mapSizeToClasses = prefix => ({ size, value }) =>
   `${prefix}-${size}${typeof value === 'string' ? `-${value}` : ''}`;
 
-class Column extends PureComponent {
-  render() {
-    const { children, attrs: { className, ...restAttrs }, ...restProps } = this.props;
-    const sizeClassIndex = sizes.reduce(reduceSizesToArray(restProps), []);
-    const sizeClassNameProp = !sizeClassIndex.length
-      ? null
-      : sizeClassIndex
-        .map(mapSizeToClasses('is'))
-        .join(' ');
-    const offsetSizeClassIndex = offsetSizes.reduce(reduceSizesToArray(restProps), []);
-    const offsetSizeClassNameProp = !offsetSizeClassIndex.length
-      ? null
-      : offsetSizeClassIndex
-        .map(mapSizeToClasses('is-offset'))
-        .join(' ');
-    return (<div className={classNameJoiner('column', offsetSizeClassNameProp, sizeClassNameProp, className)} {...restAttrs}>{children}</div>);
-  }
-}
+const Column = ({ children, attrs: { className, ...restAttrs }, ...restProps }) => {
+  const sizeClassIndex = sizes.reduce(reduceSizesToArray(restProps), []);
+  const sizeClassNameProp = !sizeClassIndex.length
+    ? null
+    : sizeClassIndex
+      .map(mapSizeToClasses('is'))
+      .join(' ');
+  const offsetSizeClassIndex = offsetSizes.reduce(reduceSizesToArray(restProps), []);
+  const offsetSizeClassNameProp = !offsetSizeClassIndex.length
+    ? null
+    : offsetSizeClassIndex
+      .map(mapSizeToClasses('is-offset'))
+      .join(' ');
+  return (<div className={classNameJoiner('column', offsetSizeClassNameProp, sizeClassNameProp, className)} {...restAttrs}>{children}</div>);
+};
 
 Column.propTypes = {
   children: PropTypes.node,

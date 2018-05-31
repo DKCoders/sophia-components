@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import withAttrs, { defaultAttrs, textAreaAttrs } from '../base/withAttrs';
@@ -6,19 +6,13 @@ import withIsHas, { helpersIsKeys, helpersHasKeys, colorsStateKeys, sizeKeys } f
 import withEvents, { inputSet } from '../base/withEvents';
 import { classNameJoiner, combineSets } from '../utils/helpers';
 
-class Textarea extends PureComponent {
-  render() {
-    const { attrs: { className, ...restAttrs }, events } = this.props;
-
-    return (
-      <textarea
-        className={classNameJoiner('textarea', className)}
-        {...events}
-        {...restAttrs}
-      />
-    );
-  }
-}
+const Textarea = ({ attrs: { className, ...restAttrs }, events }) => (
+  <textarea
+    className={classNameJoiner('textarea', className)}
+    {...events}
+    {...restAttrs}
+  />
+);
 
 Textarea.propTypes = {
   attrs: PropTypes.shape().isRequired,
