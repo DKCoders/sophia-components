@@ -1,4 +1,4 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/anchor-is-valid,react/no-multi-comp */
 import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
@@ -48,6 +48,7 @@ import NavbarDivider from '../lib/components/Navbar/components/NavbarDivider';
 import NavbarEnd from '../lib/components/Navbar/components/NavbarEnd';
 import Field from '../lib/form/Field';
 import Control from '../lib/form/Control';
+import Pagination from '../lib/components/Pagination/Pagination';
 
 const boxDecorator = story => (
   <Container style={{ marginTop: 10 }}>
@@ -563,5 +564,54 @@ storiesOf('Navbar', module)
       <Navbar dark>{commonBrand}{commonMenu}</Navbar>
       <Navbar light>{commonBrand}{commonMenu}</Navbar>
       <Navbar white>{commonBrand}{commonMenu}</Navbar>
+    </React.Fragment>
+  ));
+
+
+class PaginationShow extends Component {
+  constructor() {
+    super();
+    this.state = { current: 10 };
+    this.setCurrent = this.setCurrent.bind(this);
+  }
+
+  setCurrent(current) {
+    this.setState({ current });
+  }
+
+  render() {
+    return (
+      <Pagination
+        pages={20}
+        currentIndex={this.state.current}
+        onPageClick={this.setCurrent}
+        {...this.props}
+      />
+    );
+  }
+}
+storiesOf('Pagination', module)
+  .addDecorator(boxDecorator)
+  .add('normal', () => (
+    <React.Fragment>
+      <PaginationShow />
+      <PaginationShow links={6} />
+      <PaginationShow links={7} />
+    </React.Fragment>
+  ))
+  .add('align', () => (
+    <React.Fragment>
+      <PaginationShow />
+      <PaginationShow centered />
+      <PaginationShow right />
+    </React.Fragment>
+  ))
+  .add('styles and sizes', () => (
+    <React.Fragment>
+      <PaginationShow rounded />
+      <PaginationShow small />
+      <PaginationShow />
+      <PaginationShow medium />
+      <PaginationShow large />
     </React.Fragment>
   ));

@@ -7,7 +7,7 @@ import withIsHas, { helpersIsKeys, helpersHasKeys } from '../../../base/withIsHa
 import { classNameJoiner, combineSets } from '../../../utils/helpers';
 
 const PaginationNext = ({ children, attrs: { className, ...restAttrs }, events }) => (
-  <a className={classNameJoiner('pagination-previous', className)} {...restAttrs} {...events}>
+  <a className={classNameJoiner('pagination-next', className)} {...restAttrs} {...events}>
     {children}
   </a>
 );
