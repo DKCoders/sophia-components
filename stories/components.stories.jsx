@@ -8,55 +8,61 @@ import '@fortawesome/fontawesome-free-webfonts/css/fontawesome.css';
 import '@fortawesome/fontawesome-free-webfonts/css/fa-solid.css';
 import './index.css';
 
-import Box from '../lib/elements/Box';
-import Container from '../lib/layout/Container';
-
-import Breadcrumb from '../lib/components/Breadcrumb';
-import Card from '../lib/components/Card';
-import CardContent from '../lib/components/Card/components/CardContent';
-import CardFooter from '../lib/components/Card/components/CardFooter';
-import CardFooterItem from '../lib/components/Card/components/CardFooterItem';
-import CardHeader from '../lib/components/Card/components/CardHeader';
-import CardHeaderIcon from '../lib/components/Card/components/CardHeaderIcon';
-import CardHeaderTitle from '../lib/components/Card/components/CardHeaderTitle';
-import CardImage from '../lib/components/Card/components/CardImage';
-import Image from '../lib/elements/Image';
-import Media from '../lib/layout/Media/Media';
-import MediaLeft from '../lib/layout/Media/components/MediaLeft';
-import MediaContent from '../lib/layout/Media/components/MediaContent';
-import Title from '../lib/elements/Title';
-import Subtitle from '../lib/elements/Subtitle';
-import Content from '../lib/elements/Content';
-import Columns from '../lib/grid/Columns';
-import Column from '../lib/grid/Column';
-import Icon from '../lib/elements/Icon';
-import Dropdown from '../lib/components/Dropdown/Dropdown';
-import Menu from '../lib/components/Menu';
-import MenuLabel from '../lib/components/Menu/components/MenuLabel';
-import MenuList from '../lib/components/Menu/components/MenuList';
-import MenuListItem from '../lib/components/Menu/components/MenuListItem';
-import Message from '../lib/components/Message';
-import Modal from '../lib/components/Modal';
-import Button from '../lib/elements/Button';
-import Navbar from '../lib/components/Navbar/Navbar';
-import NavbarBrand from '../lib/components/Navbar/components/NavbarBrand';
-import NavbarItem from '../lib/components/Navbar/components/NavbarItem';
-import NavbarBurger from '../lib/components/Navbar/components/NavbarBurger';
-import NavbarMenu from '../lib/components/Navbar/components/NavbarMenu';
-import NavbarStart from '../lib/components/Navbar/components/NavbarStart';
-import NavbarDivider from '../lib/components/Navbar/components/NavbarDivider';
-import NavbarEnd from '../lib/components/Navbar/components/NavbarEnd';
-import Field from '../lib/form/Field';
-import Control from '../lib/form/Control';
-import Pagination from '../lib/components/Pagination/Pagination';
-import Panel from '../lib/components/Panel/Panel';
-import PanelHeading from '../lib/components/Panel/components/PanelHeading';
-import PanelBlock from '../lib/components/Panel/components/PanelBlock';
-import Input from '../lib/form/Input';
-import PanelTabs from '../lib/components/Panel/components/PanelTabs';
-import PanelBlockLink from '../lib/components/Panel/components/PanelBlockLink';
-import PanelBlockCheckbox from '../lib/components/Panel/components/PanelBlockCheckbox';
-import Tabs from '../lib/components/Tabs/Tabs';
+import {
+  Breadcrumb,
+  Card,
+  CardContent,
+  CardFooter,
+  CardFooterItem,
+  CardHeader,
+  CardHeaderIcon,
+  CardHeaderTitle,
+  CardImage,
+  Dropdown,
+  Menu,
+  MenuLabel,
+  MenuList,
+  MenuListItem,
+  Message,
+  Modal,
+  Navbar,
+  NavbarBrand,
+  NavbarItem,
+  NavbarBurger,
+  NavbarMenu,
+  NavbarStart,
+  NavbarDivider,
+  NavbarEnd,
+  Pagination,
+  Panel,
+  PanelHeading,
+  PanelBlock,
+  PanelTabs,
+  PanelBlockLink,
+  PanelBlockCheckbox,
+  Tabs,
+} from '../lib/components';
+import {
+  Image,
+  Title,
+  Subtitle,
+  Content,
+  Icon,
+  Button,
+  Box,
+} from '../lib/elements';
+import {
+  Field,
+  Control,
+  Input,
+} from '../lib/form';
+import { Column, Columns } from '../lib/grid';
+import {
+  Media,
+  MediaLeft,
+  MediaContent,
+  Container,
+} from '../lib/layout';
 
 const boxDecorator = story => (
   <Container style={{ marginTop: 10 }}>

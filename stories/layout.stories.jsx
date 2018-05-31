@@ -6,22 +6,34 @@ import '@fortawesome/fontawesome-free-webfonts/css/fontawesome.css';
 import '@fortawesome/fontawesome-free-webfonts/css/fa-solid.css';
 import './index.css';
 
-import Box from '../lib/elements/Box';
-import Notification from '../lib/elements/Notification';
-import Title from '../lib/elements/Title';
-import Subtitle from '../lib/elements/Subtitle';
-import Button from '../lib/elements/Button';
-import Image from '../lib/elements/Image';
-import Content from '../lib/elements/Content';
-import Delete from '../lib/elements/Delete';
+import {
+  Box,
+  Notification,
+  Title,
+  Subtitle,
+  Button,
+  Image,
+  Content,
+  Delete,
+} from '../lib/elements';
 
-import Container from '../lib/layout/Container';
-import Level, { LevelLeft, LevelRight, LevelItem } from '../lib/layout/Level';
-import Media, { MediaLeft, MediaRight, MediaContent } from '../lib/layout/Media';
-import Hero, { HeroBody, HeroFoot, HeroHead } from '../lib/layout/Hero';
-import Section from '../lib/layout/Section';
-import Footer from '../lib/layout/Footer';
-import Tile from '../lib/layout/Tile';
+import { Container,
+  Level,
+  LevelLeft,
+  LevelRight,
+  LevelItem,
+  Media,
+  MediaLeft,
+  MediaRight,
+  MediaContent,
+  Hero,
+  HeroBody,
+  HeroFoot,
+  HeroHead,
+  Section,
+  Footer,
+  Tile,
+} from '../lib/layout';
 
 const boxDecorator = story => (
   <Container style={{ marginTop: 10 }}>

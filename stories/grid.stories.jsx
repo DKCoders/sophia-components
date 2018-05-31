@@ -5,12 +5,9 @@ import '@fortawesome/fontawesome-free-webfonts/css/fontawesome.css';
 import '@fortawesome/fontawesome-free-webfonts/css/fa-solid.css';
 import './index.css';
 
-import Box from '../lib/elements/Box';
-import Notification from '../lib/elements/Notification';
-import Container from '../lib/layout/Container';
-
-import Columns from '../lib/grid/Columns';
-import Column from '../lib/grid/Column';
+import { Box, Notification } from '../lib/elements';
+import { Container } from '../lib/layout';
+import { Columns, Column } from '../lib/grid';
 
 const boxDecorator = story => (
   <Container style={{ marginTop: 10 }}>
