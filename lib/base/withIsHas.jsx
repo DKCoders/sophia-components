@@ -112,6 +112,7 @@ export const buttonIsKeys = [
   ...colorsKeys,
   ...colorsStateKeys,
   ...sizeKeys,
+  'fullwidth',
   'outlined',
   'inverted',
   'rounded',
@@ -145,15 +146,13 @@ const propTypesReduceFunc = (acceptString = []) => (acum, key) => ({
 });
 
 const withIsProcessor = (isKeys = [], hasKeys = []) => (InnerComponent) => {
-  class WithProcessor extends Component {
-    render() {
-      const { className, props } = processor(isKeys, hasKeys, this.props);
-      if (className.length) {
-        return <InnerComponent className={className} {...props} />;
-      }
-      return <InnerComponent {...props} />;
+  const WithProcessor = (_props) => {
+    const { className, props } = processor(isKeys, hasKeys, _props);
+    if (className.length) {
+      return <InnerComponent className={className} {...props} />;
     }
-  }
+    return <InnerComponent {...props} />;
+  };
 
   WithProcessor.propTypes = {
     ...InnerComponent.propTypes,

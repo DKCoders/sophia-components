@@ -49,6 +49,13 @@ import NavbarEnd from '../lib/components/Navbar/components/NavbarEnd';
 import Field from '../lib/form/Field';
 import Control from '../lib/form/Control';
 import Pagination from '../lib/components/Pagination/Pagination';
+import Panel from '../lib/components/Panel/Panel';
+import PanelHeading from '../lib/components/Panel/components/PanelHeading';
+import PanelBlock from '../lib/components/Panel/components/PanelBlock';
+import Input from '../lib/form/Input';
+import PanelTabs from '../lib/components/Panel/components/PanelTabs';
+import PanelBlockLink from '../lib/components/Panel/components/PanelBlockLink';
+import PanelBlockCheckbox from '../lib/components/Panel/components/PanelBlockCheckbox';
 
 const boxDecorator = story => (
   <Container style={{ marginTop: 10 }}>
@@ -614,4 +621,28 @@ storiesOf('Pagination', module)
       <PaginationShow medium />
       <PaginationShow large />
     </React.Fragment>
+  ));
+
+storiesOf('Panel', module)
+  .addDecorator(boxDecorator)
+  .add('normal', () => (
+    <Panel>
+      <PanelHeading>repositories</PanelHeading>
+      <PanelBlock>
+        <Control iconLeft="fas fa-search" iconLeftSize="small">
+          <Input small placeholder="search" />
+        </Control>
+      </PanelBlock>
+      <PanelTabs onTabClick={action('clicked')} tabs={['all', 'public', 'private', 'sources', 'forks']} activeTabIndex={0} />
+      <PanelBlockLink onClick={action('clicked')} icon="fas fa-book" active>bulma</PanelBlockLink>
+      <PanelBlockLink icon="fas fa-book">marksheet</PanelBlockLink>
+      <PanelBlockLink icon="fas fa-book">minireset.css</PanelBlockLink>
+      <PanelBlockLink icon="fas fa-book">jgthms.github.io</PanelBlockLink>
+      <PanelBlockLink icon="fas fa-code-branch">daniellowtw/infboard</PanelBlockLink>
+      <PanelBlockLink icon="fas fa-code-branch">mojs</PanelBlockLink>
+      <PanelBlockCheckbox onChange={action('changed')}>remember me</PanelBlockCheckbox>
+      <PanelBlock>
+        <Button link outlined fullwidth>reset all filters</Button>
+      </PanelBlock>
+    </Panel>
   ));
