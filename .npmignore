@@ -5,3 +5,4 @@ config
 __tests__
 stories
 .storybook
+storybook-static
