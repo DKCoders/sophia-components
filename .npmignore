@@ -1,4 +1,7 @@
 .babelrc
+.eslintrc
 lib
 config
 __tests__
+stories
+.storybook

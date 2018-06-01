@@ -1,7 +1,83 @@
 /* eslint-disable no-param-reassign */
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { processor } from '../utils/helpers';
+import { capitalizeFirstLetter, processor } from '../utils/helpers';
+
+export const columnSizesIsKeys = [
+  'half',
+  'oneFifths',
+  'twoFifths',
+  'threeFifths',
+  'fourFifths',
+  'oneThird',
+  'twoThirds',
+  'oneQuarter',
+  'threeQuarters',
+];
+
+export const columnOffsetIsKeys = columnSizesIsKeys
+  .map(size => `offset${capitalizeFirstLetter(size)}`);
+
+export const isAcceptStringVal = [
+  'flex',
+  'inline',
+  'inlineBlock',
+  'inlineFlex',
+  'hidden',
+  'size',
+  'half',
+  'narrow',
+  ...columnSizesIsKeys,
+  ...columnOffsetIsKeys,
+];
+
+export const hasAcceptStringVal = [
+  // color text background
+  'text',
+  'background',
+  'textCentered',
+  'textJustified',
+  'textLeft',
+  'textRight',
+  'textWeight',
+];
+
+export const helpersIsKeys = [
+  'clearfix',
+  'pulledLeft',
+  'pulledRight',
+  'marginless',
+  'paddingless',
+  'overlay',
+  'clipped',
+  'radiusless',
+  'shadowless',
+  'unselectable',
+  'invisible',
+  'block',
+  'capitalized',
+  'lowercase',
+  'uppercase',
+  'italic',
+  'flex',
+  'inline',
+  'inlineBlock',
+  'inlineFlex',
+  'hidden',
+  'size',
+];
+
+// All accept strings
+export const helpersHasKeys = [
+  // color text background
+  'text',
+  'background',
+  'textCentered',
+  'textJustified',
+  'textLeft',
+  'textRight',
+  'textWeight',
+];
 
 export const colorsKeys = [
   'white',
@@ -32,9 +108,11 @@ export const aligmentKeys = [
 ];
 
 export const buttonIsKeys = [
+  ...helpersIsKeys,
   ...colorsKeys,
   ...colorsStateKeys,
   ...sizeKeys,
+  'fullwidth',
   'outlined',
   'inverted',
   'rounded',
@@ -46,28 +124,40 @@ export const buttonIsKeys = [
   'static',
 ];
 
+export const buttonHasKeys = [
+  ...helpersHasKeys,
+];
+
 export const buttonsIsKeys = [
+  ...helpersIsKeys,
   ...aligmentKeys,
 ];
 
 export const buttonsHasKeys = [
+  ...helpersHasKeys,
   'addons',
 ];
 
-export const defaultIsKeys = [...(new Set([...colorsKeys, ...colorsStateKeys, aligmentKeys]))];
-export const defaultHasKeys = [...(new Set([]))];
-const withIsProcessor = (isKeys = defaultIsKeys, hasKeys = defaultHasKeys) => (Component) => {
-  class WithProcessor extends PureComponent {
-    render() {
-      const { className, props } = processor(isKeys, hasKeys, this.props);
-      return <Component className={className} {...props} />;
+const propTypesReduceFunc = (acceptString = []) => (acum, key) => ({
+  ...acum,
+  [key]: !acceptString.includes(key)
+    ? PropTypes.bool
+    : PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+});
+
+const withIsProcessor = (isKeys = [], hasKeys = []) => (InnerComponent) => {
+  const WithProcessor = (_props) => {
+    const { className, props } = processor(isKeys, hasKeys, _props);
+    if (className.length) {
+      return <InnerComponent className={className} {...props} />;
     }
-  }
+    return <InnerComponent {...props} />;
+  };
 
   WithProcessor.propTypes = {
-    ...Component.propTypes,
-    ...isKeys.reduce((acum, key) => ({ ...acum, [key]: PropTypes.bool }), {}),
-    ...hasKeys.reduce((acum, key) => ({ ...acum, [key]: PropTypes.bool }), {}),
+    ...InnerComponent.propTypes,
+    ...isKeys.reduce(propTypesReduceFunc(isAcceptStringVal), {}),
+    ...hasKeys.reduce(propTypesReduceFunc(hasAcceptStringVal), {}),
     is: PropTypes.arrayOf(PropTypes.string),
     has: PropTypes.arrayOf(PropTypes.string),
     className: PropTypes.oneOfType([
@@ -76,14 +166,14 @@ const withIsProcessor = (isKeys = defaultIsKeys, hasKeys = defaultHasKeys) => (C
     ]),
   };
   WithProcessor.defaultProps = {
-    ...Component.defaultProps,
+    ...InnerComponent.defaultProps,
     ...isKeys.reduce((acum, key) => ({ ...acum, [key]: null }), {}),
     ...hasKeys.reduce((acum, key) => ({ ...acum, [key]: null }), {}),
     is: null,
     has: null,
     className: [],
   };
-  WithProcessor.displayName = Component.displayName || Component.name;
+  WithProcessor.displayName = InnerComponent.displayName || InnerComponent.name;
   return WithProcessor;
 };
 

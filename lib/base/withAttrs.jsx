@@ -1,5 +1,5 @@
 /* eslint-disable no-confusing-arrow */
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 const mappedAttrs = {
@@ -10,6 +10,8 @@ const mappedAttrs = {
   ]),
   style: PropTypes.shape(),
   disabled: PropTypes.bool,
+  readOnly: PropTypes.bool,
+  checked: PropTypes.bool,
   name: PropTypes.string,
   title: PropTypes.string,
   href: PropTypes.string,
@@ -40,6 +42,14 @@ const mappedAttrs = {
     'url',
     'week',
   ]),
+  placeholder: PropTypes.string,
+  rows: PropTypes.string,
+  for: PropTypes.string,
+  size: PropTypes.string,
+  colspan: PropTypes.string,
+  headers: PropTypes.string,
+  rowspan: PropTypes.string,
+  scope: PropTypes.string,
 };
 
 const dummyConverter = val => val;
@@ -57,25 +67,43 @@ const converterAttrs = {
   id: dummyConverter,
   className: classNameConverter,
   style: dummyConverter,
+  for: dummyConverter,
   disabled: dummyConverter,
+  checked: dummyConverter,
+  readOnly: dummyConverter,
   name: dummyConverter,
   title: dummyConverter,
   href: dummyConverter,
   role: dummyConverter,
   target: dummyConverter,
   type: dummyConverter,
+  placeholder: dummyConverter,
+  rows: dummyConverter,
+  size: dummyConverter,
   value: dummyConverter,
+  colspan: dummyConverter,
+  headers: dummyConverter,
+  rowspan: dummyConverter,
+  scope: dummyConverter,
 };
 
 const acceptedAttrs = Object.keys(converterAttrs);
-export const defaultAttrs = ['id', 'className', 'style'];
+export const defaultAttrs = ['id', 'className', 'style', 'role'];
+export const labelAttrs = [...defaultAttrs, 'for'];
 export const allAttrs = [...acceptedAttrs];
 export const aAttrs = ['href', 'target', 'title', 'name'];
-export const inputAttrs = ['name', 'type', 'value', 'disabled'];
+export const inputAttrs = ['name', 'type', 'value', 'disabled', 'placeholder', 'readOnly'];
+export const checkboxAttrs = ['name', 'checked', 'disabled', 'placeholder', 'readOnly'];
+export const radioAttrs = ['name', 'value', 'checked', 'disabled', 'placeholder', 'readOnly'];
+export const fileAttrs = ['name', 'value', 'disabled', 'readOnly'];
+export const textAreaAttrs = ['name', 'value', 'disabled', 'placeholder', 'readOnly', 'rows'];
+export const selectAttrs = ['name', 'value', 'disabled', 'placeholder', 'readOnly', 'size'];
+export const tdAttrs = ['colspan', 'headers', 'rowspan', 'scope'];
 export const attrSets = {
   defaultAttrs,
   aAttrs,
   inputAttrs,
+  tdAttrs,
   allAttrs,
 };
 
@@ -96,8 +124,8 @@ const withAttrs = (attrs = defaultAttrs, skipNulls = true) => {
   if (invalidAttrs.length) {
     console.warn('Invalid attributes: ', invalidAttrs.join(', '));
   }
-  return (Component) => {
-    class WithAttr extends PureComponent {
+  return (InnerComponent) => {
+    class WithAttr extends Component {
       render() {
         const propsToBePassed = Object.entries(this.props).reduce((acum, [key, value]) => {
           if (attrs.includes(key)) {
@@ -109,20 +137,25 @@ const withAttrs = (attrs = defaultAttrs, skipNulls = true) => {
           }
           return { ...acum, [key]: value };
         }, { attrs: {} });
-        return <Component {...propsToBePassed} />;
+        return <InnerComponent {...propsToBePassed} />;
       }
     }
     const attrPropTypes = attrs.reduce((acum, key) => ({ ...acum, [key]: mappedAttrs[key] }), {});
+    if (!InnerComponent.propTypes) {
+      // eslint-disable-next-line no-param-reassign
+      InnerComponent.propTypes = {};
+    }
+    const { attrs: removedPropType, ...restPropTypes } = InnerComponent.propTypes;
     WithAttr.propTypes = {
-      ...Component.propTypes,
+      ...restPropTypes,
       ...attrPropTypes,
     };
     const attrDefaults = attrs.reduce((acum, key) => ({ ...acum, [key]: null }), {});
     WithAttr.defaultProps = {
-      ...Component.defaultProps,
+      ...InnerComponent.defaultProps,
       ...attrDefaults,
     };
-    WithAttr.displayName = Component.displayName || Component.name;
+    WithAttr.displayName = InnerComponent.displayName || InnerComponent.name;
     return WithAttr;
   };
 };
