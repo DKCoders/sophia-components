@@ -6,21 +6,22 @@ import '@fortawesome/fontawesome-free-webfonts/css/fontawesome.css';
 import '@fortawesome/fontawesome-free-webfonts/css/fa-solid.css';
 import './index.css';
 
-import Box from '../lib/elements/Box';
-import Container from '../lib/layout/Container';
-
-import Input from '../lib/form/Input';
-import Textarea from '../lib/form/Textarea';
-import Select from '../lib/form/Select';
-import Checkbox from '../lib/form/Checkbox';
-import Radio from '../lib/form/Radio';
-import FileInput from '../lib/form/FileInput';
-import Help from '../lib/form/Help';
-import Control from '../lib/form/Control';
-import Label from '../lib/form/Label';
-import Field from '../lib/form/Field';
-import FieldLabel from '../lib/form/FieldLabel';
-import FieldBody from '../lib/form/FieldBody';
+import { Box } from '../lib/elements';
+import { Container } from '../lib/layout';
+import {
+  Input,
+  Textarea,
+  Select,
+  Checkbox,
+  Radio,
+  FileInput,
+  Help,
+  Control,
+  Label,
+  Field,
+  FieldLabel,
+  FieldBody,
+} from '../lib/form';
 
 const boxDecorator = story => (
   <Container style={{ marginTop: 10 }}>

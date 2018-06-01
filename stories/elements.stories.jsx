@@ -7,22 +7,29 @@ import '@fortawesome/fontawesome-free-webfonts/css/fontawesome.css';
 import '@fortawesome/fontawesome-free-webfonts/css/fa-solid.css';
 import './index.css';
 
-import Container from '../lib/layout/Container';
-
-import Button from '../lib/elements/Button';
-import Buttons from '../lib/elements/Buttons';
-import Box from '../lib/elements/Box';
-import Content from '../lib/elements/Content';
-import Delete from '../lib/elements/Delete';
-import Icon from '../lib/elements/Icon';
-import Image from '../lib/elements/Image';
-import Notification from '../lib/elements/Notification';
-import ProgressBar from '../lib/elements/ProgressBar';
-import Table, { Tbody, Tfoot, Thead, Th, Tr, Td } from '../lib/elements/Table';
-import Tag from '../lib/elements/Tag';
-import Tags from '../lib/elements/Tags';
-import Title from '../lib/elements/Title';
-import Subtitle from '../lib/elements/Subtitle';
+import { Container } from '../lib/layout';
+import {
+  Button,
+  Buttons,
+  Box,
+  Content,
+  Delete,
+  Icon,
+  Image,
+  Notification,
+  ProgressBar,
+  Tag,
+  Tags,
+  Title,
+  Subtitle,
+  Table,
+  Tbody,
+  Tfoot,
+  Thead,
+  Th,
+  Tr,
+  Td,
+} from '../lib/elements';
 
 const boxDecorator = story => (
   <Container style={{ marginTop: 10 }}>
