@@ -1,6 +1,6 @@
 {
   "name": "sophia-components",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Sophia React Components based on bulma.io",
   "main": "build/index.js",
   "scripts": {
@@ -58,11 +58,11 @@
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "recompose": "^0.27.0"
+    "recompose": "^0.27.0",
+    "decamelize": "^2.0.0"
   },
   "dependencies": {
-    "bulma": "^0.7.1",
-    "decamelize": "^2.0.0"
+    "bulma": "^0.7.1"
   },
   "jest": {
     "collectCoverageFrom": [
