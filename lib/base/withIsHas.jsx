@@ -5,7 +5,7 @@ import { capitalizeFirstLetter, processor } from '../utils/helpers';
 
 export const columnSizesIsKeys = [
   'half',
-  'oneFifths',
+  'oneFifth',
   'twoFifths',
   'threeFifths',
   'fourFifths',

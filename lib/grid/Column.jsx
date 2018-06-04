@@ -1,3 +1,4 @@
+/* eslint-disable no-confusing-arrow */
 import React from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
@@ -14,8 +15,9 @@ const offsetSizes = [...sizes.map(size => `offset${capitalizeFirstLetter(size)}`
 
 const reduceSizesToArray = props =>
   (acum, size, index) => (!props[size] ? acum : [...acum, { size: index + 1, value: props[size] }]);
-const mapSizeToClasses = prefix => ({ size, value }) =>
-  `${prefix}-${size}${typeof value === 'string' ? `-${value}` : ''}`;
+const mapSizeToClasses = prefix => ({ size, value }) => Array.isArray(value)
+  ? value.map(val => `${prefix}-${size}${typeof val === 'string' ? `-${val}` : ''}`).join(' ')
+  : `${prefix}-${size}${typeof value === 'string' ? `-${value}` : ''}`;
 
 const Column = ({ children, attrs: { className, ...restAttrs }, ...restProps }) => {
   const sizeClassIndex = sizes.reduce(reduceSizesToArray(restProps), []);

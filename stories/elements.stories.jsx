@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key,jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
@@ -278,7 +279,7 @@ storiesOf('Icon', module)
 
 storiesOf('Image', module)
   .addDecorator(boxDecorator)
-  .add('normal image', () => <Image src="https://bulma.io/images/placeholders/128x128.png" alt="Bulma img" square="128" />)
+  .add('normal image', () => <Image title="Testing title on images" src="https://bulma.io/images/placeholders/128x128.png" alt="Bulma img" square="128" />)
   .add('sizes image', () => (
     <React.Fragment>
       <Image src="https://bulma.io/images/placeholders/16x16.png" alt="Bulma img" square="16" /><br />
