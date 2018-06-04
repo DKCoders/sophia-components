@@ -33,6 +33,10 @@ storiesOf('Columns', module)
   .add('sizes', () => (
     <React.Fragment>
       <Columns>
+        <Column oneFifth>{contentPrimary}</Column>
+        <Column>{content}</Column>
+      </Columns>
+      <Columns>
         <Column fourFifths>{contentPrimary}</Column>
         <Column>{content}</Column>
       </Columns>
@@ -57,11 +61,11 @@ storiesOf('Columns', module)
   .add('responsiveness', () => (
     <React.Fragment>
       <Columns>
-        <Column half="mobile" nine>{contentPrimary}</Column>
+        <Column half="mobile" nine={['tablet', 'mobile']}>{contentPrimary}</Column>
         <Column>{content}</Column>
       </Columns>
       <Columns>
-        <Column half="mobile" eight offsetOne="desktop" offsetTwo="tablet">{contentPrimary}</Column>
+        <Column half="mobile" eight offsetOne={['desktop', 'widescreen']} offsetTwo="tablet">{contentPrimary}</Column>
         <Column>{content}</Column>
       </Columns>
     </React.Fragment>
