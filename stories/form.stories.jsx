@@ -238,6 +238,14 @@ storiesOf('Field', module)
           <Input name="test-name" placeholder="Last Name" />
         </Control>
       </Field>
+      <Field grouped groupedCentered>
+        <Control iconLeft="fas fa-upload">
+          <Input name="test-name" placeholder="Name" />
+        </Control>
+        <Control expanded iconRight="fas fa-upload">
+          <Input name="test-name" placeholder="Last Name" />
+        </Control>
+      </Field>
     </React.Fragment>
   ))
   .add('horizontal', () => (

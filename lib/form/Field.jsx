@@ -22,7 +22,7 @@ Field.defaultProps = {
   children: null,
 };
 
-const isKeys = combineSets(helpersIsKeys, ['grouped', 'grouped-centered', 'grouped-right', 'grouped-multiline', 'horizontal']);
+const isKeys = combineSets(helpersIsKeys, ['grouped', 'groupedCentered', 'groupedRight', 'groupedMultiline', 'horizontal']);
 
 export default compose(
   withEvents(),
