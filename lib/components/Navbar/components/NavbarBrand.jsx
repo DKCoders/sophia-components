@@ -12,8 +12,11 @@ const NavbarBrand = ({
   attrs: { className, ...restAttrs },
   events,
   onBurgerClick,
+  burgerActive,
 }) => {
-  const burger = !onBurgerClick ? null : <NavbarBurger onClick={onBurgerClick} />;
+  const burger = !onBurgerClick
+    ? null
+    : <NavbarBurger active={burgerActive} onClick={onBurgerClick} />;
   return (
     <div className={classNameJoiner('navbar-brand', className)} {...restAttrs} {...events}>
       {children}
@@ -27,11 +30,13 @@ NavbarBrand.propTypes = {
   attrs: PropTypes.shape().isRequired,
   events: PropTypes.shape().isRequired,
   onBurgerClick: PropTypes.func,
+  burgerActive: PropTypes.bool,
 };
 
 NavbarBrand.defaultProps = {
   children: null,
   onBurgerClick: null,
+  burgerActive: false,
 };
 
 export default compose(
