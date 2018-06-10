@@ -1,6 +1,6 @@
 {
   "name": "sophia-components",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "Sophia React Components based on bulma.io",
   "main": "build/index.js",
   "scripts": {

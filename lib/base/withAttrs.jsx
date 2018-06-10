@@ -130,7 +130,7 @@ const withAttrs = (attrs = defaultAttrs, skipNulls = true) => {
         const propsToBePassed = Object.entries(this.props).reduce((acum, [key, value]) => {
           if (attrs.includes(key)) {
             const converted = converterAttrs[key](value);
-            if (skipNulls && !converted) {
+            if (skipNulls && (converted === null || converted === undefined)) {
               return acum;
             }
             return { ...acum, attrs: { ...acum.attrs, [key]: converted } };
