@@ -92,7 +92,7 @@ storiesOf('Level', module)
       </LevelLeft>
       <LevelRight>
         <LevelItem><strong>All</strong></LevelItem>
-        <LevelItem>Published</LevelItem>
+        <LevelItem as="a" href="#">Published</LevelItem>
         <LevelItem>Drafts</LevelItem>
         <LevelItem>Deleted</LevelItem>
         <LevelItem><Button success>New</Button></LevelItem>
