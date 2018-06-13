@@ -27,6 +27,11 @@ export const inputSet = combineSets(
   clipboard,
 );
 
+export const buttonSet = combineSets(
+  mouse,
+  keyboard,
+);
+
 export const all = combineSets(
   clipboard,
   composition,

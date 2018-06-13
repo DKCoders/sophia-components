@@ -5,6 +5,7 @@ import compose from 'recompose/compose';
 import withAttrs, { defaultAttrs } from '../base/withAttrs';
 import withIsHas, { helpersIsKeys, helpersHasKeys } from '../base/withIsHas';
 import { classNameJoiner, combineSets } from '../utils/helpers';
+import withEvents from '../base/withEvents';
 
 const Image = ({
   src,
@@ -13,6 +14,7 @@ const Image = ({
   attrs: { className, ...restAttrs },
   square,
   ratio,
+  events,
 }) => {
   const squareParsed = !square
     ? null
@@ -23,7 +25,7 @@ const Image = ({
     ? null
     : `is-${ratio}`;
   return (
-    <figure className={classNameJoiner('image', squareParsed, ratioParsed, className)} {...restAttrs}>
+    <figure className={classNameJoiner('image', squareParsed, ratioParsed, className)} {...restAttrs} {...events}>
       <img src={src} alt={alt} className={imgClassName} />
     </figure>
   );
@@ -34,6 +36,7 @@ Image.propTypes = {
   alt: PropTypes.string.isRequired,
   imgClassName: PropTypes.string,
   attrs: PropTypes.shape().isRequired,
+  events: PropTypes.shape().isRequired,
   square: PropTypes.oneOf([
     '16x16',
     '24x24',
@@ -77,6 +80,7 @@ Image.defaultProps = {
 };
 
 export default compose(
+  withEvents(),
   withIsHas(helpersIsKeys, helpersHasKeys),
   withAttrs(combineSets(defaultAttrs, ['title'])),
 )(Image);

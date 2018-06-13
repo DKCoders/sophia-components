@@ -6,6 +6,7 @@ import Delete from './Delete';
 import withAttrs, { defaultAttrs, aAttrs } from '../base/withAttrs';
 import withIsProcessor, { colorsKeys, colorsStateKeys, helpersHasKeys, helpersIsKeys, sizeKeys } from '../base/withIsHas';
 import { classNameJoiner, combineSets } from '../utils/helpers';
+import withEvents from '../base/withEvents';
 
 const mappedTag = {
   a: ({ children, ...props }) => <a {...props}>{children}</a>,
@@ -15,9 +16,9 @@ const mappedTag = {
 const Tag = ({
   children,
   as,
-  onClick,
   onDeleteClick,
   attrs,
+  events,
 }) => {
   const MappedComponent = mappedTag[as];
   const { className, ...restAttrs } = attrs;
@@ -26,7 +27,7 @@ const Tag = ({
     <MappedComponent
       className={classNameJoiner('tag', className)}
       {...restAttrs}
-      onClick={onClick}
+      {...events}
     >
       {children}
       {deleteButton}
@@ -37,21 +38,21 @@ const Tag = ({
 Tag.propTypes = {
   children: PropTypes.node,
   as: PropTypes.oneOf(['a', 'span']),
-  onClick: PropTypes.func,
   onDeleteClick: PropTypes.func,
+  events: PropTypes.shape().isRequired,
   attrs: PropTypes.shape().isRequired,
 };
 
 Tag.defaultProps = {
   children: null,
   as: 'span',
-  onClick: null,
   onDeleteClick: null,
 };
 
 const isSets = combineSets(helpersIsKeys, colorsKeys, colorsStateKeys, sizeKeys, ['delete', 'rounded']);
 
 export default compose(
+  withEvents(),
   withIsProcessor(isSets, helpersHasKeys),
   withAttrs(combineSets(defaultAttrs, aAttrs)),
 )(Tag);
