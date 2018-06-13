@@ -5,6 +5,7 @@ import compose from 'recompose/compose';
 import withAttrs from '../base/withAttrs';
 import withIsProcessor, { helpersIsKeys, helpersHasKeys } from '../base/withIsHas';
 import { combineSets, classNameJoiner } from '../utils/helpers';
+import withEvents from '../base/withEvents';
 
 const mappedTag = {
   p: ({ children, ...props }) => <p {...props}>{children}</p>,
@@ -22,6 +23,7 @@ const Title = ({
   children,
   as,
   attrs,
+  events,
   ...restProps
 }) => {
   const MappedComponent = mappedTag[as];
@@ -34,6 +36,7 @@ const Title = ({
     <MappedComponent
       className={classNameJoiner('title', sizeClassNameProp, className)}
       {...restAttrs}
+      {...events}
     >
       {children}
     </MappedComponent>
@@ -52,6 +55,7 @@ Title.propTypes = {
     'h6',
   ]),
   attrs: PropTypes.shape().isRequired,
+  events: PropTypes.shape().isRequired,
   ...sizes.reduce((acum, size) => ({ ...acum, [size]: PropTypes.bool }), {}),
 };
 
@@ -62,6 +66,7 @@ Title.defaultProps = {
 };
 
 export default compose(
+  withEvents(),
   withIsProcessor(combineSets(helpersIsKeys, ['spaced']), helpersHasKeys),
   withAttrs(),
 )(Title);

@@ -5,6 +5,7 @@ import withAttrs, { defaultAttrs, aAttrs, inputAttrs } from '../base/withAttrs';
 import withIsProcessor, { buttonIsKeys, buttonHasKeys } from '../base/withIsHas';
 import { classNameJoiner, combineSets } from '../utils/helpers';
 import Icon from './Icon';
+import withEvents, { buttonSet } from '../base/withEvents';
 
 const mappedTag = {
   // eslint-disable-next-line react/prop-types
@@ -19,8 +20,8 @@ const mappedTag = {
 const Button = ({
   children,
   as,
-  onClick,
   attrs,
+  events,
   icon,
   iconSize,
   iconPosition,
@@ -33,7 +34,7 @@ const Button = ({
       <MappedComponent
         className={classNameProp}
         {...restAttrs}
-        onClick={onClick}
+        {...events}
         value={children}
       />
     );
@@ -46,7 +47,7 @@ const Button = ({
       <MappedComponent
         className={classNameProp}
         {...restAttrs}
-        onClick={onClick}
+        {...events}
       >
         {iconPosition === 'left' && iconElement}
         {!children ? null : (<span>{children}</span>)}
@@ -59,7 +60,7 @@ const Button = ({
     <MappedComponent
       className={classNameProp}
       {...restAttrs}
-      onClick={onClick}
+      {...events}
     >
       {children}
     </MappedComponent>
@@ -69,8 +70,8 @@ const Button = ({
 Button.propTypes = {
   children: PropTypes.node,
   as: PropTypes.oneOf(['button', 'a', 'input', 'span']),
-  onClick: PropTypes.func,
   attrs: PropTypes.shape().isRequired,
+  events: PropTypes.shape().isRequired,
   icon: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.node,
@@ -82,13 +83,13 @@ Button.propTypes = {
 Button.defaultProps = {
   children: null,
   as: 'button',
-  onClick: null,
   icon: null,
   iconSize: null,
   iconPosition: 'left',
 };
 
 export default compose(
+  withEvents(buttonSet),
   withIsProcessor(buttonIsKeys, buttonHasKeys),
   withAttrs(combineSets(defaultAttrs, aAttrs, inputAttrs)),
 )(Button);

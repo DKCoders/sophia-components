@@ -9,6 +9,7 @@ import withIsHas, {
   columnSizesIsKeys, columnOffsetIsKeys,
 } from '../base/withIsHas';
 import { classNameJoiner, combineSets, capitalizeFirstLetter } from '../utils/helpers';
+import withEvents from '../base/withEvents';
 
 const sizes = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven'];
 const offsetSizes = [...sizes.map(size => `offset${capitalizeFirstLetter(size)}`)];
@@ -19,7 +20,9 @@ const mapSizeToClasses = prefix => ({ size, value }) => Array.isArray(value)
   ? value.map(val => `${prefix}-${size}${typeof val === 'string' ? `-${val}` : ''}`).join(' ')
   : `${prefix}-${size}${typeof value === 'string' ? `-${value}` : ''}`;
 
-const Column = ({ children, attrs: { className, ...restAttrs }, ...restProps }) => {
+const Column = ({
+  children, attrs: { className, ...restAttrs }, events, ...restProps
+}) => {
   const sizeClassIndex = sizes.reduce(reduceSizesToArray(restProps), []);
   const sizeClassNameProp = !sizeClassIndex.length
     ? null
@@ -32,12 +35,13 @@ const Column = ({ children, attrs: { className, ...restAttrs }, ...restProps }) 
     : offsetSizeClassIndex
       .map(mapSizeToClasses('is-offset'))
       .join(' ');
-  return (<div className={classNameJoiner('column', offsetSizeClassNameProp, sizeClassNameProp, className)} {...restAttrs}>{children}</div>);
+  return (<div className={classNameJoiner('column', offsetSizeClassNameProp, sizeClassNameProp, className)} {...restAttrs} {...events}>{children}</div>);
 };
 
 Column.propTypes = {
   children: PropTypes.node,
   attrs: PropTypes.shape().isRequired,
+  events: PropTypes.shape().isRequired,
   ...sizes.reduce((acum, size) => ({
     ...acum,
     [size]: PropTypes.oneOfType([
@@ -63,6 +67,7 @@ Column.defaultProps = {
 const sets = combineSets(helpersIsKeys, columnSizesIsKeys, columnOffsetIsKeys, ['narrow']);
 
 export default compose(
+  withEvents(),
   withIsHas(sets, helpersHasKeys),
   withAttrs(),
 )(Column);

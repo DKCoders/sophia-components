@@ -4,9 +4,10 @@ import compose from 'recompose/compose';
 import Tr from './Tr';
 import withAttrs from '../base/withAttrs';
 import withIsHas, { helpersIsKeys, helpersHasKeys } from '../base/withIsHas';
+import withEvents from '../base/withEvents';
 
-const Tfoot = ({ children, attrs: { className, ...restAttrs } }) => (
-  <tfoot className={`${className || ''}`} {...restAttrs}>
+const Tfoot = ({ children, attrs: { className, ...restAttrs }, events }) => (
+  <tfoot className={`${className || ''}`} {...restAttrs} {...events}>
     {children}
   </tfoot>
 );
@@ -21,11 +22,13 @@ Tfoot.propTypes = {
     }),
   ]).isRequired,
   attrs: PropTypes.shape().isRequired,
+  events: PropTypes.shape().isRequired,
 };
 
 Tfoot.defaultProps = {};
 
 export default compose(
+  withEvents(),
   withIsHas(helpersIsKeys, helpersHasKeys),
   withAttrs(),
 )(Tfoot);
