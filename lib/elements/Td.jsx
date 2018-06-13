@@ -4,9 +4,10 @@ import compose from 'recompose/compose';
 import withAttrs, { defaultAttrs, tdAttrs } from '../base/withAttrs';
 import withIsHas, { helpersIsKeys, helpersHasKeys } from '../base/withIsHas';
 import { combineSets } from '../utils/helpers';
+import withEvents from '../base/withEvents';
 
-const Td = ({ children, attrs: { className, ...restAttrs }, onClick }) => (
-  <td className={`${className || ''}`} {...restAttrs} onClick={onClick}>
+const Td = ({ children, attrs: { className, ...restAttrs }, events }) => (
+  <td className={`${className || ''}`} {...restAttrs} {...events}>
     {children}
   </td>
 );
@@ -14,15 +15,15 @@ const Td = ({ children, attrs: { className, ...restAttrs }, onClick }) => (
 Td.propTypes = {
   children: PropTypes.node,
   attrs: PropTypes.shape().isRequired,
-  onClick: PropTypes.func,
+  events: PropTypes.shape().isRequired,
 };
 
 Td.defaultProps = {
   children: '',
-  onClick: null,
 };
 
 export default compose(
+  withEvents(),
   withIsHas(helpersIsKeys, helpersHasKeys),
   withAttrs(combineSets(defaultAttrs, tdAttrs)),
 )(Td);
